@@ -1,10 +1,22 @@
+:root {
+  /* Cores principais */
+  --color-primary: #2563EB;
+  --color-secondary: #1D4ED8;
+  --color-primary-light: #3B82F6;
+  --color-secondary-dark: #1E40AF;
+  
+  /* Gradientes */
+  --gradient-main: linear-gradient(-45deg, var(--color-primary), var(--color-secondary), var(--color-primary-light), var(--color-secondary-dark));
+  --gradient-text: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-primary-light) 100%);
+}
+
 * {
   font-family: "Inter", sans-serif;
 }
 
 /* Background animado com gradiente dinâmico */
 .gradient-bg {
-  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background: var(--gradient-main);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   position: relative;
@@ -58,7 +70,7 @@
 
 /* Gradiente de texto animado */
 .gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: var(--gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -111,7 +123,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(102, 126, 234, 0.1),
+    rgba(37, 99, 235, 0.1),
     transparent
   );
   transition: left 0.5s;
@@ -122,8 +134,8 @@
 }
 
 .glow-card:hover {
-  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2),
-    0 4px 16px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.2),
+    0 4px 16px rgba(37, 99, 235, 0.1);
   transform: translateY(-10px) scale(1.02);
 }
 
@@ -213,7 +225,7 @@
   left: 0;
   height: 3px;
   width: 0;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   transition: width 0.4s ease;
 }
 
@@ -224,10 +236,10 @@
 /* Tech grid background */
 .tech-grid {
   background-image: linear-gradient(
-      rgba(102, 126, 234, 0.05) 1px,
+      rgba(37, 99, 235, 0.05) 1px,
       transparent 1px
     ),
-    linear-gradient(90deg, rgba(102, 126, 234, 0.05) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -267,11 +279,18 @@ html {
 }
 
 #mobileMenu {
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 
 #mobileMenu.translate-x-full {
   pointer-events: none;
+}
+
+/* Links do menu sempre clicáveis */
+#mobileMenu a,
+#mobileMenu button {
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 
 /* Responsividade aprimorada */
