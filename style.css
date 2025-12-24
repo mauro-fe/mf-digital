@@ -235,11 +235,35 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Menu mobile garantido */
-#mobileMenuBtn {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
+/* Menu mobile - animação suave */
+#mobileMenu {
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+#mobileMenu.translate-x-full {
+  transform: translateX(100%);
+}
+
+#menuOverlay {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Oculta menu e overlay em desktop */
+@media (min-width: 768px) {
+  #mobileMenu,
+  #menuOverlay,
+  #mobileMenuBtn {
+    display: none !important;
+  }
+}
+
+/* Menu mobile garantido apenas em mobile */
+@media (max-width: 767px) {
+  #mobileMenuBtn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 #mobileMenu {
