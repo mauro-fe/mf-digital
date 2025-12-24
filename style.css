@@ -1,0 +1,346 @@
+* {
+  font-family: "Inter", sans-serif;
+}
+
+/* Background animado com gradiente dinâmico */
+.gradient-bg {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+/* Gradiente de texto animado */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% auto;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Cards modernos com animações 3D */
+.glow-card {
+  background: white;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(102, 126, 234, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.glow-card:hover::before {
+  left: 100%;
+}
+
+.glow-card:hover {
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2),
+    0 4px 16px rgba(102, 126, 234, 0.1);
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* Animações */
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efeito de brilho nos botões */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-shine:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Partículas flutuantes */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: rise 10s infinite ease-in;
+}
+
+@keyframes rise {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
+
+/* Linha decorativa com animação */
+.decorative-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.decorative-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transition: width 0.4s ease;
+}
+
+.decorative-line:hover::after {
+  width: 100%;
+}
+
+/* Tech grid background */
+.tech-grid {
+  background-image: linear-gradient(
+      rgba(102, 126, 234, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(102, 126, 234, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Menu mobile garantido */
+#mobileMenuBtn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+#mobileMenu {
+  pointer-events: auto;
+}
+
+#mobileMenu.translate-x-full {
+  pointer-events: none;
+}
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+  .glow-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Desabilita parallax em mobile para melhor performance */
+  #home {
+    transform: none !important;
+  }
+
+  /* Ajusta tamanho das partículas em mobile */
+  .particle {
+    width: 3px !important;
+    height: 3px !important;
+  }
+
+  /* Melhora espaçamento de textos */
+  h1,
+  h2,
+  h3 {
+    line-height: 1.3;
+  }
+
+  /* Reduz animações complexas em mobile */
+  .gradient-bg::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Ajusta grid de tecnologias para mobile pequeno */
+  .tech-grid {
+    background-size: 30px 30px;
+  }
+
+  /* Otimiza cards de serviço */
+  .glow-card {
+    padding: 1.5rem !important;
+  }
+
+  /* Melhora legibilidade de títulos */
+  section h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Orientação landscape em dispositivos móveis */
+@media (max-width: 896px) and (orientation: landscape) {
+  #home {
+    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .particles {
+    display: none;
+  }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .gradient-bg {
+    animation: none;
+  }
+
+  .particle {
+    animation: none;
+    display: none;
+  }
+}
+
+/* Touch optimization */
+@media (hover: none) and (pointer: coarse) {
+  .glow-card:hover {
+    transform: none;
+  }
+
+  .decorative-line:hover::after {
+    width: 0;
+  }
+
+  a,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
