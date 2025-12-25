@@ -149,6 +149,34 @@
   }
 }
 
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-10deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+.whatsapp-float {
+  animation: shake 2s ease-in-out infinite;
+}
+
+.whatsapp-float:hover {
+  animation: none;
+}
+
 @keyframes float {
   0%,
   100% {
