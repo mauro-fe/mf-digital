@@ -1,0 +1,133 @@
+/* Hero styles extracted from root style.css */
+
+.gradient-bg {
+  background: var(--gradient-main);
+  background-size: 400% 400%;
+  animation: gradientShift var(--animation-duration-fast) ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    );
+  animation: float var(--animation-duration-slow) ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+/* Partículas usadas no hero */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: rise 10s infinite ease-in;
+}
+
+@keyframes rise {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    bottom: 100%;
+    opacity: 0;
+  }
+}
+
+/* Responsive hero tweaks moved here */
+@media (max-width: 768px) {
+  /* Desabilita parallax em mobile para melhor performance */
+  #home {
+    transform: none !important;
+  }
+
+  /* Ajusta tamanho das partículas em mobile */
+  .particle {
+    width: 3px !important;
+    height: 3px !important;
+  }
+
+  /* Reduz animações complexas em mobile */
+  .gradient-bg::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 896px) and (orientation: landscape) {
+  #home {
+    min-height: 100vh;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .particles {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-bg {
+    animation: none;
+  }
+
+  .particle {
+    animation: none;
+    display: none;
+  }
+}
+/* Styles specific to the Hero section */
+
+.hero-cta {
+  /* example override */
+}

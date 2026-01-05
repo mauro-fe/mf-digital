@@ -1,0 +1,78 @@
+/* Nav/menu styles extracted from root style.css */
+
+.decorative-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.decorative-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  transition: width var(--transition-slow) ease;
+}
+
+.decorative-line:hover::after {
+  width: 100%;
+}
+
+/* Menu mobile - animação suave */
+#mobileMenu {
+  box-shadow: var(--shadow-2xl);
+}
+
+#mobileMenu.translate-x-full {
+  transform: translateX(100%);
+}
+
+#menuOverlay {
+  transition: opacity var(--transition-base) ease-in-out;
+}
+
+/* Oculta menu e overlay em desktop */
+@media (min-width: 768px) {
+  #mobileMenu,
+  #menuOverlay,
+  #mobileMenuBtn {
+    display: none !important;
+  }
+}
+
+/* Menu mobile garantido apenas em mobile */
+@media (max-width: 767px) {
+  #mobileMenuBtn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+#mobileMenu {
+  pointer-events: auto !important;
+}
+
+#mobileMenu.translate-x-full {
+  pointer-events: none;
+}
+
+/* Links do menu sempre clicáveis */
+#mobileMenu a,
+#mobileMenu button {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+/* Styles specific to the navigation component */
+
+.nav-logo {
+  height: auto;
+}
+
+/* Add more nav-specific overrides here */
