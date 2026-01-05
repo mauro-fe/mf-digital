@@ -19,7 +19,7 @@ export default function ScrollTop() {
   if (!visible) return null
 
   return (
-    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} id="scrollTop" className="fixed bottom-8 right-8 bg-gradient-to-r from-primary to-secondary text-white w-14 h-14 rounded-full shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 z-50">
+    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} id="scrollTop" className="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-cyan-600 text-white w-14 h-14 rounded-full shadow-2xl hover:shadow-3xl transition-all transform hover:scale-110 z-50">
       <i className="fas fa-arrow-up text-xl"></i>
     </button>
   )

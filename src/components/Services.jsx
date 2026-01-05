@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from './Card'
-import '../styles/services.css'
 
 const services = [
   {
@@ -27,14 +26,24 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="servicos" className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="servicos" className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
-          <div className="inline-block mb-4">
-            <span className="bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-2 rounded-full text-sm font-bold">Serviços</span>
+          <div className="inline-block mb-6">
+            <span className="bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-600 px-8 py-3 rounded-full text-sm font-bold shadow-lg">✨ Serviços</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6"><span className="gradient-text">O que eu faço</span></h2>
-          <div className="w-32 h-2 bg-gradient-to-r from-primary via-secondary to-primary mx-auto rounded-full"></div>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-black mb-6">
+            <span className="bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-transparent bg-clip-text">O que eu faço</span>
+          </h2>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full"></div>
+            <div className="w-4 h-4 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full"></div>
+            <div className="w-16 h-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full"></div>
+          </div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">Soluções completas e personalizadas para o seu negócio digital</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

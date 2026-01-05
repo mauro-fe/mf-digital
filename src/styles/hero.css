@@ -1,133 +1,119 @@
-/* Hero styles extracted from root style.css */
+/* ============================= */
+/* 🦸 HERO */
+/* ============================= */
 
-.gradient-bg {
-  background: var(--gradient-main);
-  background-size: 400% 400%;
-  animation: gradientShift var(--animation-duration-fast) ease infinite;
+.hero {
   position: relative;
   overflow: hidden;
 }
 
-.gradient-bg::before {
+.hero-bg {
+  background: var(--gradient-main);
+  background-size: 400% 400%;
+  animation: hero-gradient 15s ease infinite;
+}
+
+.hero-bg::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-      circle at 20% 50%,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 50%
-    );
-  animation: float var(--animation-duration-slow) ease-in-out infinite;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,.08), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.08), transparent 50%);
+  animation: hero-float 20s ease-in-out infinite;
+  pointer-events: none;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+/* ============================= */
+/* 🎞️ HERO ANIMATIONS */
+/* ============================= */
+@keyframes hero-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-
-  50% {
-    transform: translate(30px, -30px);
-  }
+@keyframes hero-float {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(20px,-20px); }
 }
 
-/* Partículas usadas no hero */
-.particles {
+/* ============================= */
+/* ✨ PARTICLES */
+/* ============================= */
+.hero-particles {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   overflow: hidden;
   z-index: 0;
 }
 
-.particle {
+.hero-particle {
   position: absolute;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  animation: rise 10s infinite ease-in;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,.45);
+  border-radius: 9999px;
+  animation: particle-rise 10s infinite ease-in;
 }
 
-@keyframes rise {
-  0% {
-    bottom: -100px;
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.8;
-  }
-
-  100% {
-    bottom: 100%;
-    opacity: 0;
-  }
+@keyframes particle-rise {
+  0% { transform: translateY(100%); opacity: 0; }
+  50% { opacity: .8; }
+  100% { transform: translateY(-120%); opacity: 0; }
 }
 
-/* Responsive hero tweaks moved here */
+/* ============================= */
+/* 🖼️ HERO IMAGE */
+/* ============================= */
+.hero-image-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+  box-shadow: 0 18px 40px rgba(8,20,60,.35);
+  transition: transform .45s cubic-bezier(.2,.9,.3,1), box-shadow .45s ease;
+}
+
+.hero-image-wrapper:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 30px 60px rgba(8,20,60,.45);
+}
+
+.hero-image {
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 6px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 30px rgba(2,6,23,.45);
+}
+
+/* Responsive */
+@media (min-width: 640px) {
+  .hero-image { width: 20rem; height: 20rem; }
+}
+@media (min-width: 1024px) {
+  .hero-image { width: 22rem; height: 22rem; }
+}
 @media (max-width: 768px) {
-  /* Desabilita parallax em mobile para melhor performance */
-  #home {
-    transform: none !important;
-  }
-
-  /* Ajusta tamanho das partículas em mobile */
-  .particle {
-    width: 3px !important;
-    height: 3px !important;
-  }
-
-  /* Reduz animações complexas em mobile */
-  .gradient-bg::before {
-    animation: none;
-  }
+  .hero-image-wrapper { padding: 4px; }
+  .hero-image { width: 11.5rem; height: 11.5rem; }
 }
 
-@media (max-width: 896px) and (orientation: landscape) {
-  #home {
-    min-height: 100vh;
-    padding-top: 4rem;
-    padding-bottom: 2rem;
-  }
-
-  .particles {
-    display: none;
-  }
+/* ============================= */
+/* ♿ PERFORMANCE & ACCESSIBILITY */
+/* ============================= */
+@media (max-width: 768px) {
+  .hero-bg::before { animation: none; }
+  .hero-particle { width: 3px; height: 3px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gradient-bg {
+  .hero-bg,
+  .hero-bg::before,
+  .hero-particle {
     animation: none;
   }
-
-  .particle {
-    animation: none;
-    display: none;
-  }
-}
-/* Styles specific to the Hero section */
-
-.hero-cta {
-  /* example override */
 }

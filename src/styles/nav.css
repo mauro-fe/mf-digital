@@ -1,78 +1,62 @@
-/* Nav/menu styles extracted from root style.css */
+/* ============================= */
+/* 🧭 NAV */
+/* ============================= */
 
-.decorative-line {
+.nav-link {
   position: relative;
-  overflow: hidden;
 }
 
-.decorative-line::after {
+.nav-link::after {
   content: "";
   position: absolute;
-  bottom: 0;
   left: 0;
-  height: 3px;
+  bottom: -2px;
   width: 0;
+  height: 3px;
   background: linear-gradient(
     90deg,
     var(--color-primary),
     var(--color-secondary)
   );
-  transition: width var(--transition-slow) ease;
+  transition: width var(--transition-slow);
 }
 
-.decorative-line:hover::after {
+.nav-link:hover::after {
   width: 100%;
 }
 
-/* Menu mobile - animação suave */
-#mobileMenu {
+/* ============================= */
+/* 📱 MOBILE MENU */
+/* ============================= */
+
+.nav-mobile {
   box-shadow: var(--shadow-2xl);
+  pointer-events: auto;
 }
 
-#mobileMenu.translate-x-full {
+.nav-mobile.is-hidden {
   transform: translateX(100%);
+  pointer-events: none;
 }
 
-#menuOverlay {
-  transition: opacity var(--transition-base) ease-in-out;
+.nav-overlay {
+  transition: opacity var(--transition-base);
 }
 
-/* Oculta menu e overlay em desktop */
+/* Desktop: hide mobile UI */
 @media (min-width: 768px) {
-  #mobileMenu,
-  #menuOverlay,
-  #mobileMenuBtn {
+  .nav-mobile,
+  .nav-overlay,
+  .nav-mobile-btn {
     display: none !important;
   }
 }
 
-/* Menu mobile garantido apenas em mobile */
+/* Mobile only */
 @media (max-width: 767px) {
-  #mobileMenuBtn {
-    display: flex !important;
+  .nav-mobile-btn {
+    display: flex;
     align-items: center;
     justify-content: center;
   }
 }
-
-#mobileMenu {
-  pointer-events: auto !important;
-}
-
-#mobileMenu.translate-x-full {
-  pointer-events: none;
-}
-
-/* Links do menu sempre clicáveis */
-#mobileMenu a,
-#mobileMenu button {
-  pointer-events: auto !important;
-  cursor: pointer;
-}
-/* Styles specific to the navigation component */
-
-.nav-logo {
-  height: auto;
-}
-
-/* Add more nav-specific overrides here */

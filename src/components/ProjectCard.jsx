@@ -1,22 +1,28 @@
 import React from 'react'
-import '../styles/projects.css'
 
 export default function ProjectCard({ iconClass, title, description, tags = [] }) {
   return (
-    <div className="bg-white rounded-2xl overflow-hidden glow-card group">
-      <div className="h-56 bg-gradient-to-br from-primary to-secondary flex items-center justify-center relative overflow-hidden">
-        <i className={`${iconClass} text-white text-7xl group-hover:scale-110 transition-transform`}></i>
-        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl group transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      
+      <div className="relative h-64 bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05]"></div>
+        <i className={`${iconClass} text-white text-8xl group-hover:scale-125 group-hover:rotate-12 transition-all duration-700 relative z-10`}></i>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
       </div>
-      <div className="p-8">
-        <h3 className="text-2xl font-black mb-3 text-gray-900">{title}</h3>
-        <p className="text-gray-600 mb-6 leading-relaxed">{description}</p>
+      
+      <div className="p-8 relative z-10">
+        <h3 className="text-2xl font-black mb-4 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">{title}</h3>
+        <p className="text-gray-600 mb-6 leading-relaxed text-lg">{description}</p>
         <div className="flex flex-wrap gap-2 mb-6">
           {tags.map(t => (
-            <span key={t} className="bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-4 py-2 rounded-full text-sm font-bold">{t}</span>
+            <span key={t} className="bg-gradient-to-r from-blue-50 to-cyan-50 text-blue-600 px-4 py-2 rounded-xl text-sm font-bold border border-blue-100">{t}</span>
           ))}
         </div>
-        <a href="#contato" className="text-primary font-bold hover:gap-2 inline-flex items-center gap-1 transition-all">Ver detalhes <i className="fas fa-arrow-right"></i></a>
+        <a href="#contato" className="group/link inline-flex items-center gap-2 text-blue-600 font-bold text-lg hover:gap-4 transition-all duration-300">
+          Ver detalhes 
+          <i className="fas fa-arrow-right group-hover/link:translate-x-2 transition-transform duration-300"></i>
+        </a>
       </div>
     </div>
   )
