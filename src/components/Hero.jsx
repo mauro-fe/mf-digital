@@ -26,7 +26,7 @@ export default function Hero() {
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-24 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-20 sm:px-6 lg:px-8"
       style={{
         background: `linear-gradient(135deg, var(--color-primary), var(--color-secondary))`,
       }}
@@ -46,7 +46,7 @@ export default function Hero() {
           {/* Text */}
           <div className="max-w-3xl flex-1 space-y-6 text-center lg:text-left">
             <span className="inline-block rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl shadow-2xl">
-              ✨ Disponível para novos projetos
+               Disponível para novos projetos
             </span>
 
             <h1 className="text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
