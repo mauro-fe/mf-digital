@@ -7,8 +7,6 @@ export default function About() {
       className="relative overflow-hidden bg-white px-4 py-24 sm:px-6 md:py-32 lg:px-8"
     >
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/5 via-white to-[var(--color-secondary)]/5" />
-      <div className="absolute top-20 right-20 h-96 w-96 rounded-full bg-[var(--color-primary)]/30 blur-3xl opacity-30 animate-blob" />
       <div className="absolute bottom-20 left-20 h-96 w-96 rounded-full bg-[var(--color-secondary)]/30 blur-3xl opacity-30 animate-blob animation-delay-2000" />
 
       <div className="relative z-10 mx-auto max-w-6xl">

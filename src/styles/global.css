@@ -190,9 +190,9 @@ html {
   a, button { min-height: 44px; min-width: 44px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
+/*
+  Removido o corte global de animações para não "quebrar" o layout
+  em máquinas com "reduzir movimentos" ativado. Se quiser respeitar
+  essa preferência, aplique regras específicas em componentes
+  individuais em vez de usar *.
+*/
