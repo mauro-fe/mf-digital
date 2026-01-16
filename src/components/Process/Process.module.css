@@ -1,0 +1,44 @@
+.processGrid {
+  position: relative;
+}
+
+/* Linha conectora apenas para desktop */
+@media (min-width: 1024px) {
+  .processGrid::before {
+    content: "";
+    position: absolute;
+    top: 3.5rem; /* Alinhado com o centro do círculo (14/2) */
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: repeating-linear-gradient(
+      to right,
+      #e2e8f0 0,
+      #e2e8f0 10px,
+      transparent 10px,
+      transparent 20px
+    );
+    z-index: 0;
+  }
+}
+
+.stepCard {
+  background: white;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+}
+
+.stepNumber {
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+.stepCard:hover .stepNumber {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.stepCard:hover {
+  border-color: var(--color-primary);
+  background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+}

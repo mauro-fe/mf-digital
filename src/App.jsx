@@ -1,79 +1,73 @@
-import React, { useEffect } from 'react'
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import About from './components/About'
-import Services from './components/Services'
-import Technologies from './components/Technologies'
-import Process from './components/Process'
-import Projects from './components/Projects'
-import Testimonials from './components/Testimonials'
-import FAQ from './components/FAQ'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import ScrollTop from './components/ScrollTop'
+import React, { useEffect } from "react";
+import Nav from "./components/Nav/Nav";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Services from "./components/Services/Services";
+import Technologies from "./components/Technologies/Technologies";
+import Process from "./components/Process/Process";
+import Projects from "./components/Projects/Projects";
+import Testimonials from "./components/Testimonials/Testimonials";
+import FAQ from "./components/FAQ/FAQ";
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
+import ScrollTop from "./components/ScrollTop";
 
 export default function App() {
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px',
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in')
-          observer.unobserve(entry.target) // anima só uma vez
-        }
-      })
-    }, observerOptions)
+    // Seleciona todos os elementos com a classe reveal
+    const elements = document.querySelectorAll(".reveal");
+    elements.forEach((el) => observer.observe(el));
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const scrollTopBtn = document.getElementById('scrollTop')
-    if (!scrollTopBtn) return
-
-    const onScroll = () => {
-      if (window.pageYOffset > 300) scrollTopBtn.classList.remove('hidden')
-      else scrollTopBtn.classList.add('hidden')
-    }
-
-    const onClick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
-    window.addEventListener('scroll', onScroll)
-    scrollTopBtn.addEventListener('click', onClick)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      scrollTopBtn.removeEventListener('click', onClick)
-    }
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div>
+    <div className="font-body selection:bg-blue-600 selection:text-white">
       <Nav />
       <main>
-        {/* ❌ Hero NÃO recebe reveal */}
         <Hero />
 
-        {/* ✅ Só quem precisa anima */}
-        <About className="reveal" />
-        <Process className="reveal" />
-        <Services className="reveal" />
-        <Technologies className="reveal" />
-        <Projects className="reveal" />
-        <FAQ className="reveal" />
-        <Contact className="reveal" />
-        <Testimonials className="reveal" />
+        {/* Envolvendo em divs reveal caso os componentes sejam complexos */}
+        <div className="reveal">
+          <About />
+        </div>
+        <div className="reveal">
+          <Process />
+        </div>
+        <div className="reveal">
+          <Services />
+        </div>
+        <div className="reveal">
+          <Technologies />
+        </div>
+        <div className="reveal">
+          <Projects />
+        </div>
+        <div className="reveal">
+          <Testimonials />
+        </div>
+        <div className="reveal">
+          <FAQ />
+        </div>
+        <div className="reveal">
+          <Contact />
+        </div>
       </main>
+
       <Footer />
       <ScrollTop />
     </div>
-  )
+  );
 }

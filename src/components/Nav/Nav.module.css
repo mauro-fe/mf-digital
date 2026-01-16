@@ -1,0 +1,73 @@
+/* ============================= */
+/* 🧭 NAV */
+/* ============================= */
+
+/* Nav.module.css */
+
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Garante que o menu lateral não cause scroll indesejado */
+.asideMenu {
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  /* Hardware acceleration */
+  will-change: transform;
+}
+/* 📱 MOBILE MENU */
+/* ============================= */
+
+.nav-mobile {
+  box-shadow: var(--shadow-2xl);
+  pointer-events: auto;
+}
+
+.nav-mobile.is-hidden {
+  transform: translateX(100%);
+  pointer-events: none;
+}
+
+.nav-overlay {
+  transition: opacity var(--transition-base);
+}
+
+/* Desktop: hide mobile UI */
+@media (min-width: 768px) {
+  .nav-mobile,
+  .nav-overlay,
+  .nav-mobile-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile only */
+@media (max-width: 767px) {
+  .nav-mobile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
