@@ -1,78 +1,84 @@
 @import "tailwindcss";
 
+/* ============================= */
+/* 🎨 DESIGN TOKENS (Tailwind v4) */
+/* ============================= */
 @theme {
-  /* Fontes */
-  --font-display: "Syne", sans-serif;
-  --font-body: "Inter", sans-serif;
-
-  /* Cores Customizadas */
+  /* Colors */
   --color-primary: #2563eb;
-  --color-secondary: #0891b2; /* Mudei para Cyan para dar o contraste Master */
+  --color-secondary: #1d4ed8;
   --color-primary-light: #3b82f6;
   --color-secondary-dark: #1e40af;
 
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-light: #9ca3af;
+
   /* Shadows */
-  --shadow-primary: 0 20px 60px rgba(37, 99, 235, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-  /* Animações (Novo formato no CSS) */
-  --animate-blob: blob 7s infinite;
-  --animate-spin-slow: spin 8s linear infinite;
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
-  }
+  --shadow-primary: 0 20px 60px rgba(37, 99, 235, 0.2),
+    0 4px 16px rgba(37, 99, 235, 0.1);
 }
 
-/* Comportamento Global */
-@layer base {
-  html,
-  body {
-    max-width: 100vw;
-    overflow-x: hidden;
-    position: relative;
-  }
-  html {
-    @apply scroll-smooth;
-  }
-  body {
-    @apply bg-gray-50 text-gray-900 antialiased font-body;
-  }
+/* ============================= */
+/* 🌍 ROOT – comportamento global */
+/* ============================= */
+:root {
+  --gradient-main: linear-gradient(
+    -45deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-primary-light),
+    var(--color-secondary-dark)
+  );
 
-  /* Força os títulos a usarem a fonte de impacto Syne automaticamente */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-display font-black tracking-tighter;
-  }
+  --gradient-text: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-primary-light) 100%
+  );
+
+  --transition-base: 300ms;
+  --transition-slow: 500ms;
 }
 
-/* Animações e Utilitários */
-@layer utilities {
-  .animate-gradient {
-    background-size: 200% auto;
-    animation: gradient 3s ease infinite;
-  }
+/* ============================= */
+/* 🧼 RESET / BASE */
+/* ============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
 
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/30;
+/* ============================= */
+/* 🎞️ ANIMAÇÕES */
+/* ============================= */
+@keyframes blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
   }
 }
 
@@ -88,19 +94,52 @@
   }
 }
 
-/* No seu global.css */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25%,
+  75% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+/* ============================= */
+/* 🧩 UTILITÁRIOS */
+/* ============================= */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
 }
 
 .fade-in {
-<<<<<<< HEAD
-  opacity: 1;
-  transform: translateY(0);
-}
-=======
   animation: fadeIn 1s ease-out forwards;
 }
 
@@ -134,7 +173,7 @@
   background: white;
   box-shadow: var(--shadow-lg);
   transition: transform var(--transition-slow),
-              box-shadow var(--transition-slow);
+    box-shadow var(--transition-slow);
 }
 
 .glow-card::before {
@@ -164,16 +203,21 @@
 /* 📐 BACKGROUNDS */
 /* ============================= */
 .bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 .tech-grid {
-  background-image:
-    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px);
+  background-image: linear-gradient(
+      rgba(37, 99, 235, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
@@ -181,14 +225,12 @@
 /* 📱 ACESSIBILIDADE */
 /* ============================= */
 @media (hover: none) and (pointer: coarse) {
-  .glow-card:hover { transform: none; }
-  a, button { min-height: 44px; min-width: 44px; }
+  .glow-card:hover {
+    transform: none;
+  }
+  a,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
-
-/*
-  Removido o corte global de animações para não "quebrar" o layout
-  em máquinas com "reduzir movimentos" ativado. Se quiser respeitar
-  essa preferência, aplique regras específicas em componentes
-  individuais em vez de usar *.
-*/
->>>>>>> 2e6c9c4a4fe270d00e4d7bdd8fe86fc81a4bc417
