@@ -96,6 +96,99 @@
 }
 
 .fade-in {
+<<<<<<< HEAD
   opacity: 1;
   transform: translateY(0);
 }
+=======
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.gradient-text {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+  background-size: 200% auto;
+}
+
+/* ============================= */
+/* 🧱 COMPONENTES */
+/* ============================= */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-card {
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--transition-slow),
+              box-shadow var(--transition-slow);
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 99, 235, 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.glow-card:hover::before {
+  transform: translateX(100%);
+}
+
+.glow-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-primary);
+}
+
+/* ============================= */
+/* 📐 BACKGROUNDS */
+/* ============================= */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(37,99,235,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ============================= */
+/* 📱 ACESSIBILIDADE */
+/* ============================= */
+@media (hover: none) and (pointer: coarse) {
+  .glow-card:hover { transform: none; }
+  a, button { min-height: 44px; min-width: 44px; }
+}
+
+/*
+  Removido o corte global de animações para não "quebrar" o layout
+  em máquinas com "reduzir movimentos" ativado. Se quiser respeitar
+  essa preferência, aplique regras específicas em componentes
+  individuais em vez de usar *.
+*/
+>>>>>>> 2e6c9c4a4fe270d00e4d7bdd8fe86fc81a4bc417
