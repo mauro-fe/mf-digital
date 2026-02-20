@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -14,63 +16,28 @@ import ScrollTop from './components/ScrollTop'
 
 export default function App() {
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px',
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in')
-          observer.unobserve(entry.target) // anima só uma vez
-        }
-      })
-    }, observerOptions)
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const scrollTopBtn = document.getElementById('scrollTop')
-    if (!scrollTopBtn) return
-
-    const onScroll = () => {
-      if (window.pageYOffset > 300) scrollTopBtn.classList.remove('hidden')
-      else scrollTopBtn.classList.add('hidden')
-    }
-
-    const onClick = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
-    window.addEventListener('scroll', onScroll)
-    scrollTopBtn.addEventListener('click', onClick)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      scrollTopBtn.removeEventListener('click', onClick)
-    }
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80,
+      delay: 0,
+    })
   }, [])
 
   return (
-    <div>
+    <div className="selection:bg-indigo-100 selection:text-indigo-600">
       <Nav />
       <main>
-        {/* ❌ Hero NÃO recebe reveal */}
         <Hero />
-
-        {/* ✅ Só quem precisa anima */}
-        <About className="reveal" />
-        <Process className="reveal" />
-        <Services className="reveal" />
-        <Technologies className="reveal" />
-        <Projects className="reveal" />
-        <FAQ className="reveal" />
-        <Contact className="reveal" />
-        <Testimonials className="reveal" />
+        <About />
+        <Services />
+        <Process />
+        <Technologies />
+        <Projects />
+        <Testimonials />
+        <FAQ />
+        <Contact />
       </main>
       <Footer />
       <ScrollTop />

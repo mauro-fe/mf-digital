@@ -4,60 +4,79 @@ import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-const samples = [
+const testimonials = [
   {
-    name: 'Cliente A',
-    role: 'CEO - Empresa X',
-    quote: 'Excelente trabalho, comunicação clara e entrega antes do prazo. Recomendo muito!'
+    name: 'Ricardo Oliveira',
+    role: 'Empresário — Loja Virtual',
+    quote: 'O Mauro entregou um e-commerce incrível, muito acima do que eu esperava. As vendas online aumentaram 40% no primeiro mês!',
+    rating: 5,
   },
   {
-    name: 'Cliente B',
-    role: 'Product Owner - Projeto Y',
-    quote: 'Profissionalismo e atenção aos detalhes. O projeto superou expectativas.'
+    name: 'Ana Carolina',
+    role: 'Marketing Digital',
+    quote: 'Profissional excepcional. A landing page que ele criou trouxe o triplo de leads que tínhamos antes. Comunicação impecável.',
+    rating: 5,
   },
   {
-    name: 'Cliente C',
-    role: 'Marketing - Marca Z',
-    quote: 'Ótima experiência — suporte rápido e resultado muito bem executado.'
-  }
+    name: 'Pedro Santos',
+    role: 'Fundador — Startup Tech',
+    quote: 'Código limpo, entregas no prazo e sempre disponível. O sistema que desenvolveu economiza horas do nosso time todo dia.',
+    rating: 5,
+  },
 ]
 
-export default function Testimonials() {
+export default function Testimonials({ className = '' }) {
   return (
-    <section id="depoimentos" className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="inline-block mb-4">
-            <span className="bg-gradient-to-r from-blue-100 to-cyan-100 text-blue-600 px-6 py-2 rounded-full text-sm font-bold shadow-lg">🗣️ Depoimentos</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4">
-            <span className="bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 text-transparent bg-clip-text">O que clientes dizem</span>
+    <section id="depoimentos" className={`relative py-24 md:py-32 px-5 sm:px-8 bg-gray-50/50 ${className}`}>
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <span data-aos="fade-down" className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-600 mb-6">
+            <i className="fas fa-star text-[10px]" />
+            Depoimentos
+          </span>
+
+          <h2 data-aos="fade-up" data-aos-delay="100" className="heading-lg text-gray-900 mb-6">
+            O que meus clientes{" "}
+            <span className="gradient-text">dizem sobre mim</span>
           </h2>
-          <p className="text-gray-600 text-lg">Feedback real de quem já trabalhou comigo</p>
+
+          <p data-aos="fade-up" data-aos-delay="200" className="body-lg text-gray-500">
+            Feedback real de quem confiou no meu trabalho.
+          </p>
         </div>
 
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={24}
+          spaceBetween={20}
           slidesPerView={1}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 4500, disableOnInteraction: false }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
           breakpoints={{ 768: { slidesPerView: 2 } }}
+          className="pb-14"
+          data-aos="fade-up"
+          data-aos-delay="300"
         >
-          {samples.map((s, i) => (
+          {testimonials.map((t, i) => (
             <SwiperSlide key={i}>
-              <div className="p-8 m-3 bg-gradient-to-br from-gray-50 to-white rounded-3xl shadow-lg hover:shadow-2xl transition-all border border-gray-100 h-full flex flex-col justify-between">
+              <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm h-full flex flex-col justify-between transition-all duration-300 hover:shadow-lg">
+                {/* Stars */}
                 <div>
-                  <div className="text-blue-600 mb-4">
-                    <i className="fas fa-quote-left text-3xl"></i>
+                  <div className="flex gap-1 mb-5">
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <i key={j} className="fas fa-star text-amber-400 text-sm" />
+                    ))}
                   </div>
-                  <p className="text-gray-800 text-lg leading-relaxed mb-6">{s.quote}</p>
+                  <p className="text-gray-600 leading-relaxed text-[15px] mb-6">"{t.quote}"</p>
                 </div>
-                <div className="flex items-center gap-4 pt-4 border-t border-gray-200">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">{s.name.split(' ')[0][0]}</div>
+
+                <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm">
+                    {t.name.split(' ').map(n => n[0]).join('')}
+                  </div>
                   <div>
-                    <div className="font-bold text-gray-900">{s.name}</div>
-                    <div className="text-sm text-gray-600">{s.role}</div>
+                    <div className="font-semibold text-gray-900 text-sm">{t.name}</div>
+                    <div className="text-xs text-gray-500">{t.role}</div>
                   </div>
                 </div>
               </div>
