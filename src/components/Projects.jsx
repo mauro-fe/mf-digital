@@ -1,67 +1,41 @@
-import React from 'react'
-import ProjectCard from './ProjectCard'
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import ProjectCard from "./ProjectCard";
+import { PROJECTS } from "../siteContent";
 
-const projects = [
-  {
-    icon: 'fas fa-chart-pie',
-    title: 'Lukrato',
-    description: 'Plataforma SaaS de controle financeiro pessoal com dashboard, relatórios, gamificação, sistema de indicação e planos freemium.',
-    tags: ['React', 'PHP', 'MySQL', 'Tailwind', 'SaaS'],
-    link: 'https://lukrato.com.br/',
-    gradient: 'from-emerald-600 to-teal-700',
-  },
-  {
-    icon: 'fas fa-tooth',
-    title: 'Odontologia Xavier',
-    description: 'Site institucional premium para clínica odontológica estética em Curitiba, com galeria, depoimentos e agendamento via WhatsApp.',
-    tags: ['React', 'Tailwind', 'Vite', 'SEO'],
-    link: 'https://www.odontologiaxavier.com.br',
-    gradient: 'from-sky-600 to-blue-800',
-  },
-  {
-    icon: 'fas fa-scissors',
-    title: 'Social Barber Shop',
-    description: 'Site para barbearia com catálogo de serviços, tabela de valores, galeria de cortes e localização integrada.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    link: 'https://social-barber-shop.vercel.app',
-    gradient: 'from-amber-600 to-orange-800',
-  },
-  {
-    icon: 'fas fa-gamepad',
-    title: 'Jump Up',
-    description: 'Jogo web interativo de reflexos e inteligência. Plataforma de entretenimento com interface imersiva e desafios progressivos.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Canvas'],
-    link: 'https://jump-up-phi.vercel.app',
-    gradient: 'from-purple-600 to-fuchsia-700',
-  },
-  {
-    icon: 'fas fa-link',
-    title: 'Redes Vizinhas',
-    description: 'Página de links personalizada com design moderno, integrando todas as redes sociais e canais de contato em um só lugar.',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    link: 'https://redes-vizinhas.vercel.app',
-    gradient: 'from-indigo-600 to-violet-800',
-  },
-]
+const projects = PROJECTS.items;
 
-export default function Projects({ className = '' }) {
+export default function Projects({ className = "" }) {
   return (
-    <section id="projetos" className={`relative py-24 md:py-32 px-5 sm:px-8 ${className}`}>
+    <section
+      id="projetos"
+      className={`relative py-24 md:py-32 px-5 sm:px-8 ${className}`}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span data-aos="fade-down" className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-600 mb-6">
-            <i className="fas fa-briefcase text-[10px]" />
-            Portfólio
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <span
+            data-aos="fade-down"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-6"
+          >
+            &#x25C8; {PROJECTS.badge}
           </span>
 
-          <h2 data-aos="fade-up" data-aos-delay="100" className="heading-lg text-gray-900 mb-6">
-            Projetos que{" "}
-            <span className="gradient-text">geram resultados</span>
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="100"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-6 leading-[1.1] tracking-tight"
+          >
+            {PROJECTS.title}{" "}
+            <span className="gradient-text">{PROJECTS.titleHighlight}</span>
           </h2>
 
-          <p data-aos="fade-up" data-aos-delay="200" className="body-lg text-gray-500">
-            Conheça alguns dos trabalhos reais que desenvolvi com dedicação e foco em qualidade.
+          <p
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="body-lg text-gray-400"
+          >
+            {PROJECTS.subtitle}
           </p>
         </div>
 
@@ -69,7 +43,7 @@ export default function Projects({ className = '' }) {
           {projects.map((p, i) => (
             <ProjectCard
               key={p.title}
-              iconClass={p.icon}
+              icon={p.icon}
               title={p.title}
               description={p.description}
               tags={p.tags}
@@ -81,16 +55,20 @@ export default function Projects({ className = '' }) {
         </div>
 
         {/* CTA below projects */}
-        <div data-aos="fade-up" data-aos-delay="300" className="text-center mt-12">
+        <div
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="text-center mt-12"
+        >
           <a
-            href="#contato"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 transition-all duration-300 hover:gap-3"
+            href={PROJECTS.ctaHref}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary-light transition-all duration-300 hover:gap-3"
           >
-            Quer um projeto personalizado? Fale comigo
-            <i className="fas fa-arrow-right text-xs" />
+            {PROJECTS.cta}
+            <ArrowRight size={14} />
           </a>
         </div>
       </div>
     </section>
-  )
+  );
 }
