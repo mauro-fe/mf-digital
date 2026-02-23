@@ -23,6 +23,7 @@
   --color-text-secondary: #94a3b8;
   --color-text-light: #64748b;
 
+
   --color-surface: #0a0f1e;
   --color-surface-dark: #030712;
   --color-surface-card: #111827;
@@ -91,6 +92,13 @@
       sans-serif;
     color: var(--color-text-primary);
     background: var(--color-dark-900);
+    overflow-x: hidden;
+  }
+
+  /* Ensure the root and main containers also hide horizontal overflow
+     and add top padding so fixed nav doesn't cover page content on mobile */
+  #root,
+  main {
     overflow-x: hidden;
   }
 
@@ -404,11 +412,18 @@
     mask-composite: exclude;
     -webkit-mask-composite: xor;
     opacity: 0;
+    z-index: 0;
     transition: opacity 0.4s;
   }
 
   .card-glow-border:hover::before {
     opacity: 1;
+  }
+
+  /* When a card also has the utility overflow-visible, make sure it's applied
+     (components layer previously set overflow:hidden and could win) */
+  .card-glow-border.overflow-visible {
+    overflow: visible !important;
   }
 }
 

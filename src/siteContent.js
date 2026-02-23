@@ -307,6 +307,7 @@ export const PROJECTS = {
                 "Plataforma SaaS de controle financeiro pessoal com dashboard, relatórios, gamificação, sistema de indicação e planos freemium.",
             tags: ["React", "PHP", "MySQL", "Tailwind", "SaaS"],
             link: "https://lukrato.com.br/",
+            image: "/img/lukrato.png",
             gradient: "from-emerald-600 to-teal-700",
         },
         {
@@ -316,6 +317,7 @@ export const PROJECTS = {
                 "Site institucional premium para clínica odontológica estética em Curitiba, com galeria, depoimentos e agendamento via WhatsApp.",
             tags: ["React", "Tailwind", "Vite", "SEO"],
             link: "https://www.odontologiaxavier.com.br",
+            image: "/img/xavier.png",
             gradient: "from-sky-600 to-blue-800",
         },
         {
@@ -325,6 +327,7 @@ export const PROJECTS = {
                 "Site para barbearia com catálogo de serviços, tabela de valores, galeria de cortes e localização integrada.",
             tags: ["HTML", "CSS", "JavaScript"],
             link: "https://social-barber-shop.vercel.app",
+            image: "/img/social-barber-shop.png",
             gradient: "from-amber-600 to-orange-800",
         },
         {
@@ -334,17 +337,10 @@ export const PROJECTS = {
                 "Jogo web interativo de reflexos e inteligência. Plataforma de entretenimento com interface imersiva e desafios progressivos.",
             tags: ["HTML", "CSS", "JavaScript", "Canvas"],
             link: "https://jump-up-phi.vercel.app",
+            image: "/img/jumpup.png",
             gradient: "from-purple-600 to-fuchsia-700",
         },
-        {
-            icon: Link,
-            title: "Redes Vizinhas",
-            description:
-                "Página de links personalizada com design moderno, integrando todas as redes sociais e canais de contato em um só lugar.",
-            tags: ["HTML", "CSS", "JavaScript"],
-            link: "https://redes-vizinhas.vercel.app",
-            gradient: "from-primary to-secondary-dark",
-        },
+
     ],
 };
 
