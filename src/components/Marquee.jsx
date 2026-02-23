@@ -30,7 +30,7 @@ export default function Marquee({
         {[...items, ...items].map((item, i) => (
           <span
             key={i}
-            className="flex items-center gap-6 md:gap-10 px-6 md:px-10 whitespace-nowrap font-bold uppercase text-text-primary/[0.07] select-none"
+            className="flex items-center gap-6 md:gap-10 px-6 md:px-10 whitespace-nowrap font-bold uppercase text-text-secondary select-none"
           >
             <span>{item}</span>
             <span className="text-primary/30">&#x25C8;</span>

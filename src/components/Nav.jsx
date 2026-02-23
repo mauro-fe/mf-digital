@@ -57,7 +57,7 @@ export default function Nav() {
       >
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div
-            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-[56px]" : "h-[72px]"}`}
+            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-[56px]" : "h-[68px]"}`}
           >
             {/* Logo */}
             <a
@@ -65,7 +65,7 @@ export default function Nav() {
               className="shrink-0 transition-transform duration-300 hover:scale-105"
             >
               <Logo
-                className={`transition-all duration-500 ${scrolled ? "h-10 md:h-12" : "h-16 md:h-20"}`}
+                className={`transition-all duration-500 ${scrolled ? "h-10 md:h-12" : "h-16 md:h-16"}`}
               />
             </a>
 

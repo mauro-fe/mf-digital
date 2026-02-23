@@ -211,13 +211,13 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-sm font-medium text-text-primary/80">
+              <span className="text-sm font-medium text-text-secondary/80">
                 {HERO.badge}
               </span>
             </div>
 
             <h1
-              className="heading-xl text-text-primary text-balance"
+              className="heading-xl text-text-secondary text-balance"
               style={{ perspective: "600px" }}
               aria-label={HERO.ariaLabel}
             >
@@ -234,7 +234,7 @@ export default function Hero() {
 
             <p className="hero-desc gsap-hidden body-lg text-gray-400 max-w-xl mx-auto lg:mx-0">
               {HERO.description}{" "}
-              <strong className="text-text-primary font-semibold">
+              <strong className="text-text-secondary font-semibold">
                 {HERO.descriptionHighlight}
               </strong>
               .
@@ -255,7 +255,7 @@ export default function Hero() {
 
               <a
                 href={HERO.cta2Href}
-                className="hero-cta gsap-hidden inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-8 py-4 font-semibold text-text-primary backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/25"
+                className="hero-cta gsap-hidden inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-8 py-4 font-semibold text-text-secondary backdrop-blur-xl transition-all duration-300 hover:bg-white/10 hover:border-white/25"
               >
                 <Play size={14} />
                 {HERO.cta2}
@@ -270,7 +270,7 @@ export default function Hero() {
                   className="hero-stat gsap-hidden text-center lg:text-left"
                 >
                   <div
-                    className="hero-stat-value text-3xl font-extrabold text-text-primary sm:text-4xl"
+                    className="hero-stat-value text-3xl font-extrabold text-text-secondary sm:text-4xl"
                     data-target={stat.num}
                     data-suffix={stat.suffix}
                   >
@@ -308,7 +308,7 @@ export default function Hero() {
                   <div className="text-sm font-semibold text-text-primary">
                     {AUTHOR.stackLabel}
                   </div>
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-gray-400 text-text-primary">
                     {AUTHOR.stackDesc}
                   </div>
                 </div>

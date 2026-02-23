@@ -30,7 +30,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.06] text-gray-400 transition-all duration-300 hover:border-white/15 hover:text-text-primary hover:bg-white/5"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.06] text-gray-400 transition-all duration-300 hover:border-white/15 hover:text-text-secondary hover:bg-white/5"
                 >
                   <Icon size={14} color="currentColor" />
                 </a>

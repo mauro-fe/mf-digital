@@ -31,7 +31,7 @@ export default function Contact({ className = "" }) {
         <h2
           data-aos="fade-up"
           data-aos-delay="100"
-          className="heading-lg  mb-6"
+          className="heading-lg text-text-secondary mb-6"
         >
           {CONTACT.title}{" "}
           <span className="gradient-text">{CONTACT.titleHighlight}</span>?
@@ -40,7 +40,7 @@ export default function Contact({ className = "" }) {
         <p
           data-aos="fade-up"
           data-aos-delay="200"
-          className="body-lg text-gray-400 mb-14 max-w-2xl mx-auto"
+          className="body-lg text-text-secondary mb-14 max-w-2xl mx-auto"
         >
           {CONTACT.subtitle}
         </p>
@@ -69,10 +69,10 @@ export default function Contact({ className = "" }) {
                   />
                 </div>
                 <div>
-                  <h3 className="font-bold text-text-primary text-lg mb-1 transition-colors">
+                  <h3 className="font-bold text-text-secondary text-lg mb-1 transition-colors">
                     {ch.label}
                   </h3>
-                  <p className="text-sm text-gray-400 transition-colors">
+                  <p className="text-sm text-text-secondary transition-colors">
                     {ch.desc}
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default function Contact({ className = "" }) {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-400 transition-all duration-300 hover:bg-white/15 hover:text-text-primary hover:scale-110 hover:shadow-lg hover:border-white/20"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-text-secondary transition-all duration-300 hover:bg-white/15 hover:text-text-secondary hover:scale-110 hover:shadow-lg hover:border-white/20"
               >
                 <Icon size={18} color="currentColor" />
               </a>
