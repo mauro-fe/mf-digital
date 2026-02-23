@@ -411,7 +411,7 @@ export default function Process({ className = "" }) {
       </div>
 
       {/* ─── MOBILE: Original card grid ─── */}
-      <div className="lg:hidden px-5 sm:px-8 py-24 md:py-32">
+      <div className="lg:hidden relative z-10 px-5 sm:px-8 pt-32 pb-28 md:py-32">
         {/* Mobile header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-6">
@@ -432,7 +432,7 @@ export default function Process({ className = "" }) {
             return (
               <div
                 key={i}
-                className="process-mobile-card group relative rounded-2xl border border-white/[0.06] bg-white/[0.03] p-7 transition-all duration-400 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.06] card-glow-border"
+                className="process-mobile-card group relative rounded-2xl border border-white/[0.06] bg-white/[0.03] p-7 transition-all duration-400 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.06] card-glow-border overflow-visible"
               >
                 <span className="absolute -top-3 -right-2 text-6xl font-extrabold text-text-primary/[0.03] select-none transition-colors duration-300 group-hover:text-primary/10">
                   {s.num}

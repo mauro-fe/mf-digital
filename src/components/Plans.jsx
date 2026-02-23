@@ -1,6 +1,6 @@
 import React from "react";
 import { Check, ArrowRight } from "lucide-react";
-import { PLANS } from "../siteContent";
+import { PLANS, AUTHOR } from "../siteContent";
 
 const plans = PLANS.items;
 
@@ -52,7 +52,7 @@ export default function Plans({ className = "" }) {
               data-aos-delay={i * 120}
               className={`group relative rounded-2xl p-8 transition-all duration-500 card-glow-border ${
                 plan.popular
-                  ? "bg-gradient-to-b from-primary/20 to-transparent border border-primary/30 shadow-lg shadow-primary/10"
+                  ? "bg-gradient-to-b from-primary/20 to-transparent border border-primary/30 shadow-lg shadow-primary/10 z-10 overflow-visible"
                   : "bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12]"
               }`}
             >
@@ -62,7 +62,7 @@ export default function Plans({ className = "" }) {
               </span>
 
               {plan.popular && (
-                <div className="absolute -top-3 right-6">
+                <div className="absolute -top-3 right-6 z-30">
                   <span className="rounded-full bg-primary px-4 py-1 text-xs font-bold uppercase tracking-wider text-text-primary shadow-lg shadow-primary/30">
                     Popular
                   </span>
@@ -103,8 +103,20 @@ export default function Plans({ className = "" }) {
               </ul>
 
               <a
-                href={PLANS.ctaHref}
-                className={`group/btn flex items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-all duration-300 ${
+                href={AUTHOR.links.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  // ensure link opens even if some overlay/click handler blocks default
+                  e.preventDefault();
+                  try {
+                    window.open(AUTHOR.links.whatsapp, "_blank");
+                  } catch (err) {
+                    // fallback to normal navigation
+                    window.location.href = AUTHOR.links.whatsapp;
+                  }
+                }}
+                className={`group/btn relative z-40 pointer-events-auto flex items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-all duration-300 ${
                   plan.popular
                     ? "bg-primary text-text-primary hover:bg-primary-light shadow-lg shadow-primary/25"
                     : "bg-white/[0.06] text-text-primary hover:bg-white/[0.1] border border-white/[0.08]"

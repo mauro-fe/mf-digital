@@ -18,7 +18,7 @@ export default function Footer() {
           </div>
 
           <p className="text-sm text-gray-400 text-center">
-            &copy; {new Date().getFullYear()} {AUTHOR.copyright}
+             {AUTHOR.copyright}
           </p>
 
           <div className="flex gap-3">

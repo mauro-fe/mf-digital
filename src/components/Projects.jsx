@@ -44,6 +44,7 @@ export default function Projects({ className = "" }) {
             <ProjectCard
               key={p.title}
               icon={p.icon}
+              image={p.image}
               title={p.title}
               description={p.description}
               tags={p.tags}

@@ -3,6 +3,7 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 
 export default function ProjectCard({
   icon: Icon,
+  image,
   title,
   description,
   tags = [],
@@ -17,24 +18,38 @@ export default function ProjectCard({
       className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.03] overflow-hidden transition-all duration-400 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.06] card-glow-border"
     >
       {/* Preview area with gradient */}
-      <div
-        className={`relative h-52 overflow-hidden bg-gradient-to-br ${gradient}`}
-      >
+      <div className={`relative h-52 overflow-hidden bg-gradient-to-br ${gradient}`}>
         <div className="absolute inset-0 bg-grid opacity-30" />
         {/* Decorative circles */}
         <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-white/10" />
         <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-white/5" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-3">
-          <Icon
-            size={48}
-            className="text-text-primary/90 transition-all duration-500 group-hover:scale-110 group-hover:text-text-primary"
+
+        {/* If image is provided, use it as background; otherwise show the icon */}
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover"
           />
-          <span className="text-sm font-medium text-text-primary/60 tracking-wide">
-            {link
-              ?.replace("https://", "")
-              .replace("http://", "")
-              .replace(/\/$/, "")}
-          </span>
+        ) : null}
+
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-3">
+          {!image ? (
+            <>
+              <Icon
+                size={48}
+                className="text-text-primary/90 transition-all duration-500 group-hover:scale-110 group-hover:text-text-primary"
+              />
+              <span className="text-sm font-medium text-text-primary/60 tracking-wide">
+                {link
+                  ?.replace("https://", "")
+                  .replace("http://", "")
+                  .replace(/\/$/, "")}
+              </span>
+            </>
+          ) : null}
+           
         </div>
 
         {/* Hover overlay with link */}
