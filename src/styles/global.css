@@ -100,7 +100,6 @@
   #root,
   main {
     overflow-x: hidden;
-    padding-top: 68px;
   }
 
   ::selection {
@@ -413,11 +412,18 @@
     mask-composite: exclude;
     -webkit-mask-composite: xor;
     opacity: 0;
+    z-index: 0;
     transition: opacity 0.4s;
   }
 
   .card-glow-border:hover::before {
     opacity: 1;
+  }
+
+  /* When a card also has the utility overflow-visible, make sure it's applied
+     (components layer previously set overflow:hidden and could win) */
+  .card-glow-border.overflow-visible {
+    overflow: visible !important;
   }
 }
 

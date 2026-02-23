@@ -14,25 +14,26 @@ export default function Process({ className = "" }) {
   const triggerRef = useRef(null);
 
   useLayoutEffect(() => {
-    // Only run GSAP lateral pin on desktop (≥1024px)
     const mm = gsap.matchMedia();
 
+    /* ── DESKTOP: pinned lateral scroll ── */
     mm.add("(min-width: 1024px)", () => {
       const section = sectionRef.current;
       if (!section) return;
 
       const totalSteps = steps.length;
-      const cardEls = section.querySelectorAll(".process-card");
-      const titleEls = section.querySelectorAll(".process-title");
-      const descEls = section.querySelectorAll(".process-desc");
+      const cardEls     = section.querySelectorAll(".process-card");
+      const titleEls    = section.querySelectorAll(".process-title");
+      const descEls     = section.querySelectorAll(".process-desc");
       const progressFill = section.querySelector(".process-progress-fill");
-      const borderEl = section.querySelector(".process-card-border");
-      const iconEls = section.querySelectorAll(".process-icon");
-      const numEls = section.querySelectorAll(".process-num");
-      const labelTop = section.querySelector(".process-label-top");
+      const borderEl    = section.querySelector(".process-card-border");
+      const iconEls     = section.querySelectorAll(".process-icon");
+      const numEls      = section.querySelectorAll(".process-num");
+      const labelTop    = section.querySelector(".process-label-top");
       const labelBottom = section.querySelector(".process-label-bottom");
+      const dotEls      = section.querySelectorAll(".process-dot");
+      const stepCounter = section.querySelector(".process-step-counter");
 
-      // Main scroll-driven timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section.querySelector(".process-pin-wrap"),
@@ -40,132 +41,58 @@ export default function Process({ className = "" }) {
           end: `+=${totalSteps * 600}`,
           pin: true,
           scrub: 0.5,
-          onUpdate: (self) => {
-            triggerRef.current = self;
-          },
+          onUpdate: (self) => { triggerRef.current = self; },
         },
       });
 
-      // For each transition between steps
       for (let i = 0; i < totalSteps - 1; i++) {
-        const stepLabel = `step${i}`;
+        const lbl = `step${i}`;
 
-        tl.addLabel(stepLabel)
-          // --- Card: rotate out current number, rotate in next ---
-          .to(
-            cardEls[i],
-            {
-              rotateY: -90,
-              opacity: 0,
-              duration: 0.4,
-              ease: "power2.in",
-            },
-            stepLabel,
-          )
-          .fromTo(
-            cardEls[i + 1],
-            { rotateY: 90, opacity: 0 },
-            { rotateY: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-            `${stepLabel}+=0.35`,
-          )
+        tl.addLabel(lbl)
+          .to(cardEls[i],    { rotateY: -90, opacity: 0, duration: 0.4, ease: "power2.in" }, lbl)
+          .fromTo(cardEls[i + 1], { rotateY: 90, opacity: 0 }, { rotateY: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, `${lbl}+=0.35`)
 
-          // --- Icon swap ---
-          .to(iconEls[i], { scale: 0, opacity: 0, duration: 0.3 }, stepLabel)
-          .fromTo(
-            iconEls[i + 1],
-            { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.3 },
-            `${stepLabel}+=0.35`,
-          )
+          .to(iconEls[i],    { scale: 0, opacity: 0, duration: 0.3 }, lbl)
+          .fromTo(iconEls[i + 1], { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 }, `${lbl}+=0.35`)
 
-          // --- Number swap ---
-          .to(
-            numEls[i],
-            { yPercent: -100, opacity: 0, duration: 0.3 },
-            stepLabel,
-          )
-          .fromTo(
-            numEls[i + 1],
-            { yPercent: 100, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 0.3 },
-            `${stepLabel}+=0.35`,
-          )
+          .to(numEls[i],     { yPercent: -100, opacity: 0, duration: 0.3 }, lbl)
+          .fromTo(numEls[i + 1], { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.3 }, `${lbl}+=0.35`)
 
-          // --- Title: slide out old, slide in new ---
-          .to(
-            titleEls[i],
-            { yPercent: -100, opacity: 0, duration: 0.35 },
-            stepLabel,
-          )
-          .fromTo(
-            titleEls[i + 1],
-            { yPercent: 60, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 0.35 },
-            `${stepLabel}+=0.3`,
-          )
+          .to(titleEls[i],   { yPercent: -100, opacity: 0, duration: 0.35 }, lbl)
+          .fromTo(titleEls[i + 1], { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.35 }, `${lbl}+=0.3`)
 
-          // --- Desc: fade out old, fade in new ---
-          .to(descEls[i], { y: -20, opacity: 0, duration: 0.3 }, stepLabel)
-          .fromTo(
-            descEls[i + 1],
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.3 },
-            `${stepLabel}+=0.3`,
-          )
+          .to(descEls[i],    { y: -20, opacity: 0, duration: 0.3 }, lbl)
+          .fromTo(descEls[i + 1], { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, `${lbl}+=0.3`)
 
-          // --- Border color transition ---
-          .to(
-            borderEl,
-            {
-              borderColor: steps[i + 1].color,
-              boxShadow: `0 0 40px ${steps[i + 1].color}20, inset 0 0 40px ${steps[i + 1].color}08`,
-              duration: 0.6,
-            },
-            stepLabel,
-          )
+          .to(borderEl, {
+            borderColor: steps[i + 1].color,
+            boxShadow: `0 0 60px ${steps[i + 1].color}25, 0 0 120px ${steps[i + 1].color}10, inset 0 0 40px ${steps[i + 1].color}08`,
+            duration: 0.6,
+          }, lbl)
 
-          // --- Labels color ---
-          .to(
-            [labelTop, labelBottom],
-            { color: steps[i + 1].color, duration: 0.5 },
-            stepLabel,
-          )
+          .to([labelTop, labelBottom], { color: steps[i + 1].color, duration: 0.5 }, lbl)
 
-          // --- Progress bar ---
-          .to(
-            progressFill,
-            {
-              scaleX: (i + 2) / totalSteps,
-              backgroundColor: steps[i + 1].color,
-              duration: 0.6,
-            },
-            stepLabel,
-          )
+          .to(progressFill, {
+            scaleX: (i + 2) / totalSteps,
+            background: `linear-gradient(90deg, ${steps[0].color}, ${steps[i + 1].color})`,
+            duration: 0.6,
+          }, lbl)
 
-          // Hold on each step
+          // Dot indicators
+          .to(dotEls[i],     { scale: 1, opacity: 0.3, duration: 0.3 }, lbl)
+          .to(dotEls[i + 1], { scale: 1.4, opacity: 1, duration: 0.3, backgroundColor: steps[i + 1].color }, `${lbl}+=0.3`)
+
           .to({}, { duration: 0.3 });
       }
 
-      // Set initial states
-      cardEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { rotateY: 90, opacity: 0 });
-      });
-      iconEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { scale: 0, opacity: 0 });
-      });
-      numEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { yPercent: 100, opacity: 0 });
-      });
-      titleEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { yPercent: 60, opacity: 0 });
-      });
-      descEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { y: 20, opacity: 0 });
-      });
-      gsap.set(progressFill, {
-        scaleX: 1 / totalSteps,
-        transformOrigin: "left center",
-      });
+      // Initial states
+      cardEls.forEach((el, i)  => { if (i > 0) gsap.set(el, { rotateY: 90, opacity: 0 }); });
+      iconEls.forEach((el, i)  => { if (i > 0) gsap.set(el, { scale: 0, opacity: 0 }); });
+      numEls.forEach((el, i)   => { if (i > 0) gsap.set(el, { yPercent: 100, opacity: 0 }); });
+      titleEls.forEach((el, i) => { if (i > 0) gsap.set(el, { yPercent: 60, opacity: 0 }); });
+      descEls.forEach((el, i)  => { if (i > 0) gsap.set(el, { y: 20, opacity: 0 }); });
+      dotEls.forEach((el, i)   => { gsap.set(el, { scale: i === 0 ? 1.4 : 1, opacity: i === 0 ? 1 : 0.3, backgroundColor: steps[i].color }); });
+      gsap.set(progressFill, { scaleX: 1 / totalSteps, transformOrigin: "left center" });
 
       // Nav buttons
       const prevBtn = section.querySelector(".process-prev");
@@ -175,52 +102,38 @@ export default function Process({ className = "" }) {
         if (!triggerRef.current) return;
         const st = triggerRef.current;
         const progress = stepIndex / (totalSteps - 1);
-        const scrollTo = st.start + progress * (st.end - st.start);
         gsap.to(window, {
-          scrollTo: { y: scrollTo },
+          scrollTo: { y: st.start + progress * (st.end - st.start) },
           duration: 0.8,
           ease: "power2.inOut",
         });
       };
 
-      const getCurrentStep = () => {
-        if (!triggerRef.current) return 0;
-        return Math.round(triggerRef.current.progress * (totalSteps - 1));
-      };
+      const getCurrentStep = () =>
+        triggerRef.current ? Math.round(triggerRef.current.progress * (totalSteps - 1)) : 0;
 
-      const onPrev = () => {
-        const cur = getCurrentStep();
-        if (cur > 0) goToStep(cur - 1);
-      };
-      const onNext = () => {
-        const cur = getCurrentStep();
-        if (cur < totalSteps - 1) goToStep(cur + 1);
-      };
+      const onPrev = () => { const c = getCurrentStep(); if (c > 0) goToStep(c - 1); };
+      const onNext = () => { const c = getCurrentStep(); if (c < totalSteps - 1) goToStep(c + 1); };
 
       prevBtn?.addEventListener("click", onPrev);
       nextBtn?.addEventListener("click", onNext);
-
       return () => {
         prevBtn?.removeEventListener("click", onPrev);
         nextBtn?.removeEventListener("click", onNext);
       };
     });
 
-    // Mobile: simple stagger (no pin)
+    /* ── MOBILE: stagger reveal ── */
     mm.add("(max-width: 1023px)", () => {
       const section = sectionRef.current;
       if (!section) return;
-
       gsap.from(section.querySelectorAll(".process-mobile-card"), {
-        y: 40,
+        y: 50,
         opacity: 0,
-        stagger: 0.15,
+        stagger: 0.12,
         duration: 0.7,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-        },
+        ease: "power3.out",
+        scrollTrigger: { trigger: section, start: "top 80%" },
       });
     });
 
@@ -229,143 +142,203 @@ export default function Process({ className = "" }) {
 
   return (
     <section id="processo" ref={sectionRef} className={`relative ${className}`}>
-      {/* ─── DESKTOP: Lateral Pin Layout (header inside pin) ─── */}
+
+      {/* ─── DESKTOP ─── */}
       <div className="process-pin-wrap hidden lg:block">
-        <div className="relative min-h-screen flex flex-col justify-center py-16">
+        <div
+          className="relative min-h-screen flex flex-col justify-center py-20"
+          style={{ background: "var(--gradient-dark)" }}
+        >
           <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-          {/* Header — inside pin so it stays on screen */}
-          <div className="relative z-10 text-center max-w-4xl mx-auto px-8">
-            <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-6">
-              &#x25C8; {PROCESS.badge}
-            </span>
-
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-6 leading-[1.1] tracking-tight">
-              {PROCESS.title}{" "}
-              <span className="gradient-text block mt-2">
-                {PROCESS.titleHighlight}
-              </span>
-            </h2>
-
-            <p className="body-lg text-gray-400">{PROCESS.subtitle}</p>
+          {/* Ambient blobs */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 -left-32 h-96 w-96 rounded-full bg-primary/8 blur-[120px]" />
+            <div className="absolute bottom-1/4 -right-32 h-96 w-96 rounded-full bg-secondary/8 blur-[120px]" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-8 flex items-center gap-16 xl:gap-24">
-            {/* LEFT — Text side */}
+          {/* Section header */}
+          <div className="relative z-10 text-center max-w-3xl mx-auto px-8 mb-16">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
+              <span
+                className="h-px w-8"
+                style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              />
+              {PROCESS.badge}
+              <span
+                className="h-px w-8"
+                style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              />
+            </span>
+            <h2 className="text-5xl xl:text-6xl font-extrabold text-white mb-4 leading-[1.08] tracking-tight">
+              {PROCESS.title}{" "}
+              <span className="gradient-text">{PROCESS.titleHighlight}</span>
+            </h2>
+            <p className="body-lg text-gray-400 max-w-xl mx-auto">{PROCESS.subtitle}</p>
+          </div>
+
+          {/* Main layout */}
+          <div className="relative z-10 w-full max-w-6xl mx-auto px-8 flex items-center gap-20 xl:gap-28">
+
+            {/* LEFT */}
             <div className="flex-1 min-w-0">
-              {/* Step indicator line */}
+              {/* Step label */}
               <div className="flex items-center gap-3 mb-8">
-                <div className="h-px flex-1 max-w-[60px] bg-primary/40" />
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-light">
+                <div
+                  className="h-px w-12"
+                  style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+                />
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-500">
                   Etapa
                 </span>
               </div>
 
               {/* Title stack */}
-              <div className="relative h-[80px] md:h-[96px] overflow-hidden mb-6">
+              <div className="relative h-[76px] md:h-[88px] overflow-hidden mb-5">
                 {steps.map((s, i) => (
                   <h3
                     key={i}
-                    className="process-title absolute inset-0 text-4xl md:text-5xl xl:text-6xl font-extrabold text-text-primary leading-tight"
+                    className="process-title absolute inset-0 text-4xl md:text-5xl xl:text-[3.25rem] font-extrabold text-white leading-tight"
                   >
                     {s.title}
                   </h3>
                 ))}
               </div>
 
-              {/* Description stack */}
-              <div className="relative h-[80px] overflow-hidden mb-10">
+              {/* Desc stack */}
+              <div className="relative h-[88px] overflow-hidden mb-10">
                 {steps.map((s, i) => (
                   <p
                     key={i}
-                    className="process-desc absolute inset-0 text-lg text-gray-400 leading-relaxed max-w-md"
+                    className="process-desc absolute inset-0 text-base xl:text-lg text-gray-400 leading-relaxed max-w-sm"
                   >
                     {s.desc}
                   </p>
                 ))}
               </div>
 
-              {/* Progress bar */}
-              <div className="max-w-xs">
-                <div className="flex justify-between text-xs font-semibold text-gray-500 mb-2">
+              {/* Progress */}
+              <div className="max-w-[220px]">
+                <div className="flex justify-between text-[11px] font-semibold text-gray-600 mb-2 tracking-widest">
                   <span>01</span>
-                  <span>04</span>
+                  <span>0{steps.length}</span>
                 </div>
-                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                <div
+                  className="h-[2px] rounded-full overflow-hidden"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                >
                   <div
                     className="process-progress-fill h-full rounded-full"
-                    style={{ backgroundColor: steps[0].color }}
+                    style={{
+                      background: `linear-gradient(90deg, ${steps[0].color}, ${steps[0].color})`,
+                    }}
                   />
+                </div>
+
+                {/* Dot indicators */}
+                <div className="flex gap-2 mt-3">
+                  {steps.map((s, i) => (
+                    <div
+                      key={i}
+                      className="process-dot h-1.5 w-1.5 rounded-full transition-all duration-300"
+                      style={{ backgroundColor: s.color }}
+                    />
+                  ))}
                 </div>
               </div>
 
               {/* Nav arrows */}
               <div className="flex gap-3 mt-8">
-                <button className="process-prev flex items-center justify-center h-12 w-12 rounded-full border border-white/10 bg-white/5 text-text-primary/60 transition-all duration-300 hover:bg-white/10 hover:text-text-primary hover:border-white/20">
-                  <ChevronLeft size={20} />
-                </button>
-                <button className="process-next flex items-center justify-center h-12 w-12 rounded-full border border-white/10 bg-white/5 text-text-primary/60 transition-all duration-300 hover:bg-white/10 hover:text-text-primary hover:border-white/20">
-                  <ChevronRight size={20} />
-                </button>
+                {[
+                  { cls: "process-prev", Icon: ChevronLeft },
+                  { cls: "process-next", Icon: ChevronRight },
+                ].map(({ cls, Icon }) => (
+                  <button
+                    key={cls}
+                    className={`${cls} group flex items-center justify-center h-11 w-11 rounded-full transition-all duration-300`}
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "rgba(244,63,94,0.12)";
+                      e.currentTarget.style.borderColor = "rgba(244,63,94,0.3)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                    }}
+                  >
+                    <Icon size={18} className="text-gray-400 group-hover:text-white transition-colors duration-300" />
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* RIGHT — Card side */}
+            {/* RIGHT — decorative card */}
             <div className="flex-shrink-0" style={{ perspective: "800px" }}>
+              {/* Outer glow */}
               <div
-                className="process-card-border relative w-[300px] h-[420px] xl:w-[340px] xl:h-[460px] rounded-3xl border-2 overflow-hidden"
+                className="absolute -inset-8 rounded-[2.5rem] pointer-events-none"
+                style={{
+                  background: `radial-gradient(ellipse at center, ${steps[0].color}20 0%, transparent 70%)`,
+                  filter: "blur(20px)",
+                  transition: "background 0.6s ease",
+                }}
+              />
+
+              <div
+                className="process-card-border relative w-[280px] h-[400px] xl:w-[320px] xl:h-[440px] rounded-3xl border overflow-hidden"
                 style={{
                   borderColor: steps[0].color,
-                  boxShadow: `0 0 40px ${steps[0].color}20, inset 0 0 40px ${steps[0].color}08`,
+                  borderWidth: "1px",
+                  boxShadow: `0 0 60px ${steps[0].color}25, 0 0 120px ${steps[0].color}10, inset 0 0 40px ${steps[0].color}08`,
+                  background: "rgba(10,15,30,0.8)",
                 }}
               >
-                {/* Background pattern */}
                 <div className="absolute inset-0 bg-grid opacity-10" />
 
+                {/* Inner glow top */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse at 50% 0%, ${steps[0].color}20 0%, transparent 70%)`,
+                  }}
+                />
+
                 {/* Top label */}
-                <div className="absolute top-6 left-0 right-0 text-center">
+                <div className="absolute top-5 left-0 right-0 flex justify-center">
                   <span
-                    className="process-label-top text-sm font-bold tracking-wider"
-                    style={{ color: steps[0].color }}
+                    className="process-label-top text-[11px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full"
+                    style={{
+                      color: steps[0].color,
+                      background: `${steps[0].color}15`,
+                      border: `1px solid ${steps[0].color}30`,
+                    }}
                   >
                     {steps[0].title}
                   </span>
                 </div>
 
-                {/* Center: Icon + Number */}
+                {/* Center */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  {/* Icon */}
-                  <div className="relative h-20 w-20 mb-4">
+                  <div className="relative h-20 w-20 mb-3">
                     {steps.map((s, i) => {
                       const Icon = s.icon;
                       return (
-                        <div
-                          key={i}
-                          className="process-icon absolute inset-0 flex items-center justify-center"
-                        >
-                          <Icon
-                            size={48}
-                            style={{ color: s.color }}
-                            strokeWidth={1.5}
-                          />
+                        <div key={i} className="process-icon absolute inset-0 flex items-center justify-center">
+                          <Icon size={44} style={{ color: s.color }} strokeWidth={1.5} />
                         </div>
                       );
                     })}
                   </div>
 
-                  {/* Step number */}
-                  <div className="relative h-[100px] w-full overflow-hidden">
+                  <div className="relative h-[88px] w-full overflow-hidden">
                     {steps.map((s, i) => (
-                      <div
-                        key={i}
-                        className="process-num absolute inset-0 flex items-center justify-center"
-                      >
+                      <div key={i} className="process-num absolute inset-0 flex items-center justify-center">
                         <span
-                          className="text-8xl xl:text-9xl font-black"
-                          style={{
-                            WebkitTextStroke: `2px ${s.color}`,
-                            color: "transparent",
-                          }}
+                          className="text-8xl xl:text-9xl font-black select-none"
+                          style={{ WebkitTextStroke: `1.5px ${s.color}`, color: "transparent", opacity: 0.6 }}
                         >
                           {s.num}
                         </span>
@@ -373,30 +346,26 @@ export default function Process({ className = "" }) {
                     ))}
                   </div>
 
-                  {/* Rotating cards (for 3D flip) */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{ perspective: "600px" }}
-                  >
-                    {steps.map((s, i) => (
+                  {/* 3D flip planes */}
+                  <div className="absolute inset-0 pointer-events-none" style={{ perspective: "600px" }}>
+                    {steps.map((_, i) => (
                       <div
                         key={i}
                         className="process-card absolute inset-0"
-                        style={{
-                          backfaceVisibility: "hidden",
-                          transformStyle: "preserve-3d",
-                        }}
+                        style={{ backfaceVisibility: "hidden", transformStyle: "preserve-3d" }}
                       />
                     ))}
                   </div>
                 </div>
 
-                {/* Bottom label (upside down like the demo) */}
-                <div className="absolute bottom-6 left-0 right-0 text-center">
+                {/* Bottom label */}
+                <div className="absolute bottom-5 left-0 right-0 flex justify-center">
                   <span
-                    className="process-label-bottom text-sm font-bold tracking-wider"
+                    className="process-label-bottom text-[11px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full"
                     style={{
                       color: steps[0].color,
+                      background: `${steps[0].color}15`,
+                      border: `1px solid ${steps[0].color}30`,
                       display: "inline-block",
                       transform: "rotate(180deg)",
                     }}
@@ -405,49 +374,103 @@ export default function Process({ className = "" }) {
                   </span>
                 </div>
               </div>
+
+              {/* Dot grid decoration */}
+              <div
+                className="absolute -bottom-4 -right-4 h-20 w-20 opacity-20 pointer-events-none"
+                style={{
+                  backgroundImage: "radial-gradient(circle, rgba(244,63,94,0.8) 1px, transparent 1px)",
+                  backgroundSize: "7px 7px",
+                }}
+              />
             </div>
           </div>
         </div>
       </div>
 
-      {/* ─── MOBILE: Original card grid ─── */}
-      <div className="lg:hidden relative z-10 px-5 sm:px-8 pt-32 pb-28 md:py-32">
-        {/* Mobile header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-6">
-            &#x25C8; {PROCESS.badge}
-          </span>
+      {/* ─── MOBILE ─── */}
+      <div
+        className="lg:hidden relative px-4 sm:px-6 pt-24 pb-24"
+        style={{ background: "var(--gradient-dark)" }}
+      >
+        <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-6 leading-[1.1] tracking-tight">
+        {/* Blobs */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-20 -left-20 h-64 w-64 rounded-full bg-primary/8 blur-[100px]" />
+          <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-secondary/8 blur-[100px]" />
+        </div>
+
+        {/* Header */}
+        <div className="relative z-10 text-center max-w-lg mx-auto mb-12">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-4">
+            <span className="h-px w-6" style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }} />
+            {PROCESS.badge}
+            <span className="h-px w-6" style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }} />
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
             {PROCESS.title}{" "}
             <span className="gradient-text">{PROCESS.titleHighlight}</span>
           </h2>
-
-          <p className="body-lg text-gray-400">{PROCESS.subtitle}</p>
+          <p className="text-gray-400 text-base leading-relaxed">{PROCESS.subtitle}</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+        {/* Cards */}
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
               <div
                 key={i}
-                className="process-mobile-card group relative rounded-2xl border border-white/[0.06] bg-white/[0.03] p-7 transition-all duration-400 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.06] card-glow-border overflow-visible"
+                className="process-mobile-card group relative rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                style={{
+                  background: "rgba(10,15,30,0.7)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = `${s.color}40`;
+                  e.currentTarget.style.boxShadow = `0 0 30px ${s.color}15, 0 10px 40px rgba(0,0,0,0.3)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
-                <span className="absolute -top-3 -right-2 text-6xl font-extrabold text-text-primary/[0.03] select-none transition-colors duration-300 group-hover:text-primary/10">
+                {/* Step number watermark */}
+                <span
+                  className="absolute -top-2 -right-1 text-7xl font-black select-none pointer-events-none transition-opacity duration-300 group-hover:opacity-20"
+                  style={{ WebkitTextStroke: `1px ${s.color}`, color: "transparent", opacity: 0.07 }}
+                >
                   {s.num}
                 </span>
-                <div className="relative z-10">
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 transition-all duration-300 group-hover:bg-primary/20 group-hover:scale-110">
-                    <Icon size={20} className="text-primary-light" />
+
+                {/* Top row */}
+                <div className="flex items-start justify-between mb-5">
+                  <div
+                    className="flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: `${s.color}15`,
+                      border: `1px solid ${s.color}25`,
+                    }}
+                  >
+                    <Icon size={20} style={{ color: s.color }} strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-bold text-text-primary text-lg mb-2">
-                    {s.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {s.desc}
-                  </p>
+                  <span
+                    className="text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    style={{ color: s.color, background: `${s.color}12`, border: `1px solid ${s.color}20` }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
+
+                <h3 className="font-bold text-white text-base mb-2 leading-snug">{s.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{s.desc}</p>
+
+                {/* Bottom accent line */}
+                <div
+                  className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 group-hover:w-full"
+                  style={{ background: `linear-gradient(90deg, ${s.color}, transparent)` }}
+                />
               </div>
             );
           })}
