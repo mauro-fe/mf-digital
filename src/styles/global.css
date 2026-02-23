@@ -95,6 +95,14 @@
     overflow-x: hidden;
   }
 
+  /* Ensure the root and main containers also hide horizontal overflow
+     and add top padding so fixed nav doesn't cover page content on mobile */
+  #root,
+  main {
+    overflow-x: hidden;
+    padding-top: 68px;
+  }
+
   ::selection {
     background: rgba(244, 63, 94, 0.3);
     color: #fb7185;
