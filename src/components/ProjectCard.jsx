@@ -15,7 +15,7 @@ export default function ProjectCard({
     <div
       data-aos="fade-up"
       data-aos-delay={aosDelay}
-      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-1.5"
+      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-1.5 lg:max-h-[420px]"
       style={{
         background: "rgba(10,15,30,0.8)",
         border: "1px solid rgba(255,255,255,0.06)",
@@ -32,7 +32,7 @@ export default function ProjectCard({
     >
       {/* ── Preview area ── */}
       <div
-        className={`relative h-48 sm:h-52 overflow-hidden flex-shrink-0 bg-gradient-to-br ${gradient}`}
+        className={`relative h-44 sm:h-48 lg:h-36 overflow-hidden flex-shrink-0 bg-gradient-to-br ${gradient}`}
       >
         {/* Grid texture */}
         <div className="absolute inset-0 bg-grid opacity-25" />
@@ -44,13 +44,17 @@ export default function ProjectCard({
 
         {/* Image */}
         {image && (
-          <img
-            src={image}
-            alt={title}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
+          <picture>
+            <source srcSet={image.replace(/\.(png|jpe?g)$/i, '.avif').replace('/img/', '/img/optimized/')} type="image/avif" />
+            <source srcSet={image.replace(/\.(png|jpe?g)$/i, '.webp').replace('/img/', '/img/optimized/')} type="image/webp" />
+            <img
+              src={image}
+              alt={title}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </picture>
         )}
 
         {/* No-image: icon + domain */}
@@ -113,11 +117,11 @@ export default function ProjectCard({
 
       {/* ── Card body ── */}
       <div className="flex flex-col flex-1 p-5 sm:p-6">
-        <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug transition-colors duration-300 group-hover:text-primary-light line-clamp-2">
+        <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug transition-colors duration-300 group-hover:text-primary-light line-clamp-2 lg:line-clamp-2">
           {title}
         </h3>
 
-        <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed mb-4 flex-1 line-clamp-3">
+        <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed mb-4 flex-1 line-clamp-3 lg:line-clamp-2">
           {description}
         </p>
 

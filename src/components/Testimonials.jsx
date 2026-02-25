@@ -133,6 +133,7 @@ export default function Testimonials({ className = "" }) {
   return (
     <section
       id="depoimentos"
+      aria-labelledby="depoimentos-title"
       ref={sectionRef}
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
@@ -175,8 +176,8 @@ export default function Testimonials({ className = "" }) {
             />
           </span>
 
-          <h2 className="testimonials-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {TESTIMONIALS.title}{" "}
+          <h2 id="depoimentos-title" className="testimonials-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
+            {TESTIMONIALS.title} {" "}
             <span className="gradient-text">{TESTIMONIALS.titleHighlight}</span>
           </h2>
 

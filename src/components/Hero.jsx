@@ -440,16 +440,20 @@ export default function Hero() {
                   className="relative rounded-[calc(2rem-1px)] overflow-hidden"
                   style={{ background: "rgba(10,15,30,0.8)" }}
                 >
-                  <img
-                    src="/img/dev-mauro.png"
-                    alt={AUTHOR.photoAlt}
-                    width={320}
-                    height={420}
-                    loading="eager"
-                    decoding="async"
-                    className="h-[420px] w-[320px] object-cover"
-                    style={{ display: "block" }}
-                  />
+                  <picture>
+                    <source srcSet="/img/optimized/dev-mauro.avif" type="image/avif" />
+                    <source srcSet="/img/optimized/dev-mauro.webp" type="image/webp" />
+                    <img
+                      src="/img/optimized/dev-mauro.webp"
+                      alt={AUTHOR.photoAlt}
+                      width={320}
+                      height={420}
+                      loading="eager"
+                      decoding="async"
+                      className="h-[420px] w-[320px] object-cover"
+                      style={{ display: "block" }}
+                    />
+                  </picture>
                   {/* Color overlay for cohesion */}
                   <div
                     className="absolute inset-0 pointer-events-none"

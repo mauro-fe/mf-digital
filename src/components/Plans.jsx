@@ -110,6 +110,7 @@ export default function Plans({ className = "" }) {
   return (
     <section
       id="planos"
+      aria-labelledby="planos-title"
       ref={sectionRef}
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
@@ -145,8 +146,8 @@ export default function Plans({ className = "" }) {
             />
           </span>
 
-          <h2 className="plans-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {PLANS.title}{" "}
+          <h2 id="planos-title" className="plans-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
+            {PLANS.title} {" "}
             <span className="gradient-text">{PLANS.titleHighlight}</span>
           </h2>
 

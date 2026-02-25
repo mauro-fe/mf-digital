@@ -117,6 +117,7 @@ export default function FAQ({ className = "" }) {
   return (
     <section
       id="faq"
+      aria-labelledby="faq-title"
       ref={sectionRef}
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
@@ -151,8 +152,8 @@ export default function FAQ({ className = "" }) {
             />
           </span>
 
-          <h2 className="faq-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {FAQ_CONTENT.title}{" "}
+          <h2 id="faq-title" className="faq-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
+            {FAQ_CONTENT.title} {" "}
             <span className="gradient-text">{FAQ_CONTENT.titleHighlight}</span>
           </h2>
 

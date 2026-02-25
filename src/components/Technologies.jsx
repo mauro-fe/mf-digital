@@ -7,6 +7,7 @@ export default function Technologies({ className = "" }) {
   return (
     <section
       id="tecnologias"
+      aria-labelledby="tecnologias-title"
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
     >
@@ -42,7 +43,7 @@ export default function Technologies({ className = "" }) {
           />
         </span>
 
-        <h2
+        <h2 id="tecnologias-title"
           data-aos="fade-up"
           data-aos-delay="100"
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"

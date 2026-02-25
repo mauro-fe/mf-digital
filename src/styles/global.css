@@ -51,6 +51,8 @@
   );
 
   --transition-base: 300ms;
+  /* Height of the fixed navigation (used to offset anchored sections) */
+  --nav-height: 68px;
 }
 
 /* ============================= */
@@ -83,6 +85,16 @@
     background: rgba(0, 242, 255, 0.3);
     color: #ffffff;
   }
+}
+
+/* Ensure anchored sections are not hidden under the fixed nav */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 0.5rem);
+}
+
+/* Push visible hero content below the fixed nav so it's not visually covered */
+#home .relative.z-10.mx-auto {
+  padding-top: calc(var(--nav-height) + 1rem) !important;
 }
 
 /* ============================= */
@@ -310,6 +322,53 @@
     /* Slightly reduce pinned section min-height so pinned content doesn't overflow as much */
     .process-pin-wrap .min-h-screen {
       min-height: calc(100vh - 56px);
+    }
+
+    /* General short-viewport adjustments */
+    /* Reduce vertical spacing on sections to avoid large empty areas */
+    section[id] {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+
+    /* Make hero shorter and reduce internal paddings */
+    #home {
+      min-height: 60vh !important;
+    }
+
+    #home .relative.z-10.mx-auto {
+      padding-top: 1rem !important;
+      padding-bottom: 1rem !important;
+    }
+
+    /* Reduce header sizes for compact layouts */
+    /* Keep heading sizes at their default values on short viewports */
+    /* (removed smaller overrides to preserve standard typography) */
+
+    /* Reduce noisy background elements to save vertical space */
+    .hero-bg-elements .hero-blob {
+      opacity: 0.25 !important;
+      transform: scale(0.7) !important;
+      filter: blur(80px) !important;
+    }
+
+    .pointer-events-none.absolute.inset-0.bg-grid {
+      opacity: 0.12 !important;
+      background-size: 90px 90px !important;
+    }
+
+    /* Reduce hero CTA/button vertical footprint */
+    .hero-cta {
+      padding-top: 0.6rem !important;
+      padding-bottom: 0.6rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    /* Reduce min-heights on elements that use large fixed heights */
+    /* Escape Tailwind arbitrary class selector so CSS parsers accept it */
+    .min-h-\[92vh\] {
+      min-height: 60vh !important;
     }
   }
 }

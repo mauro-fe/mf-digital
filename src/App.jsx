@@ -31,7 +31,7 @@ export default function App() {
   return (
     <div className="selection:bg-primary/20 selection:text-white">
       <Nav />
-      <main>
+      <main role="main" aria-label="Conteúdo principal">
         <Hero />
         <Marquee items={MARQUEE_WORDS} speed={35} size="xl" />
         <About />

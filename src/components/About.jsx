@@ -171,6 +171,7 @@ export default function About({ className = "" }) {
   return (
     <section
       id="sobre"
+      aria-labelledby="sobre-title"
       ref={sectionRef}
       className={`relative overflow-hidden py-24 md:py-32 ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
@@ -205,7 +206,7 @@ export default function About({ className = "" }) {
             />
           </span>
 
-          <h2 className="about-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
+          <h2 id="sobre-title" className="about-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
             {ABOUT.title}{" "}
             <span className="gradient-text">{ABOUT.titleHighlight}</span>
           </h2>

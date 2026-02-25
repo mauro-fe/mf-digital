@@ -119,6 +119,7 @@ export default function Contact({ className = "" }) {
   return (
     <section
       id="contato"
+      aria-labelledby="contato-title"
       ref={sectionRef}
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
@@ -160,8 +161,8 @@ export default function Contact({ className = "" }) {
             </span>
           </div>
 
-          <h2 className="contact-title heading-lg text-white mb-6">
-            {CONTACT.title}{" "}
+          <h2 id="contato-title" className="contact-title heading-lg text-white mb-6">
+            {CONTACT.title} {" "}
             <span className="gradient-text">{CONTACT.titleHighlight}</span>?
           </h2>
 

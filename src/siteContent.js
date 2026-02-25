@@ -50,7 +50,7 @@ export const AUTHOR = {
     name: "Mauro Felix",
     email: "devmaurofelix@gmail.com",
     role: "Engenheiro de Software",
-    photo: "/img/dev-mauro.jpeg",
+    photo: "/img/optimized/dev-mauro.webp",
     photoAlt: "Mauro Felix - Desenvolvedor Web",
     stackLabel: "Full Stack",
     stackDesc: "React · PHP · MySQL",
@@ -99,7 +99,7 @@ export const HERO = {
     titleLine2: "de alto impacto",
     ariaLabel: "Transformo ideias em experiências digitais de alto impacto",
     description:
-        "Desenvolvimento de aplicações web de alta performance e design imersivo. Transformo a visão do seu negócio em",
+        "Desenvolvimento de aplicações web de alta performance e design imersivo. Como desenvolvedor freelancer, crio sites e sistemas sob medida. Transformo a visão do seu negócio em",
     descriptionHighlight: "código limpo e resultados reais",
     cta1: "Solicitar Orçamento",
     cta1Href: "#contato",
@@ -126,7 +126,7 @@ export const ABOUT = {
         prefix: "Sou um ",
         strong: "Engenheiro de Software",
         suffix:
-            " especializado em criar ecossistemas web robustos, desde landing pages de alta conversão até sistemas complexos sob medida.",
+            " e desenvolvedor freelancer, especializado em criar ecossistemas web robustos — desde sites e landing pages de alta conversão até sistemas complexos sob medida.",
     },
     paragraph2: {
         prefix: "Meu diferencial é a união de ",

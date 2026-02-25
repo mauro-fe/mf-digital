@@ -232,7 +232,7 @@ export default function Process({ className = "" }) {
   }, []);
 
   return (
-    <section id="processo" ref={sectionRef} className={`relative ${className}`}>
+    <section id="processo" aria-labelledby="processo-title" ref={sectionRef} className={`relative ${className}`}>
       {/* ─── DESKTOP ─── */}
       <div className="process-pin-wrap hidden lg:block">
         <div
@@ -266,7 +266,7 @@ export default function Process({ className = "" }) {
                 }}
               />
             </span>
-            <h2 className="text-5xl xl:text-6xl font-extrabold text-white mb-4 leading-[1.08] tracking-tight">
+            <h2 id="processo-title" className="text-5xl xl:text-6xl font-extrabold text-white mb-4 leading-[1.08] tracking-tight">
               {PROCESS.title}{" "}
               <span className="gradient-text">{PROCESS.titleHighlight}</span>
             </h2>
@@ -430,7 +430,7 @@ export default function Process({ className = "" }) {
 
                 {/* Center */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <div className="relative h-20 w-20 mb-3">
+                  <div className="relative h-20 w-20 mb-1">
                     {steps.map((s, i) => {
                       const Icon = s.icon;
                       return (

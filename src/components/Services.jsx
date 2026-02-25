@@ -123,6 +123,7 @@ export default function Services({ className = "" }) {
   return (
     <section
       id="servicos"
+      aria-labelledby="servicos-title"
       ref={sectionRef}
       className={`relative py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
@@ -157,7 +158,7 @@ export default function Services({ className = "" }) {
             />
           </span>
 
-          <h2 className="services-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight">
+          <h2 id="servicos-title" className="services-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight">
             {SERVICES.title}
             <br />
             <span className="gradient-text">{SERVICES.titleHighlight}</span>
