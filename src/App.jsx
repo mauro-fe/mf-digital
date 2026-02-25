@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="selection:bg-primary/20 selection:text-primary-light">
+    <div className="selection:bg-primary/20 selection:text-white">
       <Nav />
       <main>
         <Hero />

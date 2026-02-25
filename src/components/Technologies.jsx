@@ -27,12 +27,18 @@ export default function Technologies({ className = "" }) {
         >
           <span
             className="h-px w-8"
-            style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, var(--color-primary))",
+            }}
           />
           {TECHNOLOGIES.badge}
           <span
             className="h-px w-8"
-            style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+            style={{
+              background:
+                "linear-gradient(90deg, var(--color-primary), transparent)",
+            }}
           />
         </span>
 
@@ -55,15 +61,28 @@ export default function Technologies({ className = "" }) {
       </div>
 
       {/* Marquee rows */}
-      <div className="relative z-10 flex flex-col gap-4" data-aos="fade-up" data-aos-delay="150">
-
+      <div
+        className="relative z-10 flex flex-col gap-4"
+        data-aos="fade-up"
+        data-aos-delay="150"
+      >
         {/* Row 1 — left to right */}
         <div className="relative overflow-hidden">
           {/* Edge fades */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
-            style={{ background: "linear-gradient(90deg, var(--color-dark-900), transparent)" }} />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
-            style={{ background: "linear-gradient(-90deg, var(--color-dark-900), transparent)" }} />
+          <div
+            className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
+            style={{
+              background:
+                "linear-gradient(90deg, var(--color-dark-900), transparent)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
+            style={{
+              background:
+                "linear-gradient(-90deg, var(--color-dark-900), transparent)",
+            }}
+          />
 
           <div
             className="flex w-max animate-marquee gap-4 hover:[animation-play-state:paused]"
@@ -77,18 +96,30 @@ export default function Technologies({ className = "" }) {
 
         {/* Row 2 — right to left (reverse), offset slice */}
         <div className="relative overflow-hidden">
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
-            style={{ background: "linear-gradient(90deg, var(--color-dark-900), transparent)" }} />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
-            style={{ background: "linear-gradient(-90deg, var(--color-dark-900), transparent)" }} />
+          <div
+            className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
+            style={{
+              background:
+                "linear-gradient(90deg, var(--color-dark-900), transparent)",
+            }}
+          />
+          <div
+            className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
+            style={{
+              background:
+                "linear-gradient(-90deg, var(--color-dark-900), transparent)",
+            }}
+          />
 
           <div
             className="flex w-max animate-marquee-reverse gap-4 hover:[animation-play-state:paused]"
             style={{ animationDuration: "28s" }}
           >
-            {[...[...techs].reverse(), ...[...techs].reverse()].map((tech, i) => (
-              <TechCard key={i} tech={tech} />
-            ))}
+            {[...[...techs].reverse(), ...[...techs].reverse()].map(
+              (tech, i) => (
+                <TechCard key={i} tech={tech} />
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -105,8 +136,9 @@ function TechCard({ tech }) {
         border: "1px solid rgba(255,255,255,0.06)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(244,63,94,0.25)";
-        e.currentTarget.style.boxShadow = "0 0 20px rgba(244,63,94,0.08), 0 8px 24px rgba(0,0,0,0.3)";
+        e.currentTarget.style.borderColor = "rgba(0,242,255,0.25)";
+        e.currentTarget.style.boxShadow =
+          "0 0 20px rgba(0,242,255,0.08), 0 8px 24px rgba(0,0,0,0.3)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";

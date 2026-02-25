@@ -21,9 +21,9 @@ export default function ProjectCard({
         border: "1px solid rgba(255,255,255,0.06)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(244,63,94,0.25)";
+        e.currentTarget.style.borderColor = "rgba(0,242,255,0.25)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(244,63,94,0.08), 0 20px 60px rgba(0,0,0,0.4)";
+          "0 0 40px rgba(0,242,255,0.08), 0 20px 60px rgba(0,0,0,0.4)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
@@ -31,7 +31,9 @@ export default function ProjectCard({
       }}
     >
       {/* ── Preview area ── */}
-      <div className={`relative h-48 sm:h-52 overflow-hidden flex-shrink-0 bg-gradient-to-br ${gradient}`}>
+      <div
+        className={`relative h-48 sm:h-52 overflow-hidden flex-shrink-0 bg-gradient-to-br ${gradient}`}
+      >
         {/* Grid texture */}
         <div className="absolute inset-0 bg-grid opacity-25" />
 
@@ -80,7 +82,10 @@ export default function ProjectCard({
             rel="noopener noreferrer"
             aria-label={`Ver projeto ${title}`}
             className="absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
-            style={{ background: "rgba(3,7,18,0.65)", backdropFilter: "blur(4px)" }}
+            style={{
+              background: "rgba(3,7,18,0.65)",
+              backdropFilter: "blur(4px)",
+            }}
           >
             <span
               className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-300 group-hover:scale-105"
@@ -99,7 +104,10 @@ export default function ProjectCard({
         {/* Bottom fade into card body */}
         <div
           className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
-          style={{ background: "linear-gradient(to top, rgba(10,15,30,0.8), transparent)" }}
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,15,30,0.8), transparent)",
+          }}
         />
       </div>
 
@@ -149,7 +157,8 @@ export default function ProjectCard({
       <div
         className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 ease-out group-hover:w-full"
         style={{
-          background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary), transparent)",
+          background:
+            "linear-gradient(90deg, var(--color-primary), var(--color-secondary), transparent)",
         }}
       />
     </div>

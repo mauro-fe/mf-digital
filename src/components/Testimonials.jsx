@@ -18,11 +18,27 @@ export default function Testimonials({ className = "" }) {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       /* ── Initial states ── */
-      gsap.set(".testimonials-badge",    { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".testimonials-title",    { opacity: 0, y: 30,  visibility: "hidden" });
-      gsap.set(".testimonials-subtitle", { opacity: 0, y: 20,  visibility: "hidden" });
-      gsap.set(".testimonials-swiper",   { opacity: 0, y: 40,  visibility: "hidden" });
-      gsap.set(".testimonials-stat",     { opacity: 0, y: 24, scale: 0.9 });
+      gsap.set(".testimonials-badge", {
+        opacity: 0,
+        y: -20,
+        visibility: "hidden",
+      });
+      gsap.set(".testimonials-title", {
+        opacity: 0,
+        y: 30,
+        visibility: "hidden",
+      });
+      gsap.set(".testimonials-subtitle", {
+        opacity: 0,
+        y: 20,
+        visibility: "hidden",
+      });
+      gsap.set(".testimonials-swiper", {
+        opacity: 0,
+        y: 40,
+        visibility: "hidden",
+      });
+      gsap.set(".testimonials-stat", { opacity: 0, y: 24, scale: 0.9 });
 
       /* ── Header ── */
       const headerTl = gsap.timeline({
@@ -31,19 +47,43 @@ export default function Testimonials({ className = "" }) {
 
       headerTl
         .to(".testimonials-badge", {
-          opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.5)", visibility: "visible",
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          visibility: "visible",
         })
-        .to(".testimonials-title", {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out", visibility: "visible",
-        }, "-=0.4")
-        .to(".testimonials-subtitle", {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out", visibility: "visible",
-        }, "-=0.5");
+        .to(
+          ".testimonials-title",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.4",
+        )
+        .to(
+          ".testimonials-subtitle",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.5",
+        );
 
       /* ── Stats row ── */
       gsap.to(".testimonials-stat", {
-        opacity: 1, y: 0, scale: 1,
-        stagger: 0.1, duration: 0.6, ease: "back.out(1.4)",
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "back.out(1.4)",
         scrollTrigger: { trigger: ".testimonials-stats", start: "top 88%" },
         onComplete: () => {
           // Count up numbers
@@ -57,7 +97,9 @@ export default function Testimonials({ className = "" }) {
               duration: 2,
               ease: "power2.out",
               onUpdate: () => {
-                el.textContent = (isDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) + suffix;
+                el.textContent =
+                  (isDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) +
+                  suffix;
               },
             });
           });
@@ -66,17 +108,23 @@ export default function Testimonials({ className = "" }) {
 
       /* ── Swiper ── */
       gsap.to(".testimonials-swiper", {
-        opacity: 1, y: 0, duration: 0.9, ease: "power3.out", visibility: "visible",
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        visibility: "visible",
         scrollTrigger: { trigger: ".testimonials-swiper", start: "top 90%" },
       });
 
       /* ── Ambient quote icon float ── */
       gsap.to(".testimonials-quote-icon", {
-        y: -8, rotation: 5,
-        duration: 3, ease: "sine.inOut",
-        yoyo: true, repeat: -1,
+        y: -8,
+        rotation: 5,
+        duration: 3,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -107,18 +155,23 @@ export default function Testimonials({ className = "" }) {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8">
-
         {/* Header */}
         <div className="testimonials-header text-center mb-12 max-w-3xl mx-auto">
           <span className="testimonials-badge inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-primary))",
+              }}
             />
             {TESTIMONIALS.badge}
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
           </span>
 
@@ -136,8 +189,18 @@ export default function Testimonials({ className = "" }) {
         <div className="testimonials-stats flex items-center justify-center gap-8 sm:gap-14 mb-14">
           {[
             { target: "98", suffix: "%", label: "Satisfação", decimal: false },
-            { target: "4.9", suffix: "★", label: "Avaliação média", decimal: true },
-            { target: TESTIMONIALS.items?.length || "50", suffix: "+", label: "Depoimentos", decimal: false },
+            {
+              target: "4.9",
+              suffix: "★",
+              label: "Avaliação média",
+              decimal: true,
+            },
+            {
+              target: TESTIMONIALS.items?.length || "50",
+              suffix: "+",
+              label: "Depoimentos",
+              decimal: false,
+            },
           ].map((stat, i) => (
             <div key={i} className="testimonials-stat text-center">
               <div
@@ -172,7 +235,11 @@ export default function Testimonials({ className = "" }) {
             spaceBetween={20}
             slidesPerView={1}
             pagination={{ clickable: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
             breakpoints={{ 768: { slidesPerView: 2 } }}
             className="pb-14"
           >
@@ -185,11 +252,13 @@ export default function Testimonials({ className = "" }) {
                     border: "1px solid rgba(255,255,255,0.06)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(244,63,94,0.2)";
-                    e.currentTarget.style.boxShadow = "0 0 30px rgba(244,63,94,0.07), 0 12px 40px rgba(0,0,0,0.3)";
+                    e.currentTarget.style.borderColor = "rgba(0,242,255,0.2)";
+                    e.currentTarget.style.boxShadow =
+                      "0 0 30px rgba(0,242,255,0.07), 0 12px 40px rgba(0,0,0,0.3)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(255,255,255,0.06)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
@@ -198,7 +267,11 @@ export default function Testimonials({ className = "" }) {
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex gap-1">
                         {Array.from({ length: t.rating }).map((_, j) => (
-                          <Star key={j} size={13} className="text-amber-400 fill-amber-400" />
+                          <Star
+                            key={j}
+                            size={13}
+                            className="text-amber-400 fill-amber-400"
+                          />
                         ))}
                       </div>
                       <Quote
@@ -222,14 +295,21 @@ export default function Testimonials({ className = "" }) {
                     <div
                       className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
                       style={{
-                        background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-                        boxShadow: "0 0 12px rgba(244,63,94,0.3)",
+                        background:
+                          "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                        boxShadow: "0 0 12px rgba(0,242,255,0.3)",
                       }}
                     >
-                      {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                      {t.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .slice(0, 2)}
                     </div>
                     <div>
-                      <div className="font-semibold text-white text-sm">{t.name}</div>
+                      <div className="font-semibold text-white text-sm">
+                        {t.name}
+                      </div>
                       <div className="text-xs text-gray-500">{t.role}</div>
                     </div>
                   </div>
@@ -237,7 +317,10 @@ export default function Testimonials({ className = "" }) {
                   {/* Bottom accent */}
                   <div
                     className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 group-hover:w-full"
-                    style={{ background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary), transparent)" }}
+                    style={{
+                      background:
+                        "linear-gradient(90deg, var(--color-primary), var(--color-secondary), transparent)",
+                    }}
                   />
                 </div>
               </SwiperSlide>

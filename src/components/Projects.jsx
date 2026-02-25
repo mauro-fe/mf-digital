@@ -22,7 +22,6 @@ export default function Projects({ className = "" }) {
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
-
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <span
@@ -31,12 +30,18 @@ export default function Projects({ className = "" }) {
           >
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-primary))",
+              }}
             />
             {PROJECTS.badge}
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
           </span>
 
@@ -89,8 +94,8 @@ export default function Projects({ className = "" }) {
               border: "1px solid rgba(255,255,255,0.08)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(244,63,94,0.3)";
-              e.currentTarget.style.background = "rgba(244,63,94,0.06)";
+              e.currentTarget.style.borderColor = "rgba(0,242,255,0.3)";
+              e.currentTarget.style.background = "rgba(0,242,255,0.06)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";

@@ -6,7 +6,7 @@ export default function Card({
   description,
   iconColor = "text-primary-light",
   iconBg = "bg-primary/10",
-  iconBorderColor = "rgba(244,63,94,0.15)",
+  iconBorderColor = "rgba(0,242,255,0.15)",
   accentColor = "var(--color-primary)",
   className = "",
   aosDelay = 0,
@@ -21,9 +21,9 @@ export default function Card({
         border: "1px solid rgba(255,255,255,0.06)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(244,63,94,0.22)";
+        e.currentTarget.style.borderColor = "rgba(0,242,255,0.22)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(244,63,94,0.07), 0 16px 48px rgba(0,0,0,0.35)";
+          "0 0 40px rgba(0,242,255,0.07), 0 16px 48px rgba(0,0,0,0.35)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";

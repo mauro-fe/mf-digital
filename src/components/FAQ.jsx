@@ -16,35 +16,56 @@ export default function FAQ({ className = "" }) {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       /* ── Initial states ── */
-      gsap.set(".faq-badge",    { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".faq-title",    { opacity: 0, y: 30,  visibility: "hidden" });
-      gsap.set(".faq-subtitle", { opacity: 0, y: 20,  visibility: "hidden" });
-      gsap.set(".faq-item",     { opacity: 0, y: 24, visibility: "hidden" });
+      gsap.set(".faq-badge", { opacity: 0, y: -20, visibility: "hidden" });
+      gsap.set(".faq-title", { opacity: 0, y: 30, visibility: "hidden" });
+      gsap.set(".faq-subtitle", { opacity: 0, y: 20, visibility: "hidden" });
+      gsap.set(".faq-item", { opacity: 0, y: 24, visibility: "hidden" });
 
       /* ── Header ── */
       const tl = gsap.timeline({
         scrollTrigger: { trigger: ".faq-header", start: "top 85%" },
       });
 
-      tl
-        .to(".faq-badge", {
-          opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.5)", visibility: "visible",
-        })
-        .to(".faq-title", {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out", visibility: "visible",
-        }, "-=0.4")
-        .to(".faq-subtitle", {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out", visibility: "visible",
-        }, "-=0.5");
+      tl.to(".faq-badge", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        visibility: "visible",
+      })
+        .to(
+          ".faq-title",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.4",
+        )
+        .to(
+          ".faq-subtitle",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.5",
+        );
 
       /* ── Items stagger ── */
       gsap.to(".faq-item", {
-        opacity: 1, y: 0, visibility: "visible",
+        opacity: 1,
+        y: 0,
+        visibility: "visible",
         stagger: 0.07,
-        duration: 0.6, ease: "power3.out",
+        duration: 0.6,
+        ease: "power3.out",
         scrollTrigger: { trigger: ".faq-list", start: "top 88%" },
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -61,7 +82,10 @@ export default function FAQ({ className = "" }) {
       const prevEl = answerRefs.current[prevIndex];
       if (prevEl) {
         gsap.to(prevEl, {
-          height: 0, opacity: 0, duration: 0.3, ease: "power2.inOut",
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
           onComplete: () => gsap.set(prevEl, { display: "none" }),
         });
       }
@@ -74,13 +98,17 @@ export default function FAQ({ className = "" }) {
     if (isOpening) {
       gsap.set(el, { display: "block", height: "auto" });
       const autoHeight = el.scrollHeight;
-      gsap.fromTo(el,
+      gsap.fromTo(
+        el,
         { height: 0, opacity: 0 },
-        { height: autoHeight, opacity: 1, duration: 0.4, ease: "power3.out" }
+        { height: autoHeight, opacity: 1, duration: 0.4, ease: "power3.out" },
       );
     } else {
       gsap.to(el, {
-        height: 0, opacity: 0, duration: 0.3, ease: "power2.inOut",
+        height: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
         onComplete: () => gsap.set(el, { display: "none" }),
       });
     }
@@ -103,18 +131,23 @@ export default function FAQ({ className = "" }) {
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-25" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8">
-
         {/* Header */}
         <div className="faq-header text-center mb-14 max-w-2xl mx-auto">
           <span className="faq-badge inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-primary))",
+              }}
             />
             {FAQ_CONTENT.badge}
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
           </span>
 
@@ -138,13 +171,13 @@ export default function FAQ({ className = "" }) {
                 className="faq-item rounded-2xl overflow-hidden transition-all duration-300"
                 style={{
                   background: isOpen
-                    ? "rgba(244,63,94,0.05)"
+                    ? "rgba(0,242,255,0.05)"
                     : "rgba(10,15,30,0.7)",
                   border: isOpen
-                    ? "1px solid rgba(244,63,94,0.25)"
+                    ? "1px solid rgba(0,242,255,0.25)"
                     : "1px solid rgba(255,255,255,0.06)",
                   boxShadow: isOpen
-                    ? "0 0 30px rgba(244,63,94,0.07), 0 8px 32px rgba(0,0,0,0.2)"
+                    ? "0 0 30px rgba(0,242,255,0.07), 0 8px 32px rgba(0,0,0,0.2)"
                     : "none",
                 }}
               >
@@ -169,7 +202,9 @@ export default function FAQ({ className = "" }) {
                     </span>
                     <span
                       className="font-semibold text-sm sm:text-base leading-snug transition-colors duration-300 pr-2"
-                      style={{ color: isOpen ? "#fff" : "rgba(255,255,255,0.8)" }}
+                      style={{
+                        color: isOpen ? "#fff" : "rgba(255,255,255,0.8)",
+                      }}
                     >
                       {f.q}
                     </span>
@@ -186,17 +221,27 @@ export default function FAQ({ className = "" }) {
                         ? "none"
                         : "1px solid rgba(255,255,255,0.08)",
                       transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
-                      boxShadow: isOpen ? "0 0 12px rgba(244,63,94,0.35)" : "none",
+                      boxShadow: isOpen
+                        ? "0 0 12px rgba(0,242,255,0.35)"
+                        : "none",
                     }}
                   >
-                    <Plus size={12} className={isOpen ? "text-white" : "text-gray-400"} />
+                    <Plus
+                      size={12}
+                      className={isOpen ? "text-white" : "text-gray-400"}
+                    />
                   </span>
                 </button>
 
                 {/* Answer — height animated by GSAP */}
                 <div
                   ref={(el) => (answerRefs.current[i] = el)}
-                  style={{ height: 0, overflow: "hidden", display: "none", opacity: 0 }}
+                  style={{
+                    height: 0,
+                    overflow: "hidden",
+                    display: "none",
+                    opacity: 0,
+                  }}
                 >
                   <div
                     className="px-6 pb-6"

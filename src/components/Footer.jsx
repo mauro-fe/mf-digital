@@ -21,12 +21,12 @@ export default function Footer() {
         className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-px w-2/3"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(244,63,94,0.35), transparent)",
+            "linear-gradient(90deg, transparent, rgba(0,242,255,0.35), transparent)",
         }}
       />
       <div
         className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-40 w-[500px] rounded-full blur-[80px]"
-        style={{ background: "rgba(244,63,94,0.04)" }}
+        style={{ background: "rgba(0,242,255,0.04)" }}
       />
 
       {/* Marquee */}
@@ -36,7 +36,10 @@ export default function Footer() {
       <div className="relative z-10 py-8 px-5 sm:px-8">
         <div
           className="max-w-7xl mx-auto flex flex-col items-center gap-6 sm:flex-row sm:justify-between"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.04)", paddingTop: "2rem" }}
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.04)",
+            paddingTop: "2rem",
+          }}
         >
           {/* Logo + tagline */}
           <div className="flex flex-col items-center sm:items-start gap-1.5">
@@ -50,7 +53,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <p className="text-xs text-gray-600 text-center order-last sm:order-none">
-            © {currentYear} {AUTHOR.copyright}
+            © {currentYear} {AUTHOR.name}. Todos os direitos reservados.
           </p>
 
           {/* Social icons */}
@@ -70,13 +73,15 @@ export default function Footer() {
                     border: "1px solid rgba(255,255,255,0.07)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(244,63,94,0.08)";
-                    e.currentTarget.style.borderColor = "rgba(244,63,94,0.25)";
-                    e.currentTarget.style.boxShadow = "0 0 12px rgba(244,63,94,0.15)";
+                    e.currentTarget.style.background = "rgba(0,242,255,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(0,242,255,0.25)";
+                    e.currentTarget.style.boxShadow =
+                      "0 0 12px rgba(0,242,255,0.15)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                    e.currentTarget.style.borderColor =
+                      "rgba(255,255,255,0.07)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >

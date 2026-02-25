@@ -14,54 +14,103 @@ export default function Contact({ className = "" }) {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       /* ── Initial states ── */
-      gsap.set(".contact-badge",    { opacity: 0, y: -20, scale: 0.9, visibility: "hidden" });
-      gsap.set(".contact-title",    { opacity: 0, y: 40,  visibility: "hidden" });
-      gsap.set(".contact-subtitle", { opacity: 0, y: 20,  visibility: "hidden" });
-      gsap.set(".contact-card",     { opacity: 0, y: 40, scale: 0.93, visibility: "hidden" });
-      gsap.set(".contact-social",   { opacity: 0, y: 16, scale: 0.85 });
+      gsap.set(".contact-badge", {
+        opacity: 0,
+        y: -20,
+        scale: 0.9,
+        visibility: "hidden",
+      });
+      gsap.set(".contact-title", { opacity: 0, y: 40, visibility: "hidden" });
+      gsap.set(".contact-subtitle", {
+        opacity: 0,
+        y: 20,
+        visibility: "hidden",
+      });
+      gsap.set(".contact-card", {
+        opacity: 0,
+        y: 40,
+        scale: 0.93,
+        visibility: "hidden",
+      });
+      gsap.set(".contact-social", { opacity: 0, y: 16, scale: 0.85 });
 
       /* ── Header ── */
       const tl = gsap.timeline({
         scrollTrigger: { trigger: ".contact-header", start: "top 85%" },
       });
 
-      tl
-        .to(".contact-badge", {
-          opacity: 1, y: 0, scale: 1, duration: 0.6,
-          ease: "back.out(1.7)", visibility: "visible",
-        })
-        .to(".contact-title", {
-          opacity: 1, y: 0, duration: 0.9, ease: "power3.out", visibility: "visible",
-        }, "-=0.4")
-        .to(".contact-subtitle", {
-          opacity: 1, y: 0, duration: 0.7, ease: "power3.out", visibility: "visible",
-        }, "-=0.6");
+      tl.to(".contact-badge", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+        visibility: "visible",
+      })
+        .to(
+          ".contact-title",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.4",
+        )
+        .to(
+          ".contact-subtitle",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.6",
+        );
 
       /* ── Channel cards: fan-in from bottom ── */
       gsap.to(".contact-card", {
-        opacity: 1, y: 0, scale: 1, visibility: "visible",
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        visibility: "visible",
         stagger: { amount: 0.35, from: "center" },
-        duration: 0.8, ease: "back.out(1.4)",
+        duration: 0.8,
+        ease: "back.out(1.4)",
         scrollTrigger: { trigger: ".contact-cards", start: "top 88%" },
       });
 
       /* ── Social icons ── */
       gsap.to(".contact-social", {
-        opacity: 1, y: 0, scale: 1,
-        stagger: 0.06, duration: 0.5, ease: "back.out(1.4)",
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.06,
+        duration: 0.5,
+        ease: "back.out(1.4)",
         scrollTrigger: { trigger: ".contact-socials", start: "top 92%" },
       });
 
       /* ── Blob slow drift ── */
       gsap.to(".contact-blob-1", {
-        x: 30, y: -20, duration: 6, ease: "sine.inOut",
-        yoyo: true, repeat: -1,
+        x: 30,
+        y: -20,
+        duration: 6,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
       gsap.to(".contact-blob-2", {
-        x: -25, y: 20, duration: 7, ease: "sine.inOut",
-        yoyo: true, repeat: -1, delay: 1.5,
+        x: -25,
+        y: 20,
+        duration: 7,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 1.5,
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -87,20 +136,22 @@ export default function Contact({ className = "" }) {
       {/* Glow line top */}
       <div
         className="pointer-events-none absolute top-0 left-1/4 right-1/4 h-px"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(244,63,94,0.35), transparent)" }}
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(0,242,255,0.35), transparent)",
+        }}
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
-
         {/* Header */}
         <div className="contact-header mb-14">
           {/* Badge */}
           <div
             className="contact-badge inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 backdrop-blur-xl mb-8"
             style={{
-              background: "rgba(244,63,94,0.08)",
-              border: "1px solid rgba(244,63,94,0.2)",
-              boxShadow: "0 0 20px rgba(244,63,94,0.08) inset",
+              background: "rgba(0,242,255,0.08)",
+              border: "1px solid rgba(0,242,255,0.2)",
+              boxShadow: "0 0 20px rgba(0,242,255,0.08) inset",
             }}
           >
             <Send size={11} className="text-primary-light" />
@@ -137,8 +188,9 @@ export default function Contact({ className = "" }) {
                   backdropFilter: "blur(12px)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = ch.hoverBorderColor || "rgba(244,63,94,0.3)";
-                  e.currentTarget.style.boxShadow = `0 0 40px ${ch.glowColor || "rgba(244,63,94,0.1)"}, 0 16px 48px rgba(0,0,0,0.4)`;
+                  e.currentTarget.style.borderColor =
+                    ch.hoverBorderColor || "rgba(0,242,255,0.3)";
+                  e.currentTarget.style.boxShadow = `0 0 40px ${ch.glowColor || "rgba(0,242,255,0.1)"}, 0 16px 48px rgba(0,0,0,0.4)`;
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
@@ -149,16 +201,22 @@ export default function Contact({ className = "" }) {
                 <div
                   className="pointer-events-none absolute top-0 left-0 right-0 h-24 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   style={{
-                    background: `radial-gradient(ellipse at 50% 0%, ${ch.glowColor || "rgba(244,63,94,0.15)"} 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse at 50% 0%, ${ch.glowColor || "rgba(0,242,255,0.15)"} 0%, transparent 70%)`,
                   }}
                 />
 
                 {/* Icon */}
                 <div
                   className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl ${ch.iconBg} transition-all duration-300 group-hover:scale-110`}
-                  style={{ border: `1px solid ${ch.iconBorderColor || "rgba(255,255,255,0.1)"}` }}
+                  style={{
+                    border: `1px solid ${ch.iconBorderColor || "rgba(255,255,255,0.1)"}`,
+                  }}
                 >
-                  <Icon size={24} color="currentColor" className={ch.iconColor} />
+                  <Icon
+                    size={24}
+                    color="currentColor"
+                    className={ch.iconColor}
+                  />
                 </div>
 
                 {/* Text */}
@@ -185,11 +243,17 @@ export default function Contact({ className = "" }) {
 
         {/* Divider */}
         <div className="flex items-center gap-4 mb-8 max-w-xs mx-auto">
-          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+          <div
+            className="h-px flex-1"
+            style={{ background: "rgba(255,255,255,0.07)" }}
+          />
           <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-600">
             Redes sociais
           </span>
-          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+          <div
+            className="h-px flex-1"
+            style={{ background: "rgba(255,255,255,0.07)" }}
+          />
         </div>
 
         {/* Social icons */}
@@ -209,9 +273,10 @@ export default function Contact({ className = "" }) {
                   border: "1px solid rgba(255,255,255,0.08)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(244,63,94,0.1)";
-                  e.currentTarget.style.borderColor = "rgba(244,63,94,0.3)";
-                  e.currentTarget.style.boxShadow = "0 0 16px rgba(244,63,94,0.2)";
+                  e.currentTarget.style.background = "rgba(0,242,255,0.1)";
+                  e.currentTarget.style.borderColor = "rgba(0,242,255,0.3)";
+                  e.currentTarget.style.boxShadow =
+                    "0 0 16px rgba(0,242,255,0.2)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = "rgba(255,255,255,0.04)";
@@ -219,12 +284,15 @@ export default function Contact({ className = "" }) {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                <Icon size={16} color="currentColor" className="text-gray-400 transition-colors duration-300 group-hover:text-primary-light" />
+                <Icon
+                  size={16}
+                  color="currentColor"
+                  className="text-gray-400 transition-colors duration-300 group-hover:text-primary-light"
+                />
               </a>
             );
           })}
         </div>
-
       </div>
     </section>
   );

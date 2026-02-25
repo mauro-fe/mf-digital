@@ -60,45 +60,61 @@ export default function Hero() {
 
       tl
         // Background blobs
-        .to(".hero-blob", {
-          scale: 1,
-          opacity: 1,
-          duration: 1.8,
-          stagger: 0.25,
-          ease: "power2.out",
-          visibility: "visible",
-        }, 0)
+        .to(
+          ".hero-blob",
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.8,
+            stagger: 0.25,
+            ease: "power2.out",
+            visibility: "visible",
+          },
+          0,
+        )
 
         // Noise lines
-        .to(".hero-noise-line", {
-          opacity: 1,
-          visibility: "visible",
-          scaleX: 1,
-          duration: 1.2,
-          stagger: 0.08,
-          ease: "power3.inOut",
-        }, 0)
+        .to(
+          ".hero-noise-line",
+          {
+            opacity: 1,
+            visibility: "visible",
+            scaleX: 1,
+            duration: 1.2,
+            stagger: 0.08,
+            ease: "power3.inOut",
+          },
+          0,
+        )
 
         // Badge
-        .to(".hero-badge", {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: "back.out(1.7)",
-          visibility: "visible",
-        }, 0.4)
+        .to(
+          ".hero-badge",
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            visibility: "visible",
+          },
+          0.4,
+        )
 
         // Title words
-        .to(".hero-word-inner", {
-          yPercent: 0,
-          opacity: 1,
-          rotateX: 0,
-          duration: 0.9,
-          stagger: 0.055,
-          ease: "power4.out",
-          visibility: "visible",
-        }, 0.6)
+        .to(
+          ".hero-word-inner",
+          {
+            yPercent: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 0.9,
+            stagger: 0.055,
+            ease: "power4.out",
+            visibility: "visible",
+          },
+          0.6,
+        )
 
         // Gradient text shimmer
         .fromTo(
@@ -109,51 +125,71 @@ export default function Hero() {
         )
 
         // Description
-        .to(".hero-desc", {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          visibility: "visible",
-        }, 1.3)
+        .to(
+          ".hero-desc",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            visibility: "visible",
+          },
+          1.3,
+        )
 
         // CTA buttons
-        .to(".hero-cta", {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: "back.out(1.4)",
-          visibility: "visible",
-        }, 1.6)
+        .to(
+          ".hero-cta",
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "back.out(1.4)",
+            visibility: "visible",
+          },
+          1.6,
+        )
 
         // Stats
-        .to(".hero-stats .hero-stat", {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.1,
-          visibility: "visible",
-        }, 1.85)
+        .to(
+          ".hero-stats .hero-stat",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            visibility: "visible",
+          },
+          1.85,
+        )
 
         // Image reveal with clip-path
-        .to(".hero-image-wrap", {
-          clipPath: "inset(0% 0% 0% 0%)",
-          opacity: 1,
-          duration: 1.3,
-          ease: "power3.inOut",
-          visibility: "visible",
-        }, 1.1)
+        .to(
+          ".hero-image-wrap",
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            opacity: 1,
+            duration: 1.3,
+            ease: "power3.inOut",
+            visibility: "visible",
+          },
+          1.1,
+        )
 
         // Floating card
-        .to(".hero-floating-card", {
-          x: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          ease: "back.out(1.7)",
-          visibility: "visible",
-        }, 1.95);
+        .to(
+          ".hero-floating-card",
+          {
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.9,
+            ease: "back.out(1.7)",
+            visibility: "visible",
+          },
+          1.95,
+        );
 
       /* ── 3. Stat counters on scroll ── */
       ScrollTrigger.create({
@@ -232,7 +268,7 @@ export default function Hero() {
             className="hero-noise-line absolute left-0 h-px w-full origin-left"
             style={{
               top: `${12 + i * 16}%`,
-              background: `linear-gradient(90deg, transparent, rgba(244,63,94,${0.03 + i * 0.01}), transparent)`,
+              background: `linear-gradient(90deg, transparent, rgba(0,242,255,${0.03 + i * 0.01}), transparent)`,
               scaleX: 0,
             }}
           />
@@ -251,17 +287,15 @@ export default function Hero() {
       {/* Main content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 pt-28 pb-20">
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:justify-between">
-
           {/* ── Text column ── */}
           <div className="max-w-2xl flex-1 space-y-9 text-center lg:text-left">
-
             {/* Badge */}
             <div
               className="hero-badge inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 backdrop-blur-xl"
               style={{
                 background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(244,63,94,0.2)",
-                boxShadow: "0 0 20px rgba(244,63,94,0.08) inset",
+                border: "1px solid rgba(0,242,255,0.2)",
+                boxShadow: "0 0 20px rgba(0,242,255,0.08) inset",
               }}
             >
               <span className="relative flex h-2 w-2">
@@ -312,7 +346,7 @@ export default function Hero() {
                   background:
                     "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                   boxShadow:
-                    "0 0 0 1px rgba(244,63,94,0.3), 0 20px 40px rgba(244,63,94,0.25)",
+                    "0 0 0 1px rgba(0,242,255,0.3), 0 20px 40px rgba(0,242,255,0.25)",
                   opacity: 0,
                   transform: "scale(0.9)",
                 }}
@@ -339,7 +373,7 @@ export default function Hero() {
               >
                 <span
                   className="flex h-7 w-7 items-center justify-center rounded-full transition-colors duration-300"
-                  style={{ background: "rgba(244,63,94,0.15)" }}
+                  style={{ background: "rgba(0,242,255,0.15)" }}
                 >
                   <Play size={11} className="text-primary ml-0.5" />
                 </span>
@@ -387,7 +421,7 @@ export default function Hero() {
                 className="absolute -inset-10 rounded-[2.5rem]"
                 style={{
                   background:
-                    "radial-gradient(ellipse at center, rgba(244,63,94,0.18) 0%, rgba(249,115,22,0.10) 50%, transparent 70%)",
+                    "radial-gradient(ellipse at center, rgba(0,242,255,0.18) 0%, rgba(0,119,255,0.10) 50%, transparent 70%)",
                   filter: "blur(24px)",
                 }}
               />
@@ -397,7 +431,7 @@ export default function Hero() {
                 className="hero-image-wrap relative rounded-[2rem] p-[1px] overflow-hidden"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(244,63,94,0.4), rgba(249,115,22,0.2), rgba(255,255,255,0.05))",
+                    "linear-gradient(135deg, rgba(0,242,255,0.4), rgba(0,119,255,0.2), rgba(255,255,255,0.05))",
                   clipPath: "inset(100% 0% 0% 0%)",
                   opacity: 0,
                 }}
@@ -432,7 +466,7 @@ export default function Hero() {
                 className="hero-floating-card absolute -left-14 bottom-14 flex items-center gap-3 rounded-2xl px-5 py-3.5 backdrop-blur-2xl shadow-2xl z-50"
                 style={{
                   background: "rgba(17,24,39,0.85)",
-                  border: "1px solid rgba(244,63,94,0.2)",
+                  border: "1px solid rgba(0,242,255,0.2)",
                   boxShadow:
                     "0 0 0 1px rgba(255,255,255,0.04) inset, 0 20px 40px rgba(0,0,0,0.4)",
                   opacity: 0,
@@ -443,8 +477,8 @@ export default function Hero() {
                   className="flex h-10 w-10 items-center justify-center rounded-xl flex-shrink-0"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(244,63,94,0.2), rgba(249,115,22,0.1))",
-                    border: "1px solid rgba(244,63,94,0.2)",
+                      "linear-gradient(135deg, rgba(0,242,255,0.2), rgba(0,119,255,0.1))",
+                    border: "1px solid rgba(0,242,255,0.2)",
                   }}
                 >
                   <Code size={18} className="text-primary" />
@@ -464,7 +498,7 @@ export default function Hero() {
                 className="absolute -bottom-6 -right-6 h-24 w-24 opacity-30"
                 style={{
                   backgroundImage:
-                    "radial-gradient(circle, rgba(244,63,94,0.6) 1px, transparent 1px)",
+                    "radial-gradient(circle, rgba(0,242,255,0.6) 1px, transparent 1px)",
                   backgroundSize: "8px 8px",
                 }}
               />
@@ -474,7 +508,8 @@ export default function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{
           background:
             "linear-gradient(to top, var(--color-dark-900) 0%, transparent 100%)",

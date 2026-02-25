@@ -98,35 +98,69 @@ export default function About({ className = "" }) {
       });
 
       tl.to(".about-badge", {
-          y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.5)", visibility: "visible",
-        })
-        .to(".about-title", {
-          y: 0, opacity: 1, duration: 0.8, ease: "power3.out", visibility: "visible",
-        }, "-=0.4")
-        .to(".about-subtitle", {
-          y: 0, opacity: 1, duration: 0.7, ease: "power3.out", visibility: "visible",
-        }, "-=0.5");
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        visibility: "visible",
+      })
+        .to(
+          ".about-title",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.4",
+        )
+        .to(
+          ".about-subtitle",
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.5",
+        );
 
       /* Initial offsets for header elements */
-      gsap.set(".about-badge",    { y: -20 });
-      gsap.set(".about-title",    { y: 30 });
+      gsap.set(".about-badge", { y: -20 });
+      gsap.set(".about-title", { y: 30 });
       gsap.set(".about-subtitle", { y: 20 });
 
       /* ── Left text stagger ── */
       gsap.set(".about-text-block > *", { x: -40 });
       gsap.to(".about-text-block > *", {
-        x: 0, opacity: 1, visibility: "visible",
-        stagger: 0.1, duration: 0.8, ease: "power3.out",
+        x: 0,
+        opacity: 1,
+        visibility: "visible",
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: { trigger: ".about-text-block", start: "top 85%" },
       });
 
       /* ── Cards wave ── */
-      gsap.set(".about-tilt-card", { scale: 0.85, y: 50, rotateY: 25, rotateX: -12 });
+      gsap.set(".about-tilt-card", {
+        scale: 0.85,
+        y: 50,
+        rotateY: 25,
+        rotateX: -12,
+      });
       gsap.to(".about-tilt-card", {
-        scale: 1, opacity: 1, visibility: "visible",
-        rotateY: 0, rotateX: 0, y: 0,
+        scale: 1,
+        opacity: 1,
+        visibility: "visible",
+        rotateY: 0,
+        rotateX: 0,
+        y: 0,
         stagger: { amount: 0.5, from: "start" },
-        duration: 1.1, ease: "elastic.out(1, 0.75)",
+        duration: 1.1,
+        ease: "elastic.out(1, 0.75)",
         scrollTrigger: { trigger: ".about-cards-grid", start: "top 85%" },
       });
     }, sectionRef);
@@ -151,18 +185,23 @@ export default function About({ className = "" }) {
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-30" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8">
-
         {/* Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <span className="about-badge inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-primary))",
+              }}
             />
             {ABOUT.badge}
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
           </span>
 
@@ -178,20 +217,25 @@ export default function About({ className = "" }) {
 
         {/* Content grid */}
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
-
           {/* Left — Text + CTAs */}
           <div className="about-text-block space-y-6 order-2 lg:order-1">
             <p className="text-gray-400 leading-relaxed text-lg">
               {ABOUT.paragraph1.prefix}
-              <strong className="text-white font-semibold">{ABOUT.paragraph1.strong}</strong>
+              <strong className="text-white font-semibold">
+                {ABOUT.paragraph1.strong}
+              </strong>
               {ABOUT.paragraph1.suffix}
             </p>
 
             <p className="text-gray-400 leading-relaxed text-lg">
               {ABOUT.paragraph2.prefix}
-              <strong className="text-white font-semibold">{ABOUT.paragraph2.strong1}</strong>
+              <strong className="text-white font-semibold">
+                {ABOUT.paragraph2.strong1}
+              </strong>
               {ABOUT.paragraph2.connector}
-              <strong className="text-white font-semibold">{ABOUT.paragraph2.strong2}</strong>
+              <strong className="text-white font-semibold">
+                {ABOUT.paragraph2.strong2}
+              </strong>
               {ABOUT.paragraph2.suffix}
             </p>
 
@@ -202,7 +246,10 @@ export default function About({ className = "" }) {
             {/* Divider */}
             <div
               className="h-px w-16"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -211,13 +258,18 @@ export default function About({ className = "" }) {
                 aria-label={ABOUT.cta1AriaLabel || ABOUT.cta1}
                 className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full px-7 py-3.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
                 style={{
-                  background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-                  boxShadow: "0 0 0 1px rgba(244,63,94,0.3), 0 8px 24px rgba(244,63,94,0.2)",
+                  background:
+                    "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                  boxShadow:
+                    "0 0 0 1px rgba(0,242,255,0.3), 0 8px 24px rgba(0,242,255,0.2)",
                 }}
               >
                 <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
                 <span className="relative">{ABOUT.cta1}</span>
-                <ArrowRight size={15} className="relative transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight
+                  size={15}
+                  className="relative transition-transform duration-300 group-hover:translate-x-1"
+                />
               </a>
 
               <a
@@ -247,7 +299,10 @@ export default function About({ className = "" }) {
             {/* Ambient glow behind cards */}
             <div
               className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[120%] w-[120%] rounded-full blur-[100px]"
-              style={{ background: "radial-gradient(ellipse, rgba(244,63,94,0.08) 0%, transparent 70%)" }}
+              style={{
+                background:
+                  "radial-gradient(ellipse, rgba(0,242,255,0.08) 0%, transparent 70%)",
+              }}
             />
 
             <div className="about-cards-grid relative grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -266,7 +321,9 @@ export default function About({ className = "" }) {
                     {/* Icon */}
                     <div
                       className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${item.bg} mb-4 transition-all duration-300`}
-                      style={{ border: `1px solid ${item.borderColor || "rgba(255,255,255,0.06)"}` }}
+                      style={{
+                        border: `1px solid ${item.borderColor || "rgba(255,255,255,0.06)"}`,
+                      }}
                     >
                       <Icon size={17} className={item.color} />
                     </div>
@@ -281,7 +338,9 @@ export default function About({ className = "" }) {
                     {/* Bottom accent line on hover */}
                     <div
                       className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 group-hover:w-full"
-                      style={{ background: `linear-gradient(90deg, ${item.glowColor || "var(--color-primary)"}, transparent)` }}
+                      style={{
+                        background: `linear-gradient(90deg, ${item.glowColor || "var(--color-primary)"}, transparent)`,
+                      }}
                     />
                   </TiltCard>
                 );

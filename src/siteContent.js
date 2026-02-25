@@ -54,7 +54,7 @@ export const AUTHOR = {
     photoAlt: "Mauro Felix - Desenvolvedor Web",
     stackLabel: "Full Stack",
     stackDesc: "React · PHP · MySQL",
-    copyright: `© ${new Date().getFullYear()} Mauro Felix. Todos os direitos reservados.`,
+    copyright: `Mauro Felix. Todos os direitos reservados.`,
 
     // Links das redes sociais — altere só aqui
     links: {
@@ -157,7 +157,7 @@ export const ABOUT = {
             desc: "Código escalável, documentado e fácil de manter",
             color: "text-primary-light",
             bg: "bg-primary/10",
-            glowColor: "rgba(244,63,94,0.15)",
+            glowColor: "rgba(0,242,255,0.15)",
         },
         {
             icon: Smartphone,
@@ -239,28 +239,28 @@ export const PROCESS = {
             title: "Descoberta & Estratégia",
             desc: "Mergulho profundo no seu modelo de negócio para mapear requisitos, definir a arquitetura ideal e alinhar expectativas de ROI.",
             icon: MessagesSquare,
-            color: "#f43f5e",
+            color: "#00f2ff",
         },
         {
             num: "02",
             title: "UX/UI & Prototipagem",
             desc: "Criação de interfaces de alta fidelidade focadas em conversão e usabilidade, validadas antes de escrever a primeira linha de código.",
             icon: PenTool,
-            color: "#f97316",
+            color: "#0077ff",
         },
         {
             num: "03",
             title: "Engenharia & Código",
             desc: "Desenvolvimento ágil com stack moderna (React, Node, etc). Código limpo, escalável e otimizado para máxima performance.",
             icon: Code,
-            color: "#fbbf24",
+            color: "#38bdf8",
         },
         {
             num: "04",
             title: "Deploy & Evolução",
             desc: "Lançamento seguro em infraestrutura cloud, monitoramento de métricas e suporte contínuo para escalar a aplicação.",
             icon: Rocket,
-            color: "#fb7185",
+            color: "#22d3ee",
         },
     ],
 };

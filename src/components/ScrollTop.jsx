@@ -75,21 +75,29 @@ export default function ScrollTop() {
 
   const handleMouseEnter = () => {
     gsap.to(btnRef.current, {
-      y: -3, scale: 1.08,
-      duration: 0.3, ease: "power2.out",
+      y: -3,
+      scale: 1.08,
+      duration: 0.3,
+      ease: "power2.out",
     });
     gsap.to(".scroll-top-arrow", {
-      y: -2, duration: 0.25, ease: "power2.out",
+      y: -2,
+      duration: 0.25,
+      ease: "power2.out",
     });
   };
 
   const handleMouseLeave = () => {
     gsap.to(btnRef.current, {
-      y: 0, scale: 1,
-      duration: 0.4, ease: "elastic.out(1, 0.6)",
+      y: 0,
+      scale: 1,
+      duration: 0.4,
+      ease: "elastic.out(1, 0.6)",
     });
     gsap.to(".scroll-top-arrow", {
-      y: 0, duration: 0.3, ease: "power2.out",
+      y: 0,
+      duration: 0.3,
+      ease: "power2.out",
     });
   };
 
@@ -121,7 +129,9 @@ export default function ScrollTop() {
       >
         {/* Track */}
         <circle
-          cx="24" cy="24" r="20"
+          cx="24"
+          cy="24"
+          r="20"
           fill="none"
           stroke="rgba(255,255,255,0.06)"
           strokeWidth="1.5"
@@ -129,7 +139,9 @@ export default function ScrollTop() {
         {/* Progress */}
         <circle
           ref={progressRef}
-          cx="24" cy="24" r="20"
+          cx="24"
+          cy="24"
+          r="20"
           fill="none"
           stroke="url(#scrollGradient)"
           strokeWidth="1.5"
@@ -152,7 +164,8 @@ export default function ScrollTop() {
         style={{
           background: "rgba(10,15,30,0.85)",
           border: "1px solid rgba(255,255,255,0.08)",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(244,63,94,0.1) inset",
+          boxShadow:
+            "0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,242,255,0.1) inset",
         }}
       >
         <ArrowUp

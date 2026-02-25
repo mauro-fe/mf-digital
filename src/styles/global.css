@@ -4,9 +4,16 @@
 /* 🎨 DESIGN TOKENS (Tailwind v4) */
 /* ============================= */
 @theme {
-  /* Azul Vibrante/Ciano do Logo */
+  /* Paleta principal — Azul Vibrante / Ciano do Logo */
   --color-primary: #00f2ff;
   --color-primary-hover: #00d4e0;
+  --color-primary-light: #67f8ff;
+
+  /* Secundário — Azul profundo (para gradientes) */
+  --color-secondary: #0077ff;
+
+  /* Acento — Índigo/Violeta (para detalhes extras) */
+  --color-accent: #6366f1;
 
   --color-white: #d8dee1;
 
@@ -137,6 +144,15 @@
   }
 }
 
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 /* ============================= */
 /* 🧩 UTILITÁRIOS */
 /* ============================= */
@@ -159,6 +175,10 @@
     animation: marquee 30s linear infinite;
   }
 
+  .animate-marquee-reverse {
+    animation: marquee-reverse 30s linear infinite;
+  }
+
   .gradient-text {
     background: var(--gradient-text);
     background-clip: text;
@@ -171,6 +191,18 @@
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.025em;
+  }
+
+  .heading-lg {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .body-lg {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
   }
 }
 
@@ -196,6 +228,15 @@
       linear-gradient(to right, rgba(0, 242, 255, 0.04) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(0, 242, 255, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
   }
 
   .card-dark {

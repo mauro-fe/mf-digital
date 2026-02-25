@@ -8,7 +8,9 @@ export default function Marquee({
   bgColor = "#030712",
   className = "",
 }) {
-  const animationClass = reverse ? "animate-marquee-reverse" : "animate-marquee";
+  const animationClass = reverse
+    ? "animate-marquee-reverse"
+    : "animate-marquee";
 
   const sizeClasses = {
     sm: "py-3 text-sm tracking-widest",
@@ -30,18 +32,23 @@ export default function Marquee({
       {/* Edge fades — solid bgColor → transparent so items fade into parent bg */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10"
-        style={{ background: `linear-gradient(to right, ${bgColor} 0%, transparent 100%)` }}
+        style={{
+          background: `linear-gradient(to right, ${bgColor} 0%, transparent 100%)`,
+        }}
       />
       <div
         className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10"
-        style={{ background: `linear-gradient(to left, ${bgColor} 0%, transparent 100%)` }}
+        style={{
+          background: `linear-gradient(to left, ${bgColor} 0%, transparent 100%)`,
+        }}
       />
 
       {/* Glow line top */}
       <div
         className="pointer-events-none absolute top-0 left-1/4 right-1/4 h-px"
         style={{
-          background: "linear-gradient(90deg, transparent, rgba(244,63,94,0.3), transparent)",
+          background:
+            "linear-gradient(90deg, transparent, rgba(0,242,255,0.3), transparent)",
         }}
       />
 
@@ -61,7 +68,8 @@ export default function Marquee({
             <span
               className="flex-shrink-0 text-xs"
               style={{
-                background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                background:
+                  "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 color: "transparent",

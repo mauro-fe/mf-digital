@@ -66,9 +66,7 @@ export default function Nav() {
       <nav
         className={`fixed top-0 left-0 z-50 w-full transition-all duration-500`}
         style={{
-          background: scrolled
-            ? "rgba(3,7,18,0.82)"
-            : "transparent",
+          background: scrolled ? "rgba(3,7,18,0.82)" : "transparent",
           backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
           boxShadow: scrolled
@@ -111,8 +109,8 @@ export default function Nav() {
                       color: isActive
                         ? "#ffffff"
                         : scrolled
-                        ? "rgba(148,163,184,0.8)"
-                        : "rgba(255,255,255,0.6)",
+                          ? "rgba(148,163,184,0.8)"
+                          : "rgba(255,255,255,0.6)",
                     }}
                   >
                     {link.label}
@@ -122,7 +120,8 @@ export default function Nav() {
                       className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1.5px] rounded-full transition-all duration-300 ease-out"
                       style={{
                         width: isActive ? "70%" : "0%",
-                        background: "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
+                        background:
+                          "linear-gradient(90deg, var(--color-primary), var(--color-secondary))",
                         opacity: isActive ? 1 : 0,
                       }}
                     />
@@ -150,7 +149,7 @@ export default function Nav() {
                 background:
                   "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                 boxShadow:
-                  "0 0 0 1px rgba(244,63,94,0.3), 0 4px 16px rgba(244,63,94,0.2)",
+                  "0 0 0 1px rgba(0,242,255,0.3), 0 4px 16px rgba(0,242,255,0.2)",
               }}
             >
               {/* Shine sweep on hover */}
@@ -171,15 +170,27 @@ export default function Nav() {
             >
               <span
                 className="block h-[1.5px] w-6 rounded-full transition-all duration-300"
-                style={{ background: scrolled ? "rgba(148,163,184,0.8)" : "rgba(255,255,255,0.7)" }}
+                style={{
+                  background: scrolled
+                    ? "rgba(148,163,184,0.8)"
+                    : "rgba(255,255,255,0.7)",
+                }}
               />
               <span
                 className="block h-[1.5px] w-4 rounded-full transition-all duration-300"
-                style={{ background: scrolled ? "rgba(148,163,184,0.8)" : "rgba(255,255,255,0.7)" }}
+                style={{
+                  background: scrolled
+                    ? "rgba(148,163,184,0.8)"
+                    : "rgba(255,255,255,0.7)",
+                }}
               />
               <span
                 className="block h-[1.5px] w-5 rounded-full transition-all duration-300"
-                style={{ background: scrolled ? "rgba(148,163,184,0.8)" : "rgba(255,255,255,0.7)" }}
+                style={{
+                  background: scrolled
+                    ? "rgba(148,163,184,0.8)"
+                    : "rgba(255,255,255,0.7)",
+                }}
               />
             </button>
           </div>
@@ -197,7 +208,7 @@ export default function Nav() {
             width: `${scrollProgress}%`,
             background:
               "linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent))",
-            boxShadow: "0 0 8px rgba(244,63,94,0.6)",
+            boxShadow: "0 0 8px rgba(0,242,255,0.6)",
           }}
         />
       </div>
@@ -238,7 +249,8 @@ export default function Nav() {
             <span
               className="h-1.5 w-1.5 rounded-full"
               style={{
-                background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                background:
+                  "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
               }}
             />
             <span className="text-sm font-semibold uppercase tracking-widest text-gray-400">
@@ -272,11 +284,9 @@ export default function Nav() {
                 className="group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200"
                 style={{
                   color: isActive ? "#ffffff" : "rgba(148,163,184,0.8)",
-                  background: isActive
-                    ? "rgba(244,63,94,0.08)"
-                    : "transparent",
+                  background: isActive ? "rgba(0,242,255,0.08)" : "transparent",
                   border: isActive
-                    ? "1px solid rgba(244,63,94,0.15)"
+                    ? "1px solid rgba(0,242,255,0.15)"
                     : "1px solid transparent",
                   animationDelay: `${i * 40}ms`,
                 }}
@@ -288,14 +298,17 @@ export default function Nav() {
                     background: isActive
                       ? "var(--color-primary)"
                       : "rgba(255,255,255,0.2)",
-                    boxShadow: isActive ? "0 0 6px var(--color-primary)" : "none",
+                    boxShadow: isActive
+                      ? "0 0 6px var(--color-primary)"
+                      : "none",
                   }}
                 />
                 <span>{link.label}</span>
 
                 {/* Hover bg */}
                 {!isActive && (
-                  <span className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                  <span
+                    className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                     style={{ background: "rgba(255,255,255,0.04)" }}
                   />
                 )}
@@ -314,12 +327,15 @@ export default function Nav() {
             style={{
               background:
                 "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-              boxShadow: "0 4px 20px rgba(244,63,94,0.25)",
+              boxShadow: "0 4px 20px rgba(0,242,255,0.25)",
             }}
           >
             <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
             <span className="relative">{NAV.cta}</span>
-            <ArrowRight size={14} className="relative transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight
+              size={14}
+              className="relative transition-transform duration-300 group-hover:translate-x-1"
+            />
           </a>
 
           {/* Decorative footer inside drawer */}
@@ -333,7 +349,7 @@ export default function Nav() {
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-64"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 100%, rgba(244,63,94,0.06) 0%, transparent 70%)",
+              "radial-gradient(ellipse at 50% 100%, rgba(0,242,255,0.06) 0%, transparent 70%)",
           }}
         />
       </aside>

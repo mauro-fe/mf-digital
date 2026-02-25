@@ -17,9 +17,9 @@ function ServiceCard({ icon: Icon, title, description }) {
         border: "1px solid rgba(255,255,255,0.06)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(244,63,94,0.22)";
+        e.currentTarget.style.borderColor = "rgba(0,242,255,0.22)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(244,63,94,0.08), 0 16px 48px rgba(0,0,0,0.35)";
+          "0 0 40px rgba(0,242,255,0.08), 0 16px 48px rgba(0,0,0,0.35)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
@@ -31,7 +31,7 @@ function ServiceCard({ icon: Icon, title, description }) {
         className="pointer-events-none absolute top-0 left-0 right-0 h-20 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(244,63,94,0.12) 0%, transparent 70%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(0,242,255,0.12) 0%, transparent 70%)",
         }}
       />
 
@@ -40,8 +40,8 @@ function ServiceCard({ icon: Icon, title, description }) {
         <div
           className="inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
           style={{
-            background: "rgba(244,63,94,0.1)",
-            border: "1px solid rgba(244,63,94,0.15)",
+            background: "rgba(0,242,255,0.1)",
+            border: "1px solid rgba(0,242,255,0.15)",
           }}
         >
           <Icon size={20} className="text-primary-light" strokeWidth={1.75} />
@@ -49,7 +49,7 @@ function ServiceCard({ icon: Icon, title, description }) {
         <ArrowRight
           size={16}
           className="transition-all duration-300 group-hover:translate-x-1"
-          style={{ color: "rgba(244,63,94,0.25)" }}
+          style={{ color: "rgba(0,242,255,0.25)" }}
         />
       </div>
 
@@ -78,28 +78,41 @@ export default function Services({ className = "" }) {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       /* ── Initial states ── */
-      gsap.set(".services-badge",    { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".services-title",    { opacity: 0, y: 30,  visibility: "hidden" });
-      gsap.set(".services-row",      { opacity: 0, y: 30,  visibility: "hidden" });
+      gsap.set(".services-badge", { opacity: 0, y: -20, visibility: "hidden" });
+      gsap.set(".services-title", { opacity: 0, y: 30, visibility: "hidden" });
+      gsap.set(".services-row", { opacity: 0, y: 30, visibility: "hidden" });
 
       /* ── Header ── */
       const tl = gsap.timeline({
         scrollTrigger: { trigger: ".services-header", start: "top 85%" },
       });
 
-      tl
-        .to(".services-badge", {
-          opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.5)", visibility: "visible",
-        })
-        .to(".services-title", {
-          opacity: 1, y: 0, duration: 0.8, ease: "power3.out", visibility: "visible",
-        }, "-=0.4");
+      tl.to(".services-badge", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "back.out(1.5)",
+        visibility: "visible",
+      }).to(
+        ".services-title",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          visibility: "visible",
+        },
+        "-=0.4",
+      );
 
       /* ── Rows stagger ── */
       gsap.to(".services-row", {
-        opacity: 1, y: 0, visibility: "visible",
+        opacity: 1,
+        y: 0,
+        visibility: "visible",
         stagger: 0.15,
-        duration: 0.8, ease: "power3.out",
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: { trigger: ".services-rows", start: "top 88%" },
       });
     }, sectionRef);
@@ -124,18 +137,23 @@ export default function Services({ className = "" }) {
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-20" />
 
       <div className="relative z-10">
-
         {/* Header */}
         <div className="services-header text-center mb-14 max-w-3xl mx-auto px-5 sm:px-8">
           <span className="services-badge inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, transparent, var(--color-primary))" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--color-primary))",
+              }}
             />
             {SERVICES.badge}
             <span
               className="h-px w-8"
-              style={{ background: "linear-gradient(90deg, var(--color-primary), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-primary), transparent)",
+              }}
             />
           </span>
 
@@ -148,16 +166,21 @@ export default function Services({ className = "" }) {
 
         {/* Marquee rows */}
         <div className="services-rows flex flex-col gap-5">
-
           {/* Row 1 */}
           <div className="services-row relative overflow-hidden">
             <div
               className="pointer-events-none absolute left-0 top-0 bottom-0 w-28 z-10"
-              style={{ background: "linear-gradient(90deg, var(--color-dark-900), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-dark-900), transparent)",
+              }}
             />
             <div
               className="pointer-events-none absolute right-0 top-0 bottom-0 w-28 z-10"
-              style={{ background: "linear-gradient(-90deg, var(--color-dark-900), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(-90deg, var(--color-dark-900), transparent)",
+              }}
             />
             <div
               className="flex w-max animate-marquee gap-5 hover:[animation-play-state:paused]"
@@ -173,11 +196,17 @@ export default function Services({ className = "" }) {
           <div className="services-row relative overflow-hidden">
             <div
               className="pointer-events-none absolute left-0 top-0 bottom-0 w-28 z-10"
-              style={{ background: "linear-gradient(90deg, var(--color-dark-900), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--color-dark-900), transparent)",
+              }}
             />
             <div
               className="pointer-events-none absolute right-0 top-0 bottom-0 w-28 z-10"
-              style={{ background: "linear-gradient(-90deg, var(--color-dark-900), transparent)" }}
+              style={{
+                background:
+                  "linear-gradient(-90deg, var(--color-dark-900), transparent)",
+              }}
             />
             <div
               className="flex w-max animate-marquee-reverse gap-5 hover:[animation-play-state:paused]"
@@ -193,7 +222,6 @@ export default function Services({ className = "" }) {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>
