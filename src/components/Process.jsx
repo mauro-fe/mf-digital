@@ -206,14 +206,26 @@ export default function Process({ className = "" }) {
     mm.add("(max-width: 1023px)", () => {
       const section = sectionRef.current;
       if (!section) return;
-      gsap.from(section.querySelectorAll(".process-mobile-card"), {
-        y: 50,
-        opacity: 0,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: { trigger: section, start: "top 80%" },
-      });
+      const mobileGrid = section.querySelector(".process-mobile-grid");
+      if (!mobileGrid) return;
+      const cards = mobileGrid.querySelectorAll(".process-mobile-card");
+
+      gsap.fromTo(
+        cards,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: "power3.out",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: mobileGrid,
+            start: "top 90%",
+          },
+        },
+      );
     });
 
     return () => mm.revert();
@@ -544,7 +556,7 @@ export default function Process({ className = "" }) {
         </div>
 
         {/* Cards */}
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+        <div className="process-mobile-grid relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
