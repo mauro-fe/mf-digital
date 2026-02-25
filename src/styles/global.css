@@ -53,6 +53,224 @@
   --transition-base: 300ms;
   /* Height of the fixed navigation (used to offset anchored sections) */
   --nav-height: 68px;
+
+  /* ── Surfaces ── */
+  --surface-card: rgba(10, 15, 30, 0.7);
+  --surface-card-solid: rgba(10, 15, 30, 0.8);
+  --surface-card-hover: rgba(10, 15, 30, 0.9);
+  --surface-overlay: rgba(3, 7, 18, 0.6);
+  --surface-nav: rgba(3, 7, 18, 0.82);
+  --surface-drawer: rgba(10, 15, 30, 0.98);
+  --surface-pill: rgba(255, 255, 255, 0.04);
+  --surface-badge: rgba(255, 255, 255, 0.04);
+  --surface-inner: rgba(10, 15, 30, 0.8);
+  --surface-vignette: rgba(3, 7, 18, 0.7);
+  --surface-testimonial: linear-gradient(
+    135deg,
+    rgba(15, 20, 35, 0.95),
+    rgba(8, 12, 24, 0.9)
+  );
+
+  /* ── Borders ── */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(0, 242, 255, 0.22);
+  --border-active: rgba(0, 242, 255, 0.25);
+
+  /* ── Text ── */
+  --text-heading: #ffffff;
+  --text-body: rgba(148, 163, 184, 0.8);
+  --text-muted: #94a3b8;
+  --text-faint: #64748b;
+  --text-ultra-faint: #475569;
+
+  /* ── Hover / interaction ── */
+  --hover-bg: rgba(255, 255, 255, 0.04);
+  --hover-border-glow: rgba(0, 242, 255, 0.22);
+  --hover-shadow:
+    0 0 30px rgba(0, 242, 255, 0.15), 0 10px 40px rgba(0, 0, 0, 0.3);
+  --hover-shadow-subtle: rgba(0, 0, 0, 0.35);
+
+  /* ── Marquee ── */
+  --marquee-bg: #030712;
+  --marquee-text: rgba(148, 163, 184, 0.5);
+  --marquee-border: rgba(255, 255, 255, 0.04);
+  --card-shadow: none;
+}
+
+/* ─── Light theme overrides ─── */
+[data-theme="light"] {
+  --color-primary: #0091a1;
+  --color-primary-hover: #007a88;
+  --color-primary-light: #00b8cc;
+  --color-secondary: #0062cc;
+  --color-accent: #4f46e5;
+
+  --color-white: #1a1a2e;
+
+  --color-dark-900: #f8f9fc;
+  --color-dark-800: #f0f2f7;
+  --color-dark-700: #e2e5ed;
+  --color-dark-600: #cbd2de;
+
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #475569;
+
+  --gradient-dark: linear-gradient(135deg, #f8f9fc 0%, #f0f2f7 100%);
+  --gradient-subtle: linear-gradient(135deg, #f0f2f7 0%, #e2e5ed 100%);
+  --gradient-text: linear-gradient(135deg, #1a1a2e 0%, #0091a1 100%);
+  --gradient-card: linear-gradient(
+    135deg,
+    rgba(0, 145, 161, 0.06) 0%,
+    rgba(0, 98, 204, 0.06) 100%
+  );
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-primary: 0 0 20px rgba(0, 145, 161, 0.2);
+
+  /* ── Surfaces (light) ── */
+  --surface-card: rgba(255, 255, 255, 0.97);
+  --surface-card-solid: #ffffff;
+  --surface-card-hover: #ffffff;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.045);
+  --surface-overlay: rgba(0, 0, 0, 0.3);
+  --surface-nav: rgba(248, 249, 252, 0.88);
+  --surface-drawer: rgba(248, 249, 252, 0.98);
+  --surface-pill: rgba(0, 0, 0, 0.04);
+  --surface-badge: rgba(0, 145, 161, 0.08);
+  --surface-inner: rgba(255, 255, 255, 0.8);
+  --surface-vignette: rgba(248, 249, 252, 0.7);
+  --surface-testimonial: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(240, 242, 247, 0.9)
+  );
+
+  /* ── Borders (light) ── */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.15);
+  --border-hover: rgba(0, 145, 161, 0.3);
+  --border-active: rgba(0, 145, 161, 0.35);
+
+  /* ── Text (light) ── */
+  --text-heading: #1a1a2e;
+  --text-body: rgba(71, 85, 105, 0.9);
+  --text-muted: #475569;
+  --text-faint: #94a3b8;
+  --text-ultra-faint: #94a3b8;
+
+  /* ── Hover / interaction (light) ── */
+  --hover-bg: rgba(0, 0, 0, 0.04);
+  --hover-border-glow: rgba(0, 145, 161, 0.3);
+  --hover-shadow:
+    0 0 30px rgba(0, 145, 161, 0.1), 0 10px 40px rgba(0, 0, 0, 0.08);
+  --hover-shadow-subtle: rgba(0, 0, 0, 0.1);
+
+  /* ── Marquee (light) ── */
+  --marquee-bg: #f8f9fc;
+  --marquee-text: rgba(71, 85, 105, 0.6);
+  --marquee-border: rgba(0, 0, 0, 0.06);
+}
+
+/* Light theme — invert key inline dark backgrounds globally */
+[data-theme="light"] body {
+  color: var(--color-text-primary);
+  background: var(--color-dark-900);
+}
+
+[data-theme="light"] ::selection {
+  background: rgba(0, 145, 161, 0.25);
+  color: #1a1a2e;
+}
+
+/* Cards, glass, grids in light mode */
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .card-dark {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .card-dark:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 145, 161, 0.4);
+  box-shadow:
+    0 0 30px rgba(0, 145, 161, 0.1),
+    0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .bg-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.06) 1px,
+    transparent 1px
+  );
+}
+
+/* Light mode gradient-text uses dark start */
+[data-theme="light"] .gradient-text {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ── Light theme: override Tailwind text utilities ── */
+[data-theme="light"] .text-white {
+  color: var(--text-heading) !important;
+}
+
+[data-theme="light"] .text-gray-300 {
+  color: var(--text-body) !important;
+}
+
+[data-theme="light"] .text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+[data-theme="light"] .text-gray-500 {
+  color: var(--text-faint) !important;
+}
+
+[data-theme="light"] .text-gray-600 {
+  color: var(--text-ultra-faint) !important;
+}
+
+/* Light theme white-alpha bg utilities */
+[data-theme="light"] .bg-white\/5,
+[data-theme="light"] .bg-white\/8,
+[data-theme="light"] .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .hover\:bg-white\/5:hover,
+[data-theme="light"] .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .text-white\/90,
+[data-theme="light"] .text-white\/50 {
+  color: var(--text-heading) !important;
+}
+
+/* Light theme white-alpha border overrides */
+[data-theme="light"] .border-white\/5,
+[data-theme="light"] .border-white\/8,
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
 /* ============================= */
@@ -199,16 +417,16 @@ section[id] {
   }
 
   .heading-xl {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.025em;
   }
 
   .heading-lg {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
     font-weight: 800;
-    line-height: 1.12;
+    line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
@@ -309,14 +527,16 @@ section[id] {
 /* Responsive tweak: reduce process card scale on short viewports */
 @layer components {
   .process-card-border {
-    transition: transform 220ms ease, max-height 220ms ease;
+    transition:
+      transform 220ms ease,
+      max-height 220ms ease;
   }
 
   @media (max-height: 720px) {
     .process-card-border {
       transform: scale(0.86);
       transform-origin: right center;
-      max-height: 60vh;
+      max-height: 55vh;
     }
 
     /* Slightly reduce pinned section min-height so pinned content doesn't overflow as much */
@@ -324,51 +544,46 @@ section[id] {
       min-height: calc(100vh - 56px);
     }
 
-    /* General short-viewport adjustments */
-    /* Reduce vertical spacing on sections to avoid large empty areas */
-    section[id] {
-      padding-top: 1.5rem !important;
-      padding-bottom: 1.5rem !important;
-    }
-
-    /* Make hero shorter and reduce internal paddings */
+    /* Make hero adapt on short screens — keep enough top space for fixed nav */
     #home {
-      min-height: 60vh !important;
+      min-height: auto !important;
     }
 
     #home .relative.z-10.mx-auto {
-      padding-top: 1rem !important;
-      padding-bottom: 1rem !important;
+      padding-top: 5rem !important;
+      padding-bottom: 1.5rem !important;
     }
 
-    /* Reduce header sizes for compact layouts */
-    /* Keep heading sizes at their default values on short viewports */
-    /* (removed smaller overrides to preserve standard typography) */
-
-    /* Reduce noisy background elements to save vertical space */
-    .hero-bg-elements .hero-blob {
-      opacity: 0.25 !important;
-      transform: scale(0.7) !important;
-      filter: blur(80px) !important;
-    }
-
-    .pointer-events-none.absolute.inset-0.bg-grid {
-      opacity: 0.12 !important;
-      background-size: 90px 90px !important;
-    }
-
-    /* Reduce hero CTA/button vertical footprint */
-    .hero-cta {
-      padding-top: 0.6rem !important;
-      padding-bottom: 0.6rem !important;
-      padding-left: 1rem !important;
-      padding-right: 1rem !important;
-    }
-
-    /* Reduce min-heights on elements that use large fixed heights */
     /* Escape Tailwind arbitrary class selector so CSS parsers accept it */
     .min-h-\[92vh\] {
-      min-height: 60vh !important;
+      min-height: auto !important;
+    }
+  }
+
+  /* Extra compact for very short viewports (landscape phones) */
+  @media (max-height: 500px) {
+    #home {
+      min-height: auto !important;
+    }
+
+    .min-h-\[92vh\] {
+      min-height: auto !important;
+    }
+
+    section[id] {
+      padding-top: 2rem !important;
+      padding-bottom: 2rem !important;
+    }
+  }
+
+  /* Very small width screens (320px) */
+  @media (max-width: 359px) {
+    .heading-xl {
+      font-size: 2rem !important;
+    }
+
+    .heading-lg {
+      font-size: 1.75rem !important;
     }
   }
 }

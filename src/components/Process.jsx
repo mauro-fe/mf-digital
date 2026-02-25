@@ -232,7 +232,12 @@ export default function Process({ className = "" }) {
   }, []);
 
   return (
-    <section id="processo" aria-labelledby="processo-title" ref={sectionRef} className={`relative ${className}`}>
+    <section
+      id="processo"
+      aria-labelledby="processo-title"
+      ref={sectionRef}
+      className={`relative ${className}`}
+    >
       {/* ─── DESKTOP ─── */}
       <div className="process-pin-wrap hidden lg:block">
         <div
@@ -266,7 +271,10 @@ export default function Process({ className = "" }) {
                 }}
               />
             </span>
-            <h2 id="processo-title" className="text-5xl xl:text-6xl font-extrabold text-white mb-4 leading-[1.08] tracking-tight">
+            <h2
+              id="processo-title"
+              className="text-5xl xl:text-6xl font-extrabold text-white mb-4 leading-[1.08] tracking-tight"
+            >
               {PROCESS.title}{" "}
               <span className="gradient-text">{PROCESS.titleHighlight}</span>
             </h2>
@@ -294,11 +302,11 @@ export default function Process({ className = "" }) {
               </div>
 
               {/* Title stack */}
-              <div className="relative h-[76px] md:h-[88px] overflow-hidden mb-5">
+              <div className="relative h-[60px] md:h-[76px] xl:h-[88px] overflow-hidden mb-5">
                 {steps.map((s, i) => (
                   <h3
                     key={i}
-                    className="process-title absolute inset-0 text-4xl md:text-5xl xl:text-[3.25rem] font-extrabold text-white leading-tight"
+                    className="process-title absolute inset-0 text-3xl md:text-4xl xl:text-[3.25rem] font-extrabold text-white leading-tight"
                   >
                     {s.title}
                   </h3>
@@ -306,7 +314,7 @@ export default function Process({ className = "" }) {
               </div>
 
               {/* Desc stack */}
-              <div className="relative h-[88px] overflow-hidden mb-6">
+              <div className="relative h-[80px] md:h-[88px] overflow-hidden mb-6">
                 {steps.map((s, i) => (
                   <p
                     key={i}
@@ -325,7 +333,7 @@ export default function Process({ className = "" }) {
                 </div>
                 <div
                   className="h-[2px] rounded-full overflow-hidden"
-                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  style={{ background: "var(--border-medium)" }}
                 >
                   <div
                     className="process-progress-fill h-full rounded-full"
@@ -357,18 +365,17 @@ export default function Process({ className = "" }) {
                     key={cls}
                     className={`${cls} group flex items-center justify-center h-11 w-11 rounded-full transition-all duration-300`}
                     style={{
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
+                      background: "var(--surface-pill)",
+                      border: "1px solid var(--border-medium)",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.background = "rgba(0,242,255,0.12)";
                       e.currentTarget.style.borderColor = "rgba(0,242,255,0.3)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.background =
-                        "rgba(255,255,255,0.04)";
+                      e.currentTarget.style.background = "var(--surface-pill)";
                       e.currentTarget.style.borderColor =
-                        "rgba(255,255,255,0.08)";
+                        "var(--border-medium)";
                     }}
                   >
                     <Icon
@@ -398,10 +405,10 @@ export default function Process({ className = "" }) {
                   borderColor: steps[0].color,
                   borderWidth: "1px",
                   boxShadow: `0 0 60px ${steps[0].color}25, 0 0 120px ${steps[0].color}10, inset 0 0 40px ${steps[0].color}08`,
-                  background: "rgba(10,15,30,0.8)",
-                  width: 'min(36vw,320px)',
-                  height: 'min(50vh,440px)',
-                  maxHeight: '60vh',
+                  background: "var(--surface-card-solid)",
+                  width: "min(36vw,320px)",
+                  height: "min(50vh,440px)",
+                  maxHeight: "60vh",
                 }}
               >
                 <div className="absolute inset-0 bg-grid opacity-10" />
@@ -448,7 +455,7 @@ export default function Process({ className = "" }) {
                     })}
                   </div>
 
-                  <div className="relative h-[88px] w-full overflow-hidden">
+                  <div className="relative h-[120px] xl:h-[140px] w-full overflow-hidden">
                     {steps.map((s, i) => (
                       <div
                         key={i}
@@ -519,7 +526,7 @@ export default function Process({ className = "" }) {
 
       {/* ─── MOBILE ─── */}
       <div
-        className="lg:hidden relative px-4 sm:px-6 pt-24 pb-24"
+        className="lg:hidden relative px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-24"
         style={{ background: "var(--gradient-dark)" }}
       >
         <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
@@ -567,15 +574,15 @@ export default function Process({ className = "" }) {
                 key={i}
                 className="process-mobile-card group relative rounded-2xl p-6 overflow-hidden transition-all duration-300 hover:-translate-y-1"
                 style={{
-                  background: "rgba(10,15,30,0.7)",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  background: "var(--surface-card)",
+                  border: "1px solid var(--border-subtle)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = `${s.color}40`;
-                  e.currentTarget.style.boxShadow = `0 0 30px ${s.color}15, 0 10px 40px rgba(0,0,0,0.3)`;
+                  e.currentTarget.style.boxShadow = `0 0 30px ${s.color}15, 0 10px 40px var(--hover-shadow-subtle)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                  e.currentTarget.style.borderColor = "var(--border-subtle)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >

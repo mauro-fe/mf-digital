@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, X, Sun, Moon } from "lucide-react";
 import Logo from "./Logo";
 import { NAV } from "../siteContent";
+import { useTheme } from "../ThemeContext";
 
 const NAV_LINKS = NAV.links;
 
@@ -12,6 +13,7 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState("");
   const indicatorRef = useRef(null);
   const navLinksRef = useRef({});
+  const { theme, toggleTheme } = useTheme();
 
   /* ── Scroll tracking ── */
   useEffect(() => {
@@ -66,11 +68,11 @@ export default function Nav() {
       <nav
         className={`fixed top-0 left-0 z-50 w-full transition-all duration-500`}
         style={{
-          background: scrolled ? "rgba(3,7,18,0.82)" : "transparent",
+          background: scrolled ? "var(--surface-nav)" : "transparent",
           backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
           boxShadow: scrolled
-            ? "0 1px 0 rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.3)"
+            ? "0 1px 0 var(--border-subtle), 0 8px 32px var(--hover-shadow-subtle)"
             : "none",
         }}
       >
@@ -83,13 +85,26 @@ export default function Nav() {
             <a
               href="#home"
               onClick={(e) => smoothScroll(e, "#home")}
-              className="shrink-0 transition-all duration-300 hover:opacity-80"
+              className="shrink-0 flex items-center gap-2.5 transition-all duration-300 hover:opacity-80"
               aria-label="Ir para o início"
             >
               <Logo
                 className="transition-all duration-500"
                 style={{ height: scrolled ? "32px" : "44px" }}
               />
+              <span
+                className="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-500"
+                style={{
+                  fontSize: scrolled ? "0.8rem" : "0.9rem",
+                  background:
+                    "linear-gradient(135deg, var(--text-heading) 0%, var(--color-primary) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                digital
+              </span>
             </a>
 
             {/* Desktop links */}
@@ -107,10 +122,8 @@ export default function Nav() {
                     className="relative px-4 py-2 text-[12px] font-semibold uppercase tracking-widest transition-colors duration-300 group"
                     style={{
                       color: isActive
-                        ? "#ffffff"
-                        : scrolled
-                          ? "rgba(148,163,184,0.8)"
-                          : "rgba(255,255,255,0.6)",
+                        ? "var(--text-heading)"
+                        : "var(--text-body)",
                     }}
                   >
                     {link.label}
@@ -133,7 +146,7 @@ export default function Nav() {
                     {/* Hover background pill */}
                     <span
                       className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      style={{ background: "rgba(255,255,255,0.04)" }}
+                      style={{ background: "var(--hover-bg)" }}
                     />
                   </a>
                 );
@@ -141,25 +154,55 @@ export default function Nav() {
             </div>
 
             {/* Desktop CTA */}
-            <a
-              href="#contato"
-              onClick={(e) => smoothScroll(e, "#contato")}
-              className="group hidden lg:inline-flex items-center gap-2.5 relative overflow-hidden rounded-full px-6 py-2.5 text-[13px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-                boxShadow:
-                  "0 0 0 1px rgba(0,242,255,0.3), 0 4px 16px rgba(0,242,255,0.2)",
-              }}
-            >
-              {/* Shine sweep on hover */}
-              <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
-              <span className="relative">{NAV.cta}</span>
-              <ArrowRight
-                size={13}
-                className="relative transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
+            <div className="hidden lg:flex items-center gap-3">
+              {/* Theme toggle */}
+              <button
+                onClick={toggleTheme}
+                className="group flex items-center justify-center h-9 w-9 rounded-full transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background:
+                    theme === "dark"
+                      ? "rgba(255,255,255,0.06)"
+                      : "rgba(0,0,0,0.06)",
+                  border: `1px solid ${theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                }}
+                aria-label={
+                  theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+                }
+              >
+                {theme === "dark" ? (
+                  <Sun
+                    size={15}
+                    className="text-amber-400 transition-transform duration-300 group-hover:rotate-45"
+                  />
+                ) : (
+                  <Moon
+                    size={15}
+                    className="text-indigo-500 transition-transform duration-300 group-hover:-rotate-12"
+                  />
+                )}
+              </button>
+
+              <a
+                href="#contato"
+                onClick={(e) => smoothScroll(e, "#contato")}
+                className="group hidden lg:inline-flex items-center gap-2.5 relative overflow-hidden rounded-full px-6 py-2.5 text-[13px] font-semibold text-dark-900 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)",
+                  boxShadow:
+                    "0 0 0 1px rgba(0,242,255,0.15), 0 4px 16px rgba(0,242,255,0.1)",
+                }}
+              >
+                {/* Shine sweep on hover */}
+                <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
+                <span className="relative">{NAV.cta}</span>
+                <ArrowRight
+                  size={13}
+                  className="relative transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </a>
+            </div>
 
             {/* Mobile hamburger */}
             <button
@@ -170,27 +213,15 @@ export default function Nav() {
             >
               <span
                 className="block h-[1.5px] w-6 rounded-full transition-all duration-300"
-                style={{
-                  background: scrolled
-                    ? "rgba(148,163,184,0.8)"
-                    : "rgba(255,255,255,0.7)",
-                }}
+                style={{ background: "var(--text-body)" }}
               />
               <span
                 className="block h-[1.5px] w-4 rounded-full transition-all duration-300"
-                style={{
-                  background: scrolled
-                    ? "rgba(148,163,184,0.8)"
-                    : "rgba(255,255,255,0.7)",
-                }}
+                style={{ background: "var(--text-body)" }}
               />
               <span
                 className="block h-[1.5px] w-5 rounded-full transition-all duration-300"
-                style={{
-                  background: scrolled
-                    ? "rgba(148,163,184,0.8)"
-                    : "rgba(255,255,255,0.7)",
-                }}
+                style={{ background: "var(--text-body)" }}
               />
             </button>
           </div>
@@ -200,7 +231,7 @@ export default function Nav() {
       {/* ── Scroll progress bar ── */}
       <div
         className="fixed top-0 left-0 z-[60] h-[2px] w-full"
-        style={{ background: "rgba(255,255,255,0.04)" }}
+        style={{ background: "var(--hover-bg)" }}
       >
         <div
           className="h-full transition-[width] duration-100"
@@ -219,7 +250,7 @@ export default function Nav() {
         aria-hidden="true"
         className="fixed inset-0 z-[80] transition-all duration-400"
         style={{
-          background: "rgba(3,7,18,0.6)",
+          background: "var(--surface-overlay)",
           backdropFilter: menuOpen ? "blur(4px)" : "none",
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? "auto" : "none",
@@ -235,15 +266,15 @@ export default function Nav() {
         style={{
           transform: menuOpen ? "translateX(0)" : "translateX(100%)",
           transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
-          background: "rgba(10,15,30,0.98)",
-          borderLeft: "1px solid rgba(255,255,255,0.06)",
-          boxShadow: "-20px 0 60px rgba(0,0,0,0.5)",
+          background: "var(--surface-drawer)",
+          borderLeft: "1px solid var(--border-subtle)",
+          boxShadow: "-20px 0 60px var(--hover-shadow-subtle)",
         }}
       >
         {/* Drawer header */}
         <div
           className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ borderBottom: "1px solid var(--border-subtle)" }}
         >
           <div className="flex items-center gap-2">
             <span
@@ -260,7 +291,7 @@ export default function Nav() {
           <button
             onClick={() => setMenuOpen(false)}
             className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-white/10"
-            style={{ border: "1px solid rgba(255,255,255,0.08)" }}
+            style={{ border: "1px solid var(--border-medium)" }}
             aria-label="Fechar menu"
           >
             <X size={16} className="text-gray-400" />
@@ -283,7 +314,7 @@ export default function Nav() {
                 aria-current={isActive ? "page" : undefined}
                 className="group relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200"
                 style={{
-                  color: isActive ? "#ffffff" : "rgba(148,163,184,0.8)",
+                  color: isActive ? "var(--text-heading)" : "var(--text-body)",
                   background: isActive ? "rgba(0,242,255,0.08)" : "transparent",
                   border: isActive
                     ? "1px solid rgba(0,242,255,0.15)"
@@ -297,7 +328,7 @@ export default function Nav() {
                   style={{
                     background: isActive
                       ? "var(--color-primary)"
-                      : "rgba(255,255,255,0.2)",
+                      : "var(--border-strong)",
                     boxShadow: isActive
                       ? "0 0 6px var(--color-primary)"
                       : "none",
@@ -309,7 +340,7 @@ export default function Nav() {
                 {!isActive && (
                   <span
                     className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                    style={{ background: "rgba(255,255,255,0.04)" }}
+                    style={{ background: "var(--hover-bg)" }}
                   />
                 )}
               </a>
@@ -317,26 +348,50 @@ export default function Nav() {
           })}
 
           {/* Drawer CTA */}
-          <a
-            href="#contato"
-            onClick={(e) => {
-              smoothScroll(e, "#contato");
-              setMenuOpen(false);
-            }}
-            className="group relative mt-6 flex items-center justify-center gap-2.5 overflow-hidden rounded-xl py-4 text-center text-sm font-semibold text-white transition-all duration-300 active:scale-[0.98]"
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-              boxShadow: "0 4px 20px rgba(0,242,255,0.25)",
-            }}
-          >
-            <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
-            <span className="relative">{NAV.cta}</span>
-            <ArrowRight
-              size={14}
-              className="relative transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </a>
+          <div className="flex items-center gap-3 mt-6">
+            {/* Theme toggle mobile */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center h-12 w-12 rounded-xl transition-all duration-300 flex-shrink-0"
+              style={{
+                background:
+                  theme === "dark"
+                    ? "rgba(255,255,255,0.06)"
+                    : "rgba(0,0,0,0.06)",
+                border: `1px solid ${theme === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+              }}
+              aria-label={
+                theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+              }
+            >
+              {theme === "dark" ? (
+                <Sun size={18} className="text-amber-400" />
+              ) : (
+                <Moon size={18} className="text-indigo-500" />
+              )}
+            </button>
+
+            <a
+              href="#contato"
+              onClick={(e) => {
+                smoothScroll(e, "#contato");
+                setMenuOpen(false);
+              }}
+              className="group relative mt-0 flex-1 flex items-center justify-center gap-2.5 overflow-hidden rounded-xl py-4 text-center text-sm font-semibold text-dark-900 transition-all duration-300 active:scale-[0.98]"
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)",
+                boxShadow: "0 4px 20px rgba(0,242,255,0.12)",
+              }}
+            >
+              <span className="absolute inset-0 translate-x-[-100%] skew-x-[-20deg] bg-white/15 transition-transform duration-600 group-hover:translate-x-[200%]" />
+              <span className="relative">{NAV.cta}</span>
+              <ArrowRight
+                size={14}
+                className="relative transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </a>
+          </div>
 
           {/* Decorative footer inside drawer */}
           <p className="mt-8 text-center text-[11px] font-medium uppercase tracking-widest text-gray-600">

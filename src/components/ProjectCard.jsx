@@ -15,19 +15,20 @@ export default function ProjectCard({
     <div
       data-aos="fade-up"
       data-aos-delay={aosDelay}
-      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-1.5 lg:max-h-[420px]"
+      className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-1.5"
       style={{
-        background: "rgba(10,15,30,0.8)",
-        border: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--surface-card-solid)",
+        border: "1px solid var(--border-subtle)",
+        boxShadow: "var(--card-shadow)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(0,242,255,0.25)";
+        e.currentTarget.style.borderColor = "var(--border-active)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(0,242,255,0.08), 0 20px 60px rgba(0,0,0,0.4)";
+          "0 0 40px rgba(0,242,255,0.08), 0 20px 60px var(--hover-shadow-subtle)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.borderColor = "var(--border-subtle)";
+        e.currentTarget.style.boxShadow = "var(--card-shadow)";
       }}
     >
       {/* ── Preview area ── */}
@@ -45,8 +46,18 @@ export default function ProjectCard({
         {/* Image */}
         {image && (
           <picture>
-            <source srcSet={image.replace(/\.(png|jpe?g)$/i, '.avif').replace('/img/', '/img/optimized/')} type="image/avif" />
-            <source srcSet={image.replace(/\.(png|jpe?g)$/i, '.webp').replace('/img/', '/img/optimized/')} type="image/webp" />
+            <source
+              srcSet={image
+                .replace(/\.(png|jpe?g)$/i, ".avif")
+                .replace("/img/", "/img/optimized/")}
+              type="image/avif"
+            />
+            <source
+              srcSet={image
+                .replace(/\.(png|jpe?g)$/i, ".webp")
+                .replace("/img/", "/img/optimized/")}
+              type="image/webp"
+            />
             <img
               src={image}
               alt={title}
@@ -63,8 +74,8 @@ export default function ProjectCard({
             <div
               className="flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1"
               style={{
-                background: "rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                background: "var(--border-strong)",
+                border: "1px solid var(--border-strong)",
                 backdropFilter: "blur(8px)",
               }}
             >
@@ -87,15 +98,15 @@ export default function ProjectCard({
             aria-label={`Ver projeto ${title}`}
             className="absolute inset-0 z-20 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
             style={{
-              background: "rgba(3,7,18,0.65)",
+              background: "var(--surface-overlay)",
               backdropFilter: "blur(4px)",
             }}
           >
             <span
               className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-300 group-hover:scale-105"
               style={{
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                background: "var(--border-strong)",
+                border: "1px solid var(--border-strong)",
                 backdropFilter: "blur(12px)",
               }}
             >
@@ -110,7 +121,7 @@ export default function ProjectCard({
           className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to top, rgba(10,15,30,0.8), transparent)",
+              "linear-gradient(to top, var(--surface-card-solid), transparent)",
           }}
         />
       </div>
@@ -121,7 +132,7 @@ export default function ProjectCard({
           {title}
         </h3>
 
-        <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed mb-4 flex-1 line-clamp-3 lg:line-clamp-2">
+        <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed mb-4 flex-1 line-clamp-3">
           {description}
         </p>
 
@@ -133,8 +144,8 @@ export default function ProjectCard({
                 key={t}
                 className="rounded-md px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-gray-400 transition-colors duration-200 group-hover:text-gray-300"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  background: "var(--surface-pill)",
+                  border: "1px solid var(--border-subtle)",
                 }}
               >
                 {t}

@@ -13,7 +13,7 @@ export default function Footer() {
       className="relative overflow-hidden"
       style={{
         background: "var(--color-dark-900)",
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        borderTop: "1px solid var(--border-subtle)",
       }}
     >
       {/* Ambient glow top */}
@@ -37,13 +37,28 @@ export default function Footer() {
         <div
           className="max-w-7xl mx-auto flex flex-col items-center gap-6 sm:flex-row sm:justify-between"
           style={{
-            borderTop: "1px solid rgba(255,255,255,0.04)",
+            borderTop: "1px solid var(--border-subtle)",
             paddingTop: "2rem",
           }}
         >
           {/* Logo + tagline */}
           <div className="flex flex-col items-center sm:items-start gap-1.5">
-            <Logo className="h-8 opacity-70 transition-opacity duration-300 hover:opacity-100" />
+            <div className="flex items-center gap-2.5">
+              <Logo className="h-8 opacity-70 transition-opacity duration-300 hover:opacity-100" />
+              <span
+                className="text-xs font-bold uppercase tracking-[0.15em]"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--text-heading) 0%, var(--color-primary) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  opacity: 0.7,
+                }}
+              >
+                digital
+              </span>
+            </div>
             {FOOTER.tagline && (
               <p className="text-[11px] font-medium uppercase tracking-widest text-gray-600">
                 {FOOTER.tagline}
@@ -69,8 +84,8 @@ export default function Footer() {
                   aria-label={s.label || s.href}
                   className="group flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
                   style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--surface-pill)",
+                    border: "1px solid var(--border-subtle)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "rgba(0,242,255,0.08)";
@@ -79,9 +94,8 @@ export default function Footer() {
                       "0 0 12px rgba(0,242,255,0.15)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                    e.currentTarget.style.borderColor =
-                      "rgba(255,255,255,0.07)";
+                    e.currentTarget.style.background = "var(--surface-pill)";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >

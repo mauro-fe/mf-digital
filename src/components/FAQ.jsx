@@ -119,7 +119,7 @@ export default function FAQ({ className = "" }) {
       id="faq"
       aria-labelledby="faq-title"
       ref={sectionRef}
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
     >
       {/* Ambient blobs */}
@@ -152,8 +152,11 @@ export default function FAQ({ className = "" }) {
             />
           </span>
 
-          <h2 id="faq-title" className="faq-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {FAQ_CONTENT.title} {" "}
+          <h2
+            id="faq-title"
+            className="faq-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"
+          >
+            {FAQ_CONTENT.title}{" "}
             <span className="gradient-text">{FAQ_CONTENT.titleHighlight}</span>
           </h2>
 
@@ -173,13 +176,13 @@ export default function FAQ({ className = "" }) {
                 style={{
                   background: isOpen
                     ? "rgba(0,242,255,0.05)"
-                    : "rgba(10,15,30,0.7)",
+                    : "var(--surface-card)",
                   border: isOpen
                     ? "1px solid rgba(0,242,255,0.25)"
-                    : "1px solid rgba(255,255,255,0.06)",
+                    : "1px solid var(--border-subtle)",
                   boxShadow: isOpen
                     ? "0 0 30px rgba(0,242,255,0.07), 0 8px 32px rgba(0,0,0,0.2)"
-                    : "none",
+                    : "var(--card-shadow)",
                 }}
               >
                 {/* Question button */}
@@ -195,7 +198,7 @@ export default function FAQ({ className = "" }) {
                       style={{
                         color: isOpen
                           ? "var(--color-primary)"
-                          : "rgba(255,255,255,0.2)",
+                          : "var(--text-ultra-faint)",
                         transition: "color 0.3s",
                       }}
                     >
@@ -204,7 +207,9 @@ export default function FAQ({ className = "" }) {
                     <span
                       className="font-semibold text-sm sm:text-base leading-snug transition-colors duration-300 pr-2"
                       style={{
-                        color: isOpen ? "#fff" : "rgba(255,255,255,0.8)",
+                        color: isOpen
+                          ? "var(--text-heading)"
+                          : "var(--text-body)",
                       }}
                     >
                       {f.q}
@@ -217,10 +222,10 @@ export default function FAQ({ className = "" }) {
                     style={{
                       background: isOpen
                         ? "linear-gradient(135deg, var(--color-primary), var(--color-secondary))"
-                        : "rgba(255,255,255,0.06)",
+                        : "var(--surface-pill)",
                       border: isOpen
                         ? "none"
-                        : "1px solid rgba(255,255,255,0.08)",
+                        : "1px solid var(--border-subtle)",
                       transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
                       boxShadow: isOpen
                         ? "0 0 12px rgba(0,242,255,0.35)"
@@ -244,10 +249,7 @@ export default function FAQ({ className = "" }) {
                     opacity: 0,
                   }}
                 >
-                  <div
-                    className="px-6 pb-6"
-                    style={{ paddingLeft: "calc(1.5rem + 2rem + 1rem)" }} // align with question text
-                  >
+                  <div className="px-6 pb-6 pl-10 sm:pl-[4.5rem]">
                     <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed">
                       {f.a}
                     </p>

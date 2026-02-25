@@ -94,20 +94,20 @@ export const NAV = {
 ───────────────────────────────────────── */
 export const HERO = {
     badge: "Aceito novos projetos — atendimento personalizado",
-    titleLine1: "Crio sites e sistemas",
+    titleLine1: "Crio experiências digitais",
     titleHighlight: "que geram resultados",
-    titleLine2: "para o seu negócio",
-    ariaLabel: "Crio sites e sistemas que geram resultados para o seu negócio",
+    titleLine2: "",
+    ariaLabel: "Crio experiências digitais que geram resultados",
     description:
-        "Desenvolvo soluções web sob medida — sites, lojas e sistemas — com foco em conversão, performance e facilidade de manutenção. Trabalho diretamente com você para transformar sua ideia em",
-    descriptionHighlight: "resultados reais para o seu negócio",
+        "Sites, lojas e sistemas sob medida — com foco em conversão, performance e",
+    descriptionHighlight: "resultados reais",
     cta1: "Pedir Orçamento",
     cta1Href: "#contato",
     cta2: "Ver Projetos",
     cta2Href: "#projetos",
     stats: [
         { label: "Projetos Entregues", num: 4, suffix: "" },
-        { label: "Anos de Experiência", num: "3+", suffix: "" },
+        { label: "Anos de Experiência", num: 3, suffix: "+" },
         { label: "Satisfação", num: 100, suffix: "%" },
     ],
 };
@@ -117,7 +117,7 @@ export const HERO = {
 ───────────────────────────────────────── */
 export const ABOUT = {
     badge: "Sobre Mim",
-    title: "Engenharia de software focada em",
+    title: "Foco em",
     titleHighlight: "resultados reais",
     subtitle:
         "Combino excelência técnica com visão estratégica para arquitetar soluções digitais que escalam, performam e convertem.",
@@ -183,8 +183,8 @@ export const ABOUT = {
 ───────────────────────────────────────── */
 export const SERVICES = {
     badge: "Nossos Serviços",
-    title: "Soluções digitais que",
-    titleHighlight: "impulsionam seu negócio",
+    title: "Soluções que",
+    titleHighlight: "impulsionam",
     items: [
         {
             icon: Globe,
@@ -229,8 +229,8 @@ export const SERVICES = {
 ───────────────────────────────────────── */
 export const PROCESS = {
     badge: "Metodologia Ágil",
-    title: "Como transformo sua",
-    titleHighlight: "visão em software",
+    title: "Da visão ao",
+    titleHighlight: "software",
     steps: [
         {
             num: "01",
@@ -347,50 +347,50 @@ export const PROJECTS = {
 ───────────────────────────────────────── */
 export const TESTIMONIALS = {
     badge: "Depoimentos",
-    title: "O que meus clientes",
-    titleHighlight: "dizem sobre mim",
+    title: "Clientes",
+    titleHighlight: "satisfeitos",
     subtitle: "Feedback real de quem confiou no meu trabalho.",
     items: [
         {
-            name: "Ricardo Oliveira",
-            role: "Empresário — Loja Virtual",
+            name: "Rodrigo Xavier",
+            role: "Dentista — Odontologia Xavier",
             quote:
-                "O Mauro entregou um e-commerce incrível, muito acima do que eu esperava. As vendas online aumentaram 40% no primeiro mês!",
+                "O Mauro criou um site institucional incrível para a minha clínica. Ficou premium, rápido e os pacientes elogiam muito. O agendamento via WhatsApp aumentou demais a procura!",
             rating: 5,
         },
         {
-            name: "Ana Carolina",
-            role: "Marketing Digital",
+            name: "Felipe Mendes",
+            role: "Fundador — Lukrato",
             quote:
-                "Profissional excepcional. A landing page que ele criou trouxe o triplo de leads que tínhamos antes. Comunicação impecável.",
+                "Precisávamos de uma plataforma SaaS completa e o Mauro entregou com maestria. Dashboard intuitivo, gamificação e relatórios financeiros — tudo funcionando perfeitamente.",
             rating: 5,
         },
         {
-            name: "Pedro Santos",
-            role: "Fundador — Startup Tech",
+            name: "Bruno Almeida",
+            role: "Proprietário — Social Barber Shop",
             quote:
-                "Código limpo, entregas no prazo e sempre disponível. O sistema que desenvolveu economiza horas do nosso time todo dia.",
+                "Nosso site ficou top! Catálogo de serviços, galeria de cortes e localização integrada. Os clientes acharam muito mais fácil nos encontrar. Recomendo demais!",
             rating: 5,
         },
         {
-            name: "Mariana Lima",
-            role: "Proprietária — Loja Online",
+            name: "Lucas Ferreira",
+            role: "Criador — Jump Up",
             quote:
-                "Contratei o Mauro para refazer nossa loja. Resultado: página mais rápida, checkout claro e aumento das conversões. Super recomendo.",
+                "O Mauro transformou minha ideia em um jogo web interativo e imersivo. A interface ficou incrível e os desafios progressivos mantêm os jogadores engajados.",
             rating: 5,
         },
         {
-            name: "Lucas Pereira",
-            role: "CEO — Startup de Serviços",
+            name: "Carla Souza",
+            role: "Gerente de Marketing — Odontologia Xavier",
             quote:
-                "Agilidade e visão técnica. Entregou um MVP funcional em poucas semanas e sempre propôs melhorias práticas.",
+                "Além do design lindo, o SEO técnico que ele implementou trouxe muito mais visibilidade orgânica para a clínica. Comunicação clara e prazo cumprido.",
             rating: 5,
         },
         {
-            name: "Fernanda Gomes",
-            role: "Gerente de Marketing — Agência",
+            name: "Rafael Costa",
+            role: "Co-fundador — Lukrato",
             quote:
-                "Ótima comunicação, prazo cumprido e atenção aos detalhes. O site ficou alinhado com nossa identidade e performa muito bem.",
+                "Agilidade, código limpo e visão técnica. O sistema de indicação e os planos freemium que o Mauro desenvolveu foram essenciais pro crescimento da plataforma.",
             rating: 5,
         },
     ],
@@ -401,7 +401,7 @@ export const TESTIMONIALS = {
 ───────────────────────────────────────── */
 export const PLANS = {
     badge: "Nossos Planos",
-    title: "Escolha o plano ideal para o",
+    title: "Plano ideal pro",
     titleHighlight: "seu momento",
     subtitle:
         "Soluções transparentes com preço justo. Sem surpresas, sem taxas escondidas.",
@@ -495,7 +495,7 @@ export const FAQ = {
 ───────────────────────────────────────── */
 export const CONTACT = {
     badge: "Contato",
-    title: "Pronto para transformar sua",
+    title: "Transforme sua",
     titleHighlight: "presença digital",
     titleEnd: "?",
     subtitle:

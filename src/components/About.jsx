@@ -173,7 +173,7 @@ export default function About({ className = "" }) {
       id="sobre"
       aria-labelledby="sobre-title"
       ref={sectionRef}
-      className={`relative overflow-hidden py-24 md:py-32 ${className}`}
+      className={`relative overflow-hidden py-16 sm:py-24 md:py-32 ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
     >
       {/* Ambient blobs */}
@@ -206,7 +206,10 @@ export default function About({ className = "" }) {
             />
           </span>
 
-          <h2 id="sobre-title" className="about-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
+          <h2
+            id="sobre-title"
+            className="about-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"
+          >
             {ABOUT.title}{" "}
             <span className="gradient-text">{ABOUT.titleHighlight}</span>
           </h2>
@@ -217,7 +220,7 @@ export default function About({ className = "" }) {
         </div>
 
         {/* Content grid */}
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-20 items-center">
           {/* Left — Text + CTAs */}
           <div className="about-text-block space-y-6 order-2 lg:order-1">
             <p className="text-gray-400 leading-relaxed text-lg">
@@ -278,16 +281,16 @@ export default function About({ className = "" }) {
                 aria-label={ABOUT.cta2AriaLabel || ABOUT.cta2}
                 className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-semibold text-gray-300 transition-all duration-300 hover:text-white hover:-translate-y-0.5"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "var(--surface-pill)",
+                  border: "1px solid var(--border-medium)",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.07)";
+                  e.currentTarget.style.borderColor = "var(--border-strong)";
+                  e.currentTarget.style.background = "var(--hover-bg)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                  e.currentTarget.style.borderColor = "var(--border-medium)";
+                  e.currentTarget.style.background = "var(--surface-pill)";
                 }}
               >
                 {ABOUT.cta2}
@@ -315,8 +318,8 @@ export default function About({ className = "" }) {
                     glowColor={item.glowColor}
                     className="rounded-2xl p-6 cursor-default transition-all duration-300"
                     style={{
-                      background: "rgba(10,15,30,0.7)",
-                      border: "1px solid rgba(255,255,255,0.06)",
+                      background: "var(--surface-card)",
+                      border: "1px solid var(--border-subtle)",
                     }}
                   >
                     {/* Icon */}

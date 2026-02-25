@@ -121,7 +121,7 @@ export default function Contact({ className = "" }) {
       id="contato"
       aria-labelledby="contato-title"
       ref={sectionRef}
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
     >
       {/* Animated blobs */}
@@ -161,8 +161,11 @@ export default function Contact({ className = "" }) {
             </span>
           </div>
 
-          <h2 id="contato-title" className="contact-title heading-lg text-white mb-6">
-            {CONTACT.title} {" "}
+          <h2
+            id="contato-title"
+            className="contact-title heading-lg text-white mb-6"
+          >
+            {CONTACT.title}{" "}
             <span className="gradient-text">{CONTACT.titleHighlight}</span>?
           </h2>
 
@@ -172,7 +175,7 @@ export default function Contact({ className = "" }) {
         </div>
 
         {/* Channel cards */}
-        <div className="contact-cards grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+        <div className="contact-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12">
           {channels.map((ch, i) => {
             const Icon = ch.icon;
             return (
@@ -184,9 +187,10 @@ export default function Contact({ className = "" }) {
                 aria-label={`Entrar em contato via ${ch.label}`}
                 className="contact-card group relative flex flex-col items-center gap-4 rounded-2xl p-8 overflow-hidden transition-all duration-300 hover:-translate-y-1.5"
                 style={{
-                  background: "rgba(10,15,30,0.7)",
-                  border: "1px solid rgba(255,255,255,0.07)",
+                  background: "var(--surface-card)",
+                  border: "1px solid var(--border-subtle)",
                   backdropFilter: "blur(12px)",
+                  boxShadow: "var(--card-shadow)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor =
@@ -194,8 +198,8 @@ export default function Contact({ className = "" }) {
                   e.currentTarget.style.boxShadow = `0 0 40px ${ch.glowColor || "rgba(0,242,255,0.1)"}, 0 16px 48px rgba(0,0,0,0.4)`;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--border-subtle)";
+                  e.currentTarget.style.boxShadow = "var(--card-shadow)";
                 }}
               >
                 {/* Card inner glow on hover */}
@@ -246,14 +250,14 @@ export default function Contact({ className = "" }) {
         <div className="flex items-center gap-4 mb-8 max-w-xs mx-auto">
           <div
             className="h-px flex-1"
-            style={{ background: "rgba(255,255,255,0.07)" }}
+            style={{ background: "var(--border-subtle)" }}
           />
           <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-600">
             Redes sociais
           </span>
           <div
             className="h-px flex-1"
-            style={{ background: "rgba(255,255,255,0.07)" }}
+            style={{ background: "var(--border-subtle)" }}
           />
         </div>
 
@@ -270,8 +274,8 @@ export default function Contact({ className = "" }) {
                 aria-label={s.label || s.href}
                 className="contact-social group flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
                 style={{
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "var(--surface-pill)",
+                  border: "1px solid var(--border-subtle)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "rgba(0,242,255,0.1)";
@@ -280,8 +284,8 @@ export default function Contact({ className = "" }) {
                     "0 0 16px rgba(0,242,255,0.2)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.background = "var(--surface-pill)";
+                  e.currentTarget.style.borderColor = "var(--border-subtle)";
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >

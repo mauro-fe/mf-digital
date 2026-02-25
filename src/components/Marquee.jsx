@@ -5,7 +5,6 @@ export default function Marquee({
   reverse = false,
   speed = 30,
   size = "lg",
-  bgColor = "#030712",
   className = "",
 }) {
   const animationClass = reverse
@@ -14,32 +13,34 @@ export default function Marquee({
 
   const sizeClasses = {
     sm: "py-3 text-sm tracking-widest",
-    md: "py-4 text-base tracking-wider",
-    lg: "py-5 text-2xl md:text-3xl lg:text-4xl tracking-wide",
-    xl: "py-7 text-3xl md:text-5xl lg:text-6xl tracking-tight",
+    md: "py-3 sm:py-4 text-sm sm:text-base tracking-wider",
+    lg: "py-4 sm:py-5 text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-wide",
+    xl: "py-5 sm:py-7 text-2xl sm:text-3xl md:text-5xl lg:text-6xl tracking-tight",
   };
 
   return (
     <div
       className={`relative overflow-hidden ${className}`}
       style={{
-        /* Force same dark background used by the page so edge fades mask correctly */
-        background: bgColor,
-        borderTop: "1px solid rgba(255,255,255,0.04)",
-        borderBottom: "1px solid rgba(255,255,255,0.04)",
+        /* Force same background used by the page so edge fades mask correctly */
+        background: "var(--marquee-bg)",
+        borderTop: "1px solid var(--marquee-border)",
+        borderBottom: "1px solid var(--marquee-border)",
       }}
     >
-      {/* Edge fades — solid bgColor → transparent so items fade into parent bg */}
+      {/* Edge fades — solid bg → transparent so items fade into parent bg */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10"
         style={{
-          background: `linear-gradient(to right, ${bgColor} 0%, transparent 100%)`,
+          background:
+            "linear-gradient(to right, var(--marquee-bg) 0%, transparent 100%)",
         }}
       />
       <div
         className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10"
         style={{
-          background: `linear-gradient(to left, ${bgColor} 0%, transparent 100%)`,
+          background:
+            "linear-gradient(to left, var(--marquee-bg) 0%, transparent 100%)",
         }}
       />
 
@@ -60,7 +61,7 @@ export default function Marquee({
           <span
             key={i}
             className="group flex items-center gap-6 md:gap-10 px-6 md:px-10 whitespace-nowrap font-extrabold uppercase select-none"
-            style={{ color: "rgba(148,163,184,0.5)" }}
+            style={{ color: "var(--marquee-text)" }}
           >
             <span className="transition-colors duration-300 group-hover:text-white">
               {item}

@@ -280,20 +280,20 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(3,7,18,0.7) 100%)",
+            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, var(--surface-vignette) 100%)",
         }}
       />
 
       {/* Main content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 pt-28 pb-20">
-        <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:justify-between">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-8 pt-24 pb-16 sm:pt-28 sm:pb-20">
+        <div className="flex flex-col items-center gap-10 sm:gap-16 lg:flex-row lg:items-center lg:justify-between">
           {/* ── Text column ── */}
-          <div className="max-w-2xl flex-1 space-y-9 text-center lg:text-left">
+          <div className="max-w-2xl flex-1 space-y-6 sm:space-y-9 text-center lg:text-left">
             {/* Badge */}
             <div
               className="hero-badge inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 backdrop-blur-xl"
               style={{
-                background: "rgba(255,255,255,0.04)",
+                background: "var(--surface-badge)",
                 border: "1px solid rgba(0,242,255,0.2)",
                 boxShadow: "0 0 20px rgba(0,242,255,0.08) inset",
               }}
@@ -309,18 +309,19 @@ export default function Hero() {
 
             {/* Heading */}
             <h1
-              className="heading-xl text-text-secondary text-balance"
+              className="heading-xl text-text-secondary mb-4 sm:mb-6"
               style={{ perspective: "600px" }}
               aria-label={HERO.ariaLabel}
             >
               <span aria-hidden="true">
-                <SplitWords>{HERO.titleLine1}</SplitWords>
-                <span className="hero-word inline-block overflow-hidden">
+                <span className="block lg:whitespace-nowrap">
+                  <SplitWords>{HERO.titleLine1}</SplitWords>
+                </span>
+                <span className="hero-word block lg:whitespace-nowrap">
                   <span className="hero-word-inner hero-gradient-text inline-block gradient-text">
                     {HERO.titleHighlight}&nbsp;
                   </span>
                 </span>
-                <SplitWords>{HERO.titleLine2}</SplitWords>
               </span>
             </h1>
 
@@ -341,12 +342,12 @@ export default function Hero() {
               <a
                 href={HERO.cta1Href}
                 aria-label={HERO.cta1AriaLabel || HERO.cta1}
-                className="hero-cta group relative inline-flex items-center gap-3 rounded-full px-8 py-4 font-semibold text-white overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
+                className="hero-cta group relative inline-flex items-center gap-2.5 sm:gap-3 rounded-full px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-dark-900 overflow-hidden transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   background:
-                    "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                    "linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)",
                   boxShadow:
-                    "0 0 0 1px rgba(0,242,255,0.3), 0 20px 40px rgba(0,242,255,0.25)",
+                    "0 0 0 1px rgba(0,242,255,0.15), 0 12px 28px rgba(0,242,255,0.12)",
                   opacity: 0,
                   transform: "scale(0.9)",
                 }}
@@ -363,10 +364,10 @@ export default function Hero() {
               <a
                 href={HERO.cta2Href}
                 aria-label={HERO.cta2AriaLabel || HERO.cta2}
-                className="hero-cta group inline-flex items-center gap-3 rounded-full border px-8 py-4 font-semibold text-gray-300 backdrop-blur-xl transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+                className="hero-cta group inline-flex items-center gap-2.5 sm:gap-3 rounded-full border px-6 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-gray-300 backdrop-blur-xl transition-all duration-300 hover:text-white hover:-translate-y-0.5"
                 style={{
-                  borderColor: "rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.04)",
+                  borderColor: "var(--border-strong)",
+                  background: "var(--surface-pill)",
                   opacity: 0,
                   transform: "scale(0.9)",
                 }}
@@ -383,8 +384,8 @@ export default function Hero() {
 
             {/* Stats */}
             <div
-              className="hero-stats flex items-center justify-center gap-10 pt-4 lg:justify-start lg:gap-14"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+              className="hero-stats flex items-center justify-center gap-6 sm:gap-10 pt-4 lg:justify-start lg:gap-14"
+              style={{ borderTop: "1px solid var(--border-subtle)" }}
             >
               {STATS.map((stat, i) => (
                 <div
@@ -393,7 +394,7 @@ export default function Hero() {
                   style={{ opacity: 0, transform: "translateY(20px)" }}
                 >
                   <div
-                    className="hero-stat-value text-3xl font-extrabold sm:text-4xl"
+                    className="hero-stat-value text-2xl font-extrabold sm:text-3xl md:text-4xl"
                     style={{
                       background: "var(--gradient-text)",
                       backgroundClip: "text",
@@ -438,11 +439,17 @@ export default function Hero() {
               >
                 <div
                   className="relative rounded-[calc(2rem-1px)] overflow-hidden"
-                  style={{ background: "rgba(10,15,30,0.8)" }}
+                  style={{ background: "var(--surface-card-solid)" }}
                 >
                   <picture>
-                    <source srcSet="/img/optimized/dev-mauro.avif" type="image/avif" />
-                    <source srcSet="/img/optimized/dev-mauro.webp" type="image/webp" />
+                    <source
+                      srcSet="/img/optimized/dev-mauro.avif"
+                      type="image/avif"
+                    />
+                    <source
+                      srcSet="/img/optimized/dev-mauro.webp"
+                      type="image/webp"
+                    />
                     <img
                       src="/img/optimized/dev-mauro.webp"
                       alt={AUTHOR.photoAlt}
@@ -459,7 +466,7 @@ export default function Hero() {
                     className="absolute inset-0 pointer-events-none"
                     style={{
                       background:
-                        "linear-gradient(180deg, transparent 50%, rgba(3,7,18,0.6) 100%)",
+                        "linear-gradient(180deg, transparent 50%, var(--surface-overlay) 100%)",
                     }}
                   />
                 </div>
@@ -469,10 +476,10 @@ export default function Hero() {
               <div
                 className="hero-floating-card absolute -left-14 bottom-14 flex items-center gap-3 rounded-2xl px-5 py-3.5 backdrop-blur-2xl shadow-2xl z-50"
                 style={{
-                  background: "rgba(17,24,39,0.85)",
+                  background: "var(--surface-card-solid)",
                   border: "1px solid rgba(0,242,255,0.2)",
                   boxShadow:
-                    "0 0 0 1px rgba(255,255,255,0.04) inset, 0 20px 40px rgba(0,0,0,0.4)",
+                    "0 0 0 1px var(--hover-bg) inset, 0 20px 40px var(--hover-shadow-subtle)",
                   opacity: 0,
                   transform: "translateX(-60px) scale(0.8)",
                 }}

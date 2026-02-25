@@ -112,7 +112,7 @@ export default function Plans({ className = "" }) {
       id="planos"
       aria-labelledby="planos-title"
       ref={sectionRef}
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
     >
       {/* Ambient blobs */}
@@ -146,8 +146,11 @@ export default function Plans({ className = "" }) {
             />
           </span>
 
-          <h2 id="planos-title" className="plans-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {PLANS.title} {" "}
+          <h2
+            id="planos-title"
+            className="plans-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"
+          >
+            {PLANS.title}{" "}
             <span className="gradient-text">{PLANS.titleHighlight}</span>
           </h2>
 
@@ -157,28 +160,30 @@ export default function Plans({ className = "" }) {
         </div>
 
         {/* Cards */}
-        <div className="plans-grid grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-center">
+        <div className="plans-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-center">
           {plans.map((plan, i) => {
             const isPopular = plan.popular;
+            const isLastOdd = i === plans.length - 1 && plans.length % 2 !== 0;
             return (
               <div
                 key={plan.name}
-                className={`plans-card ${isPopular ? "plans-card-popular" : ""} relative rounded-2xl ${isPopular ? "overflow-visible" : "overflow-hidden"}`}
+                className={`plans-card ${isPopular ? "plans-card-popular" : ""} relative rounded-2xl ${isPopular ? "overflow-visible" : "overflow-hidden"} ${isLastOdd ? "sm:col-span-2 sm:max-w-md sm:mx-auto lg:col-span-1 lg:max-w-none" : ""}`}
                 style={
                   isPopular
                     ? {
                         background:
-                          "linear-gradient(160deg, rgba(0,242,255,0.14) 0%, rgba(0,119,255,0.06) 50%, rgba(10,15,30,0.9) 100%)",
+                          "linear-gradient(160deg, rgba(0,242,255,0.14) 0%, rgba(0,119,255,0.06) 50%, var(--surface-card-solid) 100%)",
                         border: "1px solid rgba(0,242,255,0.35)",
                         boxShadow:
-                          "0 0 60px rgba(0,242,255,0.12), 0 20px 60px rgba(0,0,0,0.4)",
+                          "0 0 60px rgba(0,242,255,0.12), 0 20px 60px var(--hover-shadow-subtle)",
                         transform: "scale(1.03)",
                         zIndex: 10,
                         padding: "2rem",
                       }
                     : {
-                        background: "rgba(10,15,30,0.7)",
-                        border: "1px solid rgba(255,255,255,0.06)",
+                        background: "var(--surface-card)",
+                        border: "1px solid var(--border-subtle)",
+                        boxShadow: "var(--card-shadow)",
                         padding: "2rem",
                       }
                 }
@@ -186,20 +191,19 @@ export default function Plans({ className = "" }) {
                   if (!isPopular) {
                     e.currentTarget.style.borderColor = "rgba(0,242,255,0.2)";
                     e.currentTarget.style.boxShadow =
-                      "0 0 30px rgba(0,242,255,0.06), 0 16px 48px rgba(0,0,0,0.3)";
+                      "0 0 30px rgba(0,242,255,0.06), 0 16px 48px var(--hover-shadow-subtle)";
                   } else {
                     e.currentTarget.style.boxShadow =
-                      "0 0 80px rgba(0,242,255,0.2), 0 30px 80px rgba(0,0,0,0.5)";
+                      "0 0 80px rgba(0,242,255,0.2), 0 30px 80px var(--hover-shadow-subtle)";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isPopular) {
-                    e.currentTarget.style.borderColor =
-                      "rgba(255,255,255,0.06)";
-                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
+                    e.currentTarget.style.boxShadow = "var(--card-shadow)";
                   } else {
                     e.currentTarget.style.boxShadow =
-                      "0 0 60px rgba(0,242,255,0.12), 0 20px 60px rgba(0,0,0,0.4)";
+                      "0 0 60px rgba(0,242,255,0.12), 0 20px 60px var(--hover-shadow-subtle)";
                   }
                 }}
               >
@@ -232,8 +236,8 @@ export default function Plans({ className = "" }) {
                 <span
                   className="inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-500 mb-5"
                   style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.07)",
+                    background: "var(--surface-pill)",
+                    border: "1px solid var(--border-subtle)",
                   }}
                 >
                   {plan.tag}
@@ -266,7 +270,7 @@ export default function Plans({ className = "" }) {
                             WebkitBackgroundClip: "text",
                             color: "transparent",
                           }
-                        : { color: "#fff" }
+                        : { color: "var(--text-heading)" }
                     }
                   >
                     {plan.price}
@@ -279,7 +283,7 @@ export default function Plans({ className = "" }) {
                   style={{
                     background: isPopular
                       ? "linear-gradient(90deg, rgba(0,242,255,0.3), rgba(0,119,255,0.2), transparent)"
-                      : "rgba(255,255,255,0.05)",
+                      : "var(--border-subtle)",
                   }}
                 />
 
@@ -295,10 +299,10 @@ export default function Plans({ className = "" }) {
                         style={{
                           background: isPopular
                             ? "rgba(0,242,255,0.15)"
-                            : "rgba(255,255,255,0.06)",
+                            : "var(--border-subtle)",
                           border: isPopular
                             ? "1px solid rgba(0,242,255,0.25)"
-                            : "1px solid rgba(255,255,255,0.08)",
+                            : "1px solid var(--border-medium)",
                         }}
                       >
                         <Check
@@ -330,27 +334,25 @@ export default function Plans({ className = "" }) {
                           boxShadow: "0 4px 20px rgba(0,242,255,0.3)",
                         }
                       : {
-                          background: "rgba(255,255,255,0.05)",
-                          border: "1px solid rgba(255,255,255,0.1)",
-                          color: "rgba(148,163,184,0.9)",
+                          background: "var(--surface-pill)",
+                          border: "1px solid var(--border-medium)",
+                          color: "var(--text-body)",
                         }
                   }
                   onMouseEnter={(e) => {
                     if (!isPopular) {
-                      e.currentTarget.style.background =
-                        "rgba(255,255,255,0.09)";
+                      e.currentTarget.style.background = "var(--hover-bg)";
                       e.currentTarget.style.borderColor =
                         "rgba(0,242,255,0.25)";
-                      e.currentTarget.style.color = "#fff";
+                      e.currentTarget.style.color = "var(--text-heading)";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isPopular) {
-                      e.currentTarget.style.background =
-                        "rgba(255,255,255,0.05)";
+                      e.currentTarget.style.background = "var(--surface-pill)";
                       e.currentTarget.style.borderColor =
-                        "rgba(255,255,255,0.1)";
-                      e.currentTarget.style.color = "rgba(148,163,184,0.9)";
+                        "var(--border-medium)";
+                      e.currentTarget.style.color = "var(--text-body)";
                     }
                   }}
                 >

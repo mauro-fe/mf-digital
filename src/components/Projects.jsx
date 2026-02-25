@@ -40,7 +40,7 @@ export default function Projects({ className = "" }) {
     <section
       id="projetos"
       aria-labelledby="projetos-title"
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
     >
       {/* Ambient blobs */}
@@ -76,7 +76,8 @@ export default function Projects({ className = "" }) {
             />
           </span>
 
-          <h2 id="projetos-title"
+          <h2
+            id="projetos-title"
             data-aos="fade-up"
             data-aos-delay="100"
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"
@@ -102,7 +103,9 @@ export default function Projects({ className = "" }) {
               return (
                 <div
                   key={rowIndex}
-                  style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}
+                  style={{
+                    gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))`,
+                  }}
                   className="grid gap-5 sm:gap-6"
                 >
                   {row.map((p, i) => (
@@ -124,11 +127,17 @@ export default function Projects({ className = "" }) {
 
             // Incomplete last row — center the items
             return (
-              <div key={rowIndex} className="flex justify-center gap-5 sm:gap-6">
+              <div
+                key={rowIndex}
+                className="flex justify-center gap-5 sm:gap-6"
+              >
                 {row.map((p, i) => (
                   <div
                     key={p.title}
-                    style={{ flex: `0 0 calc(${100 / cols}% )`, maxWidth: `calc(${100 / cols}% )` }}
+                    style={{
+                      flex: `0 0 calc(${100 / cols}% )`,
+                      maxWidth: `calc(${100 / cols}% )`,
+                    }}
                   >
                     <ProjectCard
                       icon={p.icon}
@@ -157,16 +166,16 @@ export default function Projects({ className = "" }) {
             href={PROJECTS.ctaHref}
             className="group inline-flex items-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-gray-300 transition-all duration-300 hover:text-white hover:-translate-y-0.5"
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.08)",
+              background: "var(--surface-pill)",
+              border: "1px solid var(--border-medium)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,242,255,0.3)";
+              e.currentTarget.style.borderColor = "var(--border-active)";
               e.currentTarget.style.background = "rgba(0,242,255,0.06)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-              e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+              e.currentTarget.style.borderColor = "var(--border-medium)";
+              e.currentTarget.style.background = "var(--surface-pill)";
             }}
           >
             {PROJECTS.cta}

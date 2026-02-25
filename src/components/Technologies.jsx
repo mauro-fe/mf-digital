@@ -8,7 +8,7 @@ export default function Technologies({ className = "" }) {
     <section
       id="tecnologias"
       aria-labelledby="tecnologias-title"
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
     >
       {/* Ambient blobs */}
@@ -43,7 +43,8 @@ export default function Technologies({ className = "" }) {
           />
         </span>
 
-        <h2 id="tecnologias-title"
+        <h2
+          id="tecnologias-title"
           data-aos="fade-up"
           data-aos-delay="100"
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight"
@@ -134,15 +135,14 @@ function TechCard({ tech }) {
     <div
       className={`group flex-shrink-0 flex items-center gap-3 rounded-xl px-5 py-3.5 w-auto transition-all duration-300 hover:-translate-y-0.5 cursor-default ${tech.bg}`}
       style={{
-        border: "1px solid rgba(255,255,255,0.06)",
+        border: "1px solid var(--border-subtle)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(0,242,255,0.25)";
-        e.currentTarget.style.boxShadow =
-          "0 0 20px rgba(0,242,255,0.08), 0 8px 24px rgba(0,0,0,0.3)";
+        e.currentTarget.style.borderColor = "var(--hover-border-glow)";
+        e.currentTarget.style.boxShadow = "var(--hover-shadow-subtle)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+        e.currentTarget.style.borderColor = "var(--border-subtle)";
         e.currentTarget.style.boxShadow = "none";
       }}
     >

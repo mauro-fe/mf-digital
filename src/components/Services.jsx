@@ -11,19 +11,20 @@ const services = SERVICES.items;
 function ServiceCard({ icon: Icon, title, description }) {
   return (
     <div
-      className="group relative flex-shrink-0 w-[300px] md:w-[360px] rounded-2xl p-7 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 cursor-default"
+      className="group relative flex-shrink-0 w-[260px] sm:w-[300px] md:w-[360px] rounded-2xl p-5 sm:p-7 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 cursor-default"
       style={{
-        background: "rgba(10,15,30,0.8)",
-        border: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--surface-card-solid)",
+        border: "1px solid var(--border-subtle)",
+        boxShadow: "var(--card-shadow)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(0,242,255,0.22)";
+        e.currentTarget.style.borderColor = "var(--hover-border-glow)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(0,242,255,0.08), 0 16px 48px rgba(0,0,0,0.35)";
+          "0 0 40px rgba(0,242,255,0.08), 0 16px 48px var(--hover-shadow-subtle)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.borderColor = "var(--border-subtle)";
+        e.currentTarget.style.boxShadow = "var(--card-shadow)";
       }}
     >
       {/* Top glow on hover */}
@@ -125,7 +126,7 @@ export default function Services({ className = "" }) {
       id="servicos"
       aria-labelledby="servicos-title"
       ref={sectionRef}
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-dark)" }}
     >
       {/* Ambient blobs */}
@@ -158,7 +159,10 @@ export default function Services({ className = "" }) {
             />
           </span>
 
-          <h2 id="servicos-title" className="services-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight">
+          <h2
+            id="servicos-title"
+            className="services-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight"
+          >
             {SERVICES.title}
             <br />
             <span className="gradient-text">{SERVICES.titleHighlight}</span>

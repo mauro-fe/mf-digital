@@ -17,17 +17,18 @@ export default function Card({
       data-aos-delay={aosDelay}
       className={`group relative flex flex-col rounded-2xl p-6 sm:p-7 h-full overflow-hidden transition-all duration-300 hover:-translate-y-1.5 ${className}`}
       style={{
-        background: "rgba(10,15,30,0.7)",
-        border: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--surface-card)",
+        border: "1px solid var(--border-subtle)",
+        boxShadow: "var(--card-shadow)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "rgba(0,242,255,0.22)";
+        e.currentTarget.style.borderColor = "var(--hover-border-glow)";
         e.currentTarget.style.boxShadow =
-          "0 0 40px rgba(0,242,255,0.07), 0 16px 48px rgba(0,0,0,0.35)";
+          "0 0 40px rgba(0,242,255,0.07), 0 16px 48px var(--hover-shadow-subtle)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
-        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.borderColor = "var(--border-subtle)";
+        e.currentTarget.style.boxShadow = "var(--card-shadow)";
       }}
     >
       {/* Subtle top glow on hover */}

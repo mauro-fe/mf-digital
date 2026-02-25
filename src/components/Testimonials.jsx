@@ -135,7 +135,7 @@ export default function Testimonials({ className = "" }) {
       id="depoimentos"
       aria-labelledby="depoimentos-title"
       ref={sectionRef}
-      className={`relative py-24 md:py-32 overflow-hidden ${className}`}
+      className={`relative py-16 sm:py-24 md:py-32 overflow-hidden ${className}`}
       style={{ background: "var(--gradient-subtle)" }}
     >
       {/* Ambient blobs */}
@@ -155,7 +155,7 @@ export default function Testimonials({ className = "" }) {
         <Quote size={180} className="text-primary" strokeWidth={1} />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-5 sm:px-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         {/* Header */}
         <div className="testimonials-header text-center mb-12 max-w-3xl mx-auto">
           <span className="testimonials-badge inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
@@ -176,8 +176,11 @@ export default function Testimonials({ className = "" }) {
             />
           </span>
 
-          <h2 id="depoimentos-title" className="testimonials-title text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-5 leading-[1.08] tracking-tight">
-            {TESTIMONIALS.title} {" "}
+          <h2
+            id="depoimentos-title"
+            className="testimonials-title heading-lg text-white mb-5"
+          >
+            {TESTIMONIALS.title}{" "}
             <span className="gradient-text">{TESTIMONIALS.titleHighlight}</span>
           </h2>
 
@@ -187,11 +190,11 @@ export default function Testimonials({ className = "" }) {
         </div>
 
         {/* Stats row */}
-        <div className="testimonials-stats flex items-center justify-center gap-8 sm:gap-14 mb-14">
+        <div className="testimonials-stats flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-14 mb-14">
           {[
-            { target: "98", suffix: "%", label: "Satisfação", decimal: false },
+            { target: "100", suffix: "%", label: "Satisfação", decimal: false },
             {
-              target: "4.9",
+              target: "5.0",
               suffix: "★",
               label: "Avaliação média",
               decimal: true,
@@ -233,97 +236,116 @@ export default function Testimonials({ className = "" }) {
         <div className="testimonials-swiper">
           <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            // small fractional slidesPerView creates a "peek" of the next slide
-            slidesPerView={1.05}
+            spaceBetween={24}
+            slidesPerView={1.1}
             pagination={{ clickable: true }}
             loop={true}
-            speed={1200}
+            speed={1000}
             autoplay={{
-              delay: 3500,
+              delay: 4000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
               waitForTransition: false,
             }}
-            // ensure proper looping when using responsive slidesPerView
             loopedSlides={testimonials.length}
-            breakpoints={{ 768: { slidesPerView: 1.9 } }}
+            breakpoints={{
+              640: { slidesPerView: 1.5, spaceBetween: 20 },
+              768: { slidesPerView: 2.2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 28 },
+            }}
             className="pb-14 overflow-visible"
           >
             {testimonials.map((t, i) => (
-              <SwiperSlide key={i} className="h-auto">
+              <SwiperSlide key={i} className="!h-auto">
                 <div
-                  className="group relative rounded-2xl p-7 h-full flex flex-col justify-between transition-all duration-300 hover:-translate-y-1"
+                  className="group relative rounded-2xl h-full min-h-[280px] flex flex-col transition-all duration-500 hover:-translate-y-1.5 overflow-hidden"
                   style={{
-                    background: "rgba(10,15,30,0.8)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    background: "var(--surface-testimonial)",
+                    border: "1px solid var(--border-subtle)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(0,242,255,0.2)";
+                    e.currentTarget.style.borderColor = "var(--border-active)";
                     e.currentTarget.style.boxShadow =
-                      "0 0 30px rgba(0,242,255,0.07), 0 12px 40px rgba(0,0,0,0.3)";
+                      "0 0 40px rgba(0,242,255,0.08), 0 20px 50px var(--hover-shadow-subtle)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor =
-                      "rgba(255,255,255,0.06)";
+                    e.currentTarget.style.borderColor = "var(--border-subtle)";
                     e.currentTarget.style.boxShadow = "none";
                   }}
                 >
-                  {/* Top: stars + quote icon */}
-                  <div>
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex gap-1">
+                  {/* Top gradient accent */}
+                  <div
+                    className="h-[3px] w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary))",
+                    }}
+                  />
+
+                  <div className="p-6 flex flex-col flex-1">
+                    {/* Stars + quote */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex gap-0.5">
                         {Array.from({ length: t.rating }).map((_, j) => (
                           <Star
                             key={j}
-                            size={13}
+                            size={14}
                             className="text-amber-400 fill-amber-400"
                           />
                         ))}
                       </div>
-                      <Quote
-                        size={20}
-                        className="text-primary/20 transition-colors duration-300 group-hover:text-primary/40"
-                        strokeWidth={1.5}
-                      />
+                      <div
+                        className="flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110"
+                        style={{
+                          background: "rgba(0,242,255,0.06)",
+                          border: "1px solid rgba(0,242,255,0.1)",
+                        }}
+                      >
+                        <Quote
+                          size={14}
+                          className="text-primary/40 transition-colors duration-300 group-hover:text-primary/70"
+                          strokeWidth={1.5}
+                        />
+                      </div>
                     </div>
 
-                    <p className="text-gray-400 leading-relaxed text-[15px] mb-6 italic">
+                    <p className="text-gray-300 leading-relaxed text-sm mb-auto line-clamp-4">
                       "{t.quote}"
                     </p>
-                  </div>
 
-                  {/* Bottom: avatar + info */}
-                  <div
-                    className="flex items-center gap-3 pt-5"
-                    style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
-                  >
-                    {/* Avatar initials */}
+                    {/* Bottom: avatar + info */}
                     <div
-                      className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-                        boxShadow: "0 0 12px rgba(0,242,255,0.3)",
-                      }}
+                      className="flex items-center gap-3 pt-5 mt-5"
+                      style={{ borderTop: "1px solid var(--border-subtle)" }}
                     >
-                      {t.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")
-                        .slice(0, 2)}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white text-sm">
-                        {t.name}
+                      <div
+                        className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                          boxShadow: "0 0 12px rgba(0,242,255,0.2)",
+                        }}
+                      >
+                        {t.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)}
                       </div>
-                      <div className="text-xs text-gray-500">{t.role}</div>
+                      <div className="min-w-0">
+                        <div className="font-semibold text-white text-sm truncate">
+                          {t.name}
+                        </div>
+                        <div className="text-[11px] text-gray-500 truncate">
+                          {t.role}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Bottom accent */}
+                  {/* Bottom accent line */}
                   <div
-                    className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-500 group-hover:w-full"
+                    className="absolute bottom-0 left-0 h-[2px] w-0 rounded-full transition-all duration-700 group-hover:w-full"
                     style={{
                       background:
                         "linear-gradient(90deg, var(--color-primary), var(--color-secondary), transparent)",

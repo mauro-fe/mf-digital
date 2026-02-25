@@ -133,7 +133,7 @@ export default function ScrollTop() {
           cy="24"
           r="20"
           fill="none"
-          stroke="rgba(255,255,255,0.06)"
+          stroke="var(--border-subtle)"
           strokeWidth="1.5"
         />
         {/* Progress */}
@@ -162,8 +162,8 @@ export default function ScrollTop() {
       <div
         className="relative flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-xl"
         style={{
-          background: "rgba(10,15,30,0.85)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "var(--surface-card-solid)",
+          border: "1px solid var(--border-subtle)",
           boxShadow:
             "0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,242,255,0.1) inset",
         }}
