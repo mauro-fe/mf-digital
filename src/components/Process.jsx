@@ -248,7 +248,7 @@ export default function Process({ className = "" }) {
           </div>
 
           {/* Section header */}
-          <div className="relative z-10 text-center max-w-3xl mx-auto px-8 mb-16">
+          <div className="relative z-10 text-center max-w-3xl mx-auto px-8 mb-2">
             <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-primary-light mb-5">
               <span
                 className="h-px w-8"
@@ -306,7 +306,7 @@ export default function Process({ className = "" }) {
               </div>
 
               {/* Desc stack */}
-              <div className="relative h-[88px] overflow-hidden mb-10">
+              <div className="relative h-[88px] overflow-hidden mb-6">
                 {steps.map((s, i) => (
                   <p
                     key={i}
@@ -382,9 +382,9 @@ export default function Process({ className = "" }) {
 
             {/* RIGHT — decorative card */}
             <div className="flex-shrink-0" style={{ perspective: "800px" }}>
-              {/* Outer glow */}
+              {/* Outer glow (reduced inset to avoid large overflow on short viewports) */}
               <div
-                className="absolute -inset-8 rounded-[2.5rem] pointer-events-none"
+                className="absolute -inset-6 rounded-[2.5rem] pointer-events-none"
                 style={{
                   background: `radial-gradient(ellipse at center, ${steps[0].color}20 0%, transparent 70%)`,
                   filter: "blur(20px)",
@@ -393,12 +393,15 @@ export default function Process({ className = "" }) {
               />
 
               <div
-                className="process-card-border relative w-[280px] h-[400px] xl:w-[320px] xl:h-[440px] rounded-3xl border overflow-hidden"
+                className="process-card-border relative w-[280px] h-[400px] md:w-[300px] md:h-[420px] xl:w-[320px] xl:h-[440px] rounded-3xl border overflow-hidden max-h-[60vh]"
                 style={{
                   borderColor: steps[0].color,
                   borderWidth: "1px",
                   boxShadow: `0 0 60px ${steps[0].color}25, 0 0 120px ${steps[0].color}10, inset 0 0 40px ${steps[0].color}08`,
                   background: "rgba(10,15,30,0.8)",
+                  width: 'min(36vw,320px)',
+                  height: 'min(50vh,440px)',
+                  maxHeight: '60vh',
                 }}
               >
                 <div className="absolute inset-0 bg-grid opacity-10" />

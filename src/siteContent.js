@@ -231,8 +231,6 @@ export const PROCESS = {
     badge: "Metodologia Ágil",
     title: "Como transformo sua",
     titleHighlight: "visão em software",
-    subtitle:
-        "Um processo de engenharia transparente, focado em previsibilidade, qualidade de código e entrega de valor contínuo.",
     steps: [
         {
             num: "01",

@@ -293,3 +293,23 @@
   opacity: 1 !important;
   background: var(--color-primary) !important;
 }
+
+/* Responsive tweak: reduce process card scale on short viewports */
+@layer components {
+  .process-card-border {
+    transition: transform 220ms ease, max-height 220ms ease;
+  }
+
+  @media (max-height: 720px) {
+    .process-card-border {
+      transform: scale(0.86);
+      transform-origin: right center;
+      max-height: 60vh;
+    }
+
+    /* Slightly reduce pinned section min-height so pinned content doesn't overflow as much */
+    .process-pin-wrap .min-h-screen {
+      min-height: calc(100vh - 56px);
+    }
+  }
+}
