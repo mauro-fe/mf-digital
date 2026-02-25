@@ -49,9 +49,9 @@ import {
 export const AUTHOR = {
     name: "Mauro Felix",
     email: "devmaurofelix@gmail.com",
-    role: "Engenheiro de Software",
+    role: "Desenvolvedor Web Freelancer",
     photo: "/img/optimized/dev-mauro.webp",
-    photoAlt: "Mauro Felix - Desenvolvedor Web",
+    photoAlt: "Mauro Felix — Desenvolvedor Web (freelancer)",
     stackLabel: "Full Stack",
     stackDesc: "React · PHP · MySQL",
     copyright: `Mauro Felix. Todos os direitos reservados.`,
@@ -93,21 +93,21 @@ export const NAV = {
    HERO
 ───────────────────────────────────────── */
 export const HERO = {
-    badge: "Disponível para novos projetos",
-    titleLine1: "Transformo ideias em",
-    titleHighlight: "experiências digitais",
-    titleLine2: "de alto impacto",
-    ariaLabel: "Transformo ideias em experiências digitais de alto impacto",
+    badge: "Aceito novos projetos — atendimento personalizado",
+    titleLine1: "Crio sites e sistemas",
+    titleHighlight: "que geram resultados",
+    titleLine2: "para o seu negócio",
+    ariaLabel: "Crio sites e sistemas que geram resultados para o seu negócio",
     description:
-        "Desenvolvimento de aplicações web de alta performance e design imersivo. Como desenvolvedor freelancer, crio sites e sistemas sob medida. Transformo a visão do seu negócio em",
-    descriptionHighlight: "código limpo e resultados reais",
-    cta1: "Solicitar Orçamento",
+        "Desenvolvo soluções web sob medida — sites, lojas e sistemas — com foco em conversão, performance e facilidade de manutenção. Trabalho diretamente com você para transformar sua ideia em",
+    descriptionHighlight: "resultados reais para o seu negócio",
+    cta1: "Pedir Orçamento",
     cta1Href: "#contato",
     cta2: "Ver Projetos",
     cta2Href: "#projetos",
     stats: [
-        { label: "Projetos Entregues", num: 50, suffix: "+" },
-        { label: "Anos de Experiência", num: 3, suffix: "+" },
+        { label: "Projetos Entregues", num: 4, suffix: "" },
+        { label: "Anos de Experiência", num: "3+", suffix: "" },
         { label: "Satisfação", num: 100, suffix: "%" },
     ],
 };
@@ -370,6 +370,27 @@ export const TESTIMONIALS = {
             role: "Fundador — Startup Tech",
             quote:
                 "Código limpo, entregas no prazo e sempre disponível. O sistema que desenvolveu economiza horas do nosso time todo dia.",
+            rating: 5,
+        },
+        {
+            name: "Mariana Lima",
+            role: "Proprietária — Loja Online",
+            quote:
+                "Contratei o Mauro para refazer nossa loja. Resultado: página mais rápida, checkout claro e aumento das conversões. Super recomendo.",
+            rating: 5,
+        },
+        {
+            name: "Lucas Pereira",
+            role: "CEO — Startup de Serviços",
+            quote:
+                "Agilidade e visão técnica. Entregou um MVP funcional em poucas semanas e sempre propôs melhorias práticas.",
+            rating: 5,
+        },
+        {
+            name: "Fernanda Gomes",
+            role: "Gerente de Marketing — Agência",
+            quote:
+                "Ótima comunicação, prazo cumprido e atenção aos detalhes. O site ficou alinhado com nossa identidade e performa muito bem.",
             rating: 5,
         },
     ],

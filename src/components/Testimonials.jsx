@@ -234,15 +234,21 @@ export default function Testimonials({ className = "" }) {
           <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
-            slidesPerView={1}
+            // small fractional slidesPerView creates a "peek" of the next slide
+            slidesPerView={1.05}
             pagination={{ clickable: true }}
+            loop={true}
+            speed={1200}
             autoplay={{
-              delay: 5000,
+              delay: 3500,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
+              waitForTransition: false,
             }}
-            breakpoints={{ 768: { slidesPerView: 2 } }}
-            className="pb-14"
+            // ensure proper looping when using responsive slidesPerView
+            loopedSlides={testimonials.length}
+            breakpoints={{ 768: { slidesPerView: 1.9 } }}
+            className="pb-14 overflow-visible"
           >
             {testimonials.map((t, i) => (
               <SwiperSlide key={i} className="h-auto">
