@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -76,49 +76,66 @@ function ServiceCard({ icon: Icon, title, description }) {
 export default function Services({ className = "" }) {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states ── */
-      gsap.set(".services-badge", { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".services-title", { opacity: 0, y: 30, visibility: "hidden" });
-      gsap.set(".services-row", { opacity: 0, y: 30, visibility: "hidden" });
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states ── */
+        gsap.set(".services-badge", {
+          opacity: 0,
+          y: -20,
+          visibility: "hidden",
+        });
+        gsap.set(".services-title", {
+          opacity: 0,
+          y: 30,
+          visibility: "hidden",
+        });
+        gsap.set(".services-row", { opacity: 0, y: 30, visibility: "hidden" });
 
-      /* ── Header ── */
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: ".services-header", start: "top 85%" },
-      });
+        /* ── Header ── */
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: ".services-header", start: "top 85%" },
+        });
 
-      tl.to(".services-badge", {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        visibility: "visible",
-      }).to(
-        ".services-title",
-        {
+        tl.to(".services-badge", {
           opacity: 1,
           y: 0,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          visibility: "visible",
+        }).to(
+          ".services-title",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            visibility: "visible",
+          },
+          "-=0.4",
+        );
+
+        /* ── Rows stagger ── */
+        gsap.to(".services-row", {
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+          stagger: 0.15,
           duration: 0.8,
           ease: "power3.out",
-          visibility: "visible",
-        },
-        "-=0.4",
-      );
+          scrollTrigger: { trigger: ".services-rows", start: "top 88%" },
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[Services GSAP]", err);
+    }
 
-      /* ── Rows stagger ── */
-      gsap.to(".services-row", {
-        opacity: 1,
-        y: 0,
-        visibility: "visible",
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".services-rows", start: "top 88%" },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   return (

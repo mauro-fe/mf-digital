@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Plus } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,62 +13,71 @@ export default function FAQ({ className = "" }) {
   const answerRefs = useRef([]);
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states ── */
-      gsap.set(".faq-badge", { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".faq-title", { opacity: 0, y: 30, visibility: "hidden" });
-      gsap.set(".faq-subtitle", { opacity: 0, y: 20, visibility: "hidden" });
-      gsap.set(".faq-item", { opacity: 0, y: 24, visibility: "hidden" });
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states ── */
+        gsap.set(".faq-badge", { opacity: 0, y: -20, visibility: "hidden" });
+        gsap.set(".faq-title", { opacity: 0, y: 30, visibility: "hidden" });
+        gsap.set(".faq-subtitle", { opacity: 0, y: 20, visibility: "hidden" });
+        gsap.set(".faq-item", { opacity: 0, y: 24, visibility: "hidden" });
 
-      /* ── Header ── */
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: ".faq-header", start: "top 85%" },
-      });
+        /* ── Header ── */
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: ".faq-header", start: "top 85%" },
+        });
 
-      tl.to(".faq-badge", {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        visibility: "visible",
-      })
-        .to(
-          ".faq-title",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.4",
-        )
-        .to(
-          ".faq-subtitle",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.5",
-        );
+        tl.to(".faq-badge", {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          visibility: "visible",
+        })
+          .to(
+            ".faq-title",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.4",
+          )
+          .to(
+            ".faq-subtitle",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.5",
+          );
 
-      /* ── Items stagger ── */
-      gsap.to(".faq-item", {
-        opacity: 1,
-        y: 0,
-        visibility: "visible",
-        stagger: 0.07,
-        duration: 0.6,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".faq-list", start: "top 88%" },
-      });
-    }, sectionRef);
+        /* ── Items stagger ── */
+        gsap.to(".faq-item", {
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+          stagger: 0.07,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".faq-list", start: "top 88%" },
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[FAQ GSAP]", err);
+    }
 
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   const toggle = (i) => {

@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -78,94 +78,103 @@ function TiltCard({ children, glowColor, className = "" }) {
 export default function About({ className = "" }) {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states via GSAP (no FOUC) ── */
-      gsap.set(
-        [
-          ".about-badge",
-          ".about-title",
-          ".about-subtitle",
-          ".about-text-block > *",
-          ".about-tilt-card",
-        ],
-        { opacity: 0, visibility: "hidden" },
-      );
-
-      /* ── Header ── */
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
-      });
-
-      tl.to(".about-badge", {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "back.out(1.5)",
-        visibility: "visible",
-      })
-        .to(
-          ".about-title",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.4",
-        )
-        .to(
-          ".about-subtitle",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.5",
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states via GSAP (no FOUC) ── */
+        gsap.set(
+          [
+            ".about-badge",
+            ".about-title",
+            ".about-subtitle",
+            ".about-text-block > *",
+            ".about-tilt-card",
+          ],
+          { opacity: 0, visibility: "hidden" },
         );
 
-      /* Initial offsets for header elements */
-      gsap.set(".about-badge", { y: -20 });
-      gsap.set(".about-title", { y: 30 });
-      gsap.set(".about-subtitle", { y: 20 });
+        /* ── Header ── */
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" },
+        });
 
-      /* ── Left text stagger ── */
-      gsap.set(".about-text-block > *", { x: -40 });
-      gsap.to(".about-text-block > *", {
-        x: 0,
-        opacity: 1,
-        visibility: "visible",
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".about-text-block", start: "top 85%" },
-      });
+        tl.to(".about-badge", {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          visibility: "visible",
+        })
+          .to(
+            ".about-title",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.4",
+          )
+          .to(
+            ".about-subtitle",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.5",
+          );
 
-      /* ── Cards wave ── */
-      gsap.set(".about-tilt-card", {
-        scale: 0.85,
-        y: 50,
-        rotateY: 25,
-        rotateX: -12,
-      });
-      gsap.to(".about-tilt-card", {
-        scale: 1,
-        opacity: 1,
-        visibility: "visible",
-        rotateY: 0,
-        rotateX: 0,
-        y: 0,
-        stagger: { amount: 0.5, from: "start" },
-        duration: 1.1,
-        ease: "elastic.out(1, 0.75)",
-        scrollTrigger: { trigger: ".about-cards-grid", start: "top 85%" },
-      });
-    }, sectionRef);
+        /* Initial offsets for header elements */
+        gsap.set(".about-badge", { y: -20 });
+        gsap.set(".about-title", { y: 30 });
+        gsap.set(".about-subtitle", { y: 20 });
 
-    return () => ctx.revert();
+        /* ── Left text stagger ── */
+        gsap.set(".about-text-block > *", { x: -40 });
+        gsap.to(".about-text-block > *", {
+          x: 0,
+          opacity: 1,
+          visibility: "visible",
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".about-text-block", start: "top 85%" },
+        });
+
+        /* ── Cards wave ── */
+        gsap.set(".about-tilt-card", {
+          scale: 0.85,
+          y: 50,
+          rotateY: 25,
+          rotateX: -12,
+        });
+        gsap.to(".about-tilt-card", {
+          scale: 1,
+          opacity: 1,
+          visibility: "visible",
+          rotateY: 0,
+          rotateX: 0,
+          y: 0,
+          stagger: { amount: 0.5, from: "start" },
+          duration: 1.1,
+          ease: "elastic.out(1, 0.75)",
+          scrollTrigger: { trigger: ".about-cards-grid", start: "top 85%" },
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[About GSAP]", err);
+    }
+
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   return (

@@ -1,10 +1,16 @@
-import React, { useRef, useLayoutEffect, useMemo } from "react";
+import React, { useRef, useLayoutEffect, useEffect, useMemo } from "react";
 import { ArrowRight, Play, Code } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HERO, AUTHOR } from "../siteContent";
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* Use useEffect on mobile to avoid blocking first paint */
+const useIsomorphicEffect =
+  typeof window !== "undefined" && window.innerWidth >= 1024
+    ? useLayoutEffect
+    : useEffect;
 
 const STATS = HERO.stats;
 
@@ -27,215 +33,226 @@ function SplitWords({ children, className = "" }) {
 export default function Hero() {
   const heroRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const ctx = gsap.context(() => {
-      /* ── 1. Set INITIAL hidden state via GSAP (not CSS toggle) ── */
-      gsap.set(
-        [
-          ".hero-badge",
-          ".hero-desc",
-          ".hero-cta",
-          ".hero-stats .hero-stat",
-          ".hero-image-wrap",
-          ".hero-floating-card",
-          ".hero-noise-line",
-        ],
-        { opacity: 0, visibility: "hidden" },
-      );
-
-      gsap.set(".hero-word-inner", {
-        yPercent: 110,
-        opacity: 0,
-        rotateX: -40,
-        visibility: "hidden",
-      });
-
-      gsap.set(".hero-blob", { scale: 0, opacity: 0 });
-
-      /* ── 2. Main entrance timeline ── */
-      const tl = gsap.timeline({
-        defaults: { ease: "power4.out", duration: 1 },
-        onComplete: () => ScrollTrigger.refresh(),
-      });
-
-      tl
-        // Background blobs
-        .to(
-          ".hero-blob",
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 1.8,
-            stagger: 0.25,
-            ease: "power2.out",
-            visibility: "visible",
-          },
-          0,
-        )
-
-        // Noise lines
-        .to(
-          ".hero-noise-line",
-          {
-            opacity: 1,
-            visibility: "visible",
-            scaleX: 1,
-            duration: 1.2,
-            stagger: 0.08,
-            ease: "power3.inOut",
-          },
-          0,
-        )
-
-        // Badge
-        .to(
-          ".hero-badge",
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            visibility: "visible",
-          },
-          0.4,
-        )
-
-        // Title words
-        .to(
-          ".hero-word-inner",
-          {
-            yPercent: 0,
-            opacity: 1,
-            rotateX: 0,
-            duration: 0.9,
-            stagger: 0.055,
-            ease: "power4.out",
-            visibility: "visible",
-          },
-          0.6,
-        )
-
-        // Gradient text shimmer
-        .fromTo(
-          ".hero-gradient-text",
-          { backgroundSize: "0% 100%" },
-          { backgroundSize: "100% 100%", duration: 1, ease: "power2.inOut" },
-          1.1,
-        )
-
-        // Description
-        .to(
-          ".hero-desc",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            visibility: "visible",
-          },
-          1.3,
-        )
-
-        // CTA buttons
-        .to(
-          ".hero-cta",
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.6,
-            stagger: 0.12,
-            ease: "back.out(1.4)",
-            visibility: "visible",
-          },
-          1.6,
-        )
-
-        // Stats
-        .to(
-          ".hero-stats .hero-stat",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.1,
-            visibility: "visible",
-          },
-          1.85,
-        )
-
-        // Image reveal with clip-path
-        .to(
-          ".hero-image-wrap",
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            opacity: 1,
-            duration: 1.3,
-            ease: "power3.inOut",
-            visibility: "visible",
-          },
-          1.1,
-        )
-
-        // Floating card
-        .to(
-          ".hero-floating-card",
-          {
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.9,
-            ease: "back.out(1.7)",
-            visibility: "visible",
-          },
-          1.95,
+      try {
+        /* ── 1. Set INITIAL hidden state via GSAP (not CSS toggle) ── */
+        gsap.set(
+          [
+            ".hero-badge",
+            ".hero-desc",
+            ".hero-cta",
+            ".hero-stats .hero-stat",
+            ".hero-image-wrap",
+            ".hero-floating-card",
+            ".hero-noise-line",
+          ],
+          { opacity: 0, visibility: "hidden" },
         );
 
-      /* ── 3. Stat counters on scroll ── */
-      ScrollTrigger.create({
-        trigger: ".hero-stats",
-        start: "top 90%",
-        onEnter: () => {
-          document.querySelectorAll(".hero-stat-value").forEach((el) => {
-            const target = parseInt(el.dataset.target, 10);
-            const suffix = el.dataset.suffix || "";
-            const obj = { val: 0 };
-            gsap.to(obj, {
-              val: target,
-              duration: 2.2,
+        gsap.set(".hero-word-inner", {
+          yPercent: 110,
+          opacity: 0,
+          rotateX: -40,
+          visibility: "hidden",
+        });
+
+        gsap.set(".hero-blob", { scale: 0, opacity: 0 });
+
+        /* ── 2. Main entrance timeline ── */
+        const tl = gsap.timeline({
+          defaults: { ease: "power4.out", duration: 1 },
+          onComplete: () => ScrollTrigger.refresh(),
+        });
+
+        tl
+          // Background blobs
+          .to(
+            ".hero-blob",
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 1.8,
+              stagger: 0.25,
               ease: "power2.out",
-              onUpdate: () => {
-                el.textContent = Math.round(obj.val) + suffix;
-              },
+              visibility: "visible",
+            },
+            0,
+          )
+
+          // Noise lines
+          .to(
+            ".hero-noise-line",
+            {
+              opacity: 1,
+              visibility: "visible",
+              scaleX: 1,
+              duration: 1.2,
+              stagger: 0.08,
+              ease: "power3.inOut",
+            },
+            0,
+          )
+
+          // Badge
+          .to(
+            ".hero-badge",
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              ease: "back.out(1.7)",
+              visibility: "visible",
+            },
+            0.4,
+          )
+
+          // Title words
+          .to(
+            ".hero-word-inner",
+            {
+              yPercent: 0,
+              opacity: 1,
+              rotateX: 0,
+              duration: 0.9,
+              stagger: 0.055,
+              ease: "power4.out",
+              visibility: "visible",
+            },
+            0.6,
+          )
+
+          // Gradient text shimmer
+          .fromTo(
+            ".hero-gradient-text",
+            { backgroundSize: "0% 100%" },
+            { backgroundSize: "100% 100%", duration: 1, ease: "power2.inOut" },
+            1.1,
+          )
+
+          // Description
+          .to(
+            ".hero-desc",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              visibility: "visible",
+            },
+            1.3,
+          )
+
+          // CTA buttons
+          .to(
+            ".hero-cta",
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.12,
+              ease: "back.out(1.4)",
+              visibility: "visible",
+            },
+            1.6,
+          )
+
+          // Stats
+          .to(
+            ".hero-stats .hero-stat",
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.5,
+              stagger: 0.1,
+              visibility: "visible",
+            },
+            1.85,
+          )
+
+          // Image reveal with clip-path
+          .to(
+            ".hero-image-wrap",
+            {
+              clipPath: "inset(0% 0% 0% 0%)",
+              opacity: 1,
+              duration: 1.3,
+              ease: "power3.inOut",
+              visibility: "visible",
+            },
+            1.1,
+          )
+
+          // Floating card
+          .to(
+            ".hero-floating-card",
+            {
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.9,
+              ease: "back.out(1.7)",
+              visibility: "visible",
+            },
+            1.95,
+          );
+
+        /* ── 3. Stat counters on scroll ── */
+        ScrollTrigger.create({
+          trigger: ".hero-stats",
+          start: "top 90%",
+          onEnter: () => {
+            document.querySelectorAll(".hero-stat-value").forEach((el) => {
+              const target = parseInt(el.dataset.target, 10);
+              const suffix = el.dataset.suffix || "";
+              const obj = { val: 0 };
+              gsap.to(obj, {
+                val: target,
+                duration: 2.2,
+                ease: "power2.out",
+                onUpdate: () => {
+                  el.textContent = Math.round(obj.val) + suffix;
+                },
+              });
             });
+          },
+          once: true,
+        });
+
+        /* ── 4. Parallax on bg blobs ── */
+        gsap.to(".hero-bg-elements", {
+          yPercent: 35,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        /* ── 5. Subtle image parallax ── */
+        gsap.to(".hero-image-wrap", {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      } catch (err) {
+        console.error("[Hero GSAP]", err);
+        /* Fallback: make everything visible if GSAP crashed */
+        heroRef.current
+          ?.querySelectorAll('[style*="visibility"]')
+          .forEach((el) => {
+            el.style.visibility = "visible";
+            el.style.opacity = "1";
           });
-        },
-        once: true,
-      });
-
-      /* ── 4. Parallax on bg blobs ── */
-      gsap.to(".hero-bg-elements", {
-        yPercent: 35,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      /* ── 5. Subtle image parallax ── */
-      gsap.to(".hero-image-wrap", {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      }
     }, heroRef);
 
     return () => ctx.revert();

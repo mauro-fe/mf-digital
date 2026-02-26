@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Send } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,109 +11,118 @@ const channels = CONTACT.channels;
 export default function Contact({ className = "" }) {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states ── */
-      gsap.set(".contact-badge", {
-        opacity: 0,
-        y: -20,
-        scale: 0.9,
-        visibility: "hidden",
-      });
-      gsap.set(".contact-title", { opacity: 0, y: 40, visibility: "hidden" });
-      gsap.set(".contact-subtitle", {
-        opacity: 0,
-        y: 20,
-        visibility: "hidden",
-      });
-      gsap.set(".contact-card", {
-        opacity: 0,
-        y: 40,
-        scale: 0.93,
-        visibility: "hidden",
-      });
-      gsap.set(".contact-social", { opacity: 0, y: 16, scale: 0.85 });
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states ── */
+        gsap.set(".contact-badge", {
+          opacity: 0,
+          y: -20,
+          scale: 0.9,
+          visibility: "hidden",
+        });
+        gsap.set(".contact-title", { opacity: 0, y: 40, visibility: "hidden" });
+        gsap.set(".contact-subtitle", {
+          opacity: 0,
+          y: 20,
+          visibility: "hidden",
+        });
+        gsap.set(".contact-card", {
+          opacity: 0,
+          y: 40,
+          scale: 0.93,
+          visibility: "hidden",
+        });
+        gsap.set(".contact-social", { opacity: 0, y: 16, scale: 0.85 });
 
-      /* ── Header ── */
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: ".contact-header", start: "top 85%" },
-      });
+        /* ── Header ── */
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: ".contact-header", start: "top 85%" },
+        });
 
-      tl.to(".contact-badge", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-        visibility: "visible",
-      })
-        .to(
-          ".contact-title",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.4",
-        )
-        .to(
-          ".contact-subtitle",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.6",
-        );
+        tl.to(".contact-badge", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          visibility: "visible",
+        })
+          .to(
+            ".contact-title",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.4",
+          )
+          .to(
+            ".contact-subtitle",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.6",
+          );
 
-      /* ── Channel cards: fan-in from bottom ── */
-      gsap.to(".contact-card", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        visibility: "visible",
-        stagger: { amount: 0.35, from: "center" },
-        duration: 0.8,
-        ease: "back.out(1.4)",
-        scrollTrigger: { trigger: ".contact-cards", start: "top 88%" },
-      });
+        /* ── Channel cards: fan-in from bottom ── */
+        gsap.to(".contact-card", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          visibility: "visible",
+          stagger: { amount: 0.35, from: "center" },
+          duration: 0.8,
+          ease: "back.out(1.4)",
+          scrollTrigger: { trigger: ".contact-cards", start: "top 88%" },
+        });
 
-      /* ── Social icons ── */
-      gsap.to(".contact-social", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        stagger: 0.06,
-        duration: 0.5,
-        ease: "back.out(1.4)",
-        scrollTrigger: { trigger: ".contact-socials", start: "top 92%" },
-      });
+        /* ── Social icons ── */
+        gsap.to(".contact-social", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.06,
+          duration: 0.5,
+          ease: "back.out(1.4)",
+          scrollTrigger: { trigger: ".contact-socials", start: "top 92%" },
+        });
 
-      /* ── Blob slow drift ── */
-      gsap.to(".contact-blob-1", {
-        x: 30,
-        y: -20,
-        duration: 6,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-      gsap.to(".contact-blob-2", {
-        x: -25,
-        y: 20,
-        duration: 7,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.5,
-      });
-    }, sectionRef);
+        /* ── Blob slow drift ── */
+        gsap.to(".contact-blob-1", {
+          x: 30,
+          y: -20,
+          duration: 6,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+        gsap.to(".contact-blob-2", {
+          x: -25,
+          y: 20,
+          duration: 7,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.5,
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[Contact GSAP]", err);
+    }
 
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   return (

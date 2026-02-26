@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Star, Quote } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -15,119 +15,128 @@ const testimonials = TESTIMONIALS.items;
 export default function Testimonials({ className = "" }) {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states ── */
-      gsap.set(".testimonials-badge", {
-        opacity: 0,
-        y: -20,
-        visibility: "hidden",
-      });
-      gsap.set(".testimonials-title", {
-        opacity: 0,
-        y: 30,
-        visibility: "hidden",
-      });
-      gsap.set(".testimonials-subtitle", {
-        opacity: 0,
-        y: 20,
-        visibility: "hidden",
-      });
-      gsap.set(".testimonials-swiper", {
-        opacity: 0,
-        y: 40,
-        visibility: "hidden",
-      });
-      gsap.set(".testimonials-stat", { opacity: 0, y: 24, scale: 0.9 });
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states ── */
+        gsap.set(".testimonials-badge", {
+          opacity: 0,
+          y: -20,
+          visibility: "hidden",
+        });
+        gsap.set(".testimonials-title", {
+          opacity: 0,
+          y: 30,
+          visibility: "hidden",
+        });
+        gsap.set(".testimonials-subtitle", {
+          opacity: 0,
+          y: 20,
+          visibility: "hidden",
+        });
+        gsap.set(".testimonials-swiper", {
+          opacity: 0,
+          y: 40,
+          visibility: "hidden",
+        });
+        gsap.set(".testimonials-stat", { opacity: 0, y: 24, scale: 0.9 });
 
-      /* ── Header ── */
-      const headerTl = gsap.timeline({
-        scrollTrigger: { trigger: ".testimonials-header", start: "top 85%" },
-      });
+        /* ── Header ── */
+        const headerTl = gsap.timeline({
+          scrollTrigger: { trigger: ".testimonials-header", start: "top 85%" },
+        });
 
-      headerTl
-        .to(".testimonials-badge", {
+        headerTl
+          .to(".testimonials-badge", {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "back.out(1.5)",
+            visibility: "visible",
+          })
+          .to(
+            ".testimonials-title",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.4",
+          )
+          .to(
+            ".testimonials-subtitle",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.5",
+          );
+
+        /* ── Stats row ── */
+        gsap.to(".testimonials-stat", {
           opacity: 1,
           y: 0,
+          scale: 1,
+          stagger: 0.1,
           duration: 0.6,
-          ease: "back.out(1.5)",
-          visibility: "visible",
-        })
-        .to(
-          ".testimonials-title",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.4",
-        )
-        .to(
-          ".testimonials-subtitle",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.5",
-        );
-
-      /* ── Stats row ── */
-      gsap.to(".testimonials-stat", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "back.out(1.4)",
-        scrollTrigger: { trigger: ".testimonials-stats", start: "top 88%" },
-        onComplete: () => {
-          // Count up numbers
-          document.querySelectorAll(".stat-number").forEach((el) => {
-            const target = parseFloat(el.dataset.target);
-            const suffix = el.dataset.suffix || "";
-            const isDecimal = el.dataset.decimal === "true";
-            const obj = { val: 0 };
-            gsap.to(obj, {
-              val: target,
-              duration: 2,
-              ease: "power2.out",
-              onUpdate: () => {
-                el.textContent =
-                  (isDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) +
-                  suffix;
-              },
+          ease: "back.out(1.4)",
+          scrollTrigger: { trigger: ".testimonials-stats", start: "top 88%" },
+          onComplete: () => {
+            // Count up numbers
+            document.querySelectorAll(".stat-number").forEach((el) => {
+              const target = parseFloat(el.dataset.target);
+              const suffix = el.dataset.suffix || "";
+              const isDecimal = el.dataset.decimal === "true";
+              const obj = { val: 0 };
+              gsap.to(obj, {
+                val: target,
+                duration: 2,
+                ease: "power2.out",
+                onUpdate: () => {
+                  el.textContent =
+                    (isDecimal ? obj.val.toFixed(1) : Math.round(obj.val)) +
+                    suffix;
+                },
+              });
             });
-          });
-        },
-      });
+          },
+        });
 
-      /* ── Swiper ── */
-      gsap.to(".testimonials-swiper", {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        visibility: "visible",
-        scrollTrigger: { trigger: ".testimonials-swiper", start: "top 90%" },
-      });
+        /* ── Swiper ── */
+        gsap.to(".testimonials-swiper", {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          visibility: "visible",
+          scrollTrigger: { trigger: ".testimonials-swiper", start: "top 90%" },
+        });
 
-      /* ── Ambient quote icon float ── */
-      gsap.to(".testimonials-quote-icon", {
-        y: -8,
-        rotation: 5,
-        duration: 3,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-    }, sectionRef);
+        /* ── Ambient quote icon float ── */
+        gsap.to(".testimonials-quote-icon", {
+          y: -8,
+          rotation: 5,
+          duration: 3,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[Testimonials GSAP]", err);
+    }
 
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   return (

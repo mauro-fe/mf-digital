@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,226 +9,252 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const steps = PROCESS.steps;
 
+/* Use useEffect on mobile to avoid blocking first paint */
+const useIsomorphicEffect =
+  typeof window !== "undefined" && window.innerWidth >= 1024
+    ? useLayoutEffect
+    : useEffect;
+
 export default function Process({ className = "" }) {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
+  useIsomorphicEffect(() => {
+    let mm;
+    try {
+      mm = gsap.matchMedia();
 
-    /* ── DESKTOP: pinned lateral scroll ── */
-    mm.add("(min-width: 1024px)", () => {
-      const section = sectionRef.current;
-      if (!section) return;
+      /* ── DESKTOP: pinned lateral scroll ── */
+      mm.add("(min-width: 1024px)", () => {
+        const section = sectionRef.current;
+        if (!section) return;
 
-      const totalSteps = steps.length;
-      const cardEls = section.querySelectorAll(".process-card");
-      const titleEls = section.querySelectorAll(".process-title");
-      const descEls = section.querySelectorAll(".process-desc");
-      const progressFill = section.querySelector(".process-progress-fill");
-      const borderEl = section.querySelector(".process-card-border");
-      const iconEls = section.querySelectorAll(".process-icon");
-      const numEls = section.querySelectorAll(".process-num");
-      const labelTop = section.querySelector(".process-label-top");
-      const labelBottom = section.querySelector(".process-label-bottom");
-      const dotEls = section.querySelectorAll(".process-dot");
-      const stepCounter = section.querySelector(".process-step-counter");
+        const totalSteps = steps.length;
+        const cardEls = section.querySelectorAll(".process-card");
+        const titleEls = section.querySelectorAll(".process-title");
+        const descEls = section.querySelectorAll(".process-desc");
+        const progressFill = section.querySelector(".process-progress-fill");
+        const borderEl = section.querySelector(".process-card-border");
+        const iconEls = section.querySelectorAll(".process-icon");
+        const numEls = section.querySelectorAll(".process-num");
+        const labelTop = section.querySelector(".process-label-top");
+        const labelBottom = section.querySelector(".process-label-bottom");
+        const dotEls = section.querySelectorAll(".process-dot");
+        const stepCounter = section.querySelector(".process-step-counter");
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section.querySelector(".process-pin-wrap"),
-          start: "top top",
-          end: `+=${totalSteps * 600}`,
-          pin: true,
-          scrub: 0.5,
-          onUpdate: (self) => {
-            triggerRef.current = self;
-          },
-        },
-      });
-
-      for (let i = 0; i < totalSteps - 1; i++) {
-        const lbl = `step${i}`;
-
-        tl.addLabel(lbl)
-          .to(
-            cardEls[i],
-            { rotateY: -90, opacity: 0, duration: 0.4, ease: "power2.in" },
-            lbl,
-          )
-          .fromTo(
-            cardEls[i + 1],
-            { rotateY: 90, opacity: 0 },
-            { rotateY: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-            `${lbl}+=0.35`,
-          )
-
-          .to(iconEls[i], { scale: 0, opacity: 0, duration: 0.3 }, lbl)
-          .fromTo(
-            iconEls[i + 1],
-            { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.3 },
-            `${lbl}+=0.35`,
-          )
-
-          .to(numEls[i], { yPercent: -100, opacity: 0, duration: 0.3 }, lbl)
-          .fromTo(
-            numEls[i + 1],
-            { yPercent: 100, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 0.3 },
-            `${lbl}+=0.35`,
-          )
-
-          .to(titleEls[i], { yPercent: -100, opacity: 0, duration: 0.35 }, lbl)
-          .fromTo(
-            titleEls[i + 1],
-            { yPercent: 60, opacity: 0 },
-            { yPercent: 0, opacity: 1, duration: 0.35 },
-            `${lbl}+=0.3`,
-          )
-
-          .to(descEls[i], { y: -20, opacity: 0, duration: 0.3 }, lbl)
-          .fromTo(
-            descEls[i + 1],
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.3 },
-            `${lbl}+=0.3`,
-          )
-
-          .to(
-            borderEl,
-            {
-              borderColor: steps[i + 1].color,
-              boxShadow: `0 0 60px ${steps[i + 1].color}25, 0 0 120px ${steps[i + 1].color}10, inset 0 0 40px ${steps[i + 1].color}08`,
-              duration: 0.6,
-            },
-            lbl,
-          )
-
-          .to(
-            [labelTop, labelBottom],
-            { color: steps[i + 1].color, duration: 0.5 },
-            lbl,
-          )
-
-          .to(
-            progressFill,
-            {
-              scaleX: (i + 2) / totalSteps,
-              background: `linear-gradient(90deg, ${steps[0].color}, ${steps[i + 1].color})`,
-              duration: 0.6,
-            },
-            lbl,
-          )
-
-          // Dot indicators
-          .to(dotEls[i], { scale: 1, opacity: 0.3, duration: 0.3 }, lbl)
-          .to(
-            dotEls[i + 1],
-            {
-              scale: 1.4,
-              opacity: 1,
-              duration: 0.3,
-              backgroundColor: steps[i + 1].color,
-            },
-            `${lbl}+=0.3`,
-          )
-
-          .to({}, { duration: 0.3 });
-      }
-
-      // Initial states
-      cardEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { rotateY: 90, opacity: 0 });
-      });
-      iconEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { scale: 0, opacity: 0 });
-      });
-      numEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { yPercent: 100, opacity: 0 });
-      });
-      titleEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { yPercent: 60, opacity: 0 });
-      });
-      descEls.forEach((el, i) => {
-        if (i > 0) gsap.set(el, { y: 20, opacity: 0 });
-      });
-      dotEls.forEach((el, i) => {
-        gsap.set(el, {
-          scale: i === 0 ? 1.4 : 1,
-          opacity: i === 0 ? 1 : 0.3,
-          backgroundColor: steps[i].color,
-        });
-      });
-      gsap.set(progressFill, {
-        scaleX: 1 / totalSteps,
-        transformOrigin: "left center",
-      });
-
-      // Nav buttons
-      const prevBtn = section.querySelector(".process-prev");
-      const nextBtn = section.querySelector(".process-next");
-
-      const goToStep = (stepIndex) => {
-        if (!triggerRef.current) return;
-        const st = triggerRef.current;
-        const progress = stepIndex / (totalSteps - 1);
-        gsap.to(window, {
-          scrollTo: { y: st.start + progress * (st.end - st.start) },
-          duration: 0.8,
-          ease: "power2.inOut",
-        });
-      };
-
-      const getCurrentStep = () =>
-        triggerRef.current
-          ? Math.round(triggerRef.current.progress * (totalSteps - 1))
-          : 0;
-
-      const onPrev = () => {
-        const c = getCurrentStep();
-        if (c > 0) goToStep(c - 1);
-      };
-      const onNext = () => {
-        const c = getCurrentStep();
-        if (c < totalSteps - 1) goToStep(c + 1);
-      };
-
-      prevBtn?.addEventListener("click", onPrev);
-      nextBtn?.addEventListener("click", onNext);
-      return () => {
-        prevBtn?.removeEventListener("click", onPrev);
-        nextBtn?.removeEventListener("click", onNext);
-      };
-    });
-
-    /* ── MOBILE: stagger reveal ── */
-    mm.add("(max-width: 1023px)", () => {
-      const section = sectionRef.current;
-      if (!section) return;
-      const mobileGrid = section.querySelector(".process-mobile-grid");
-      if (!mobileGrid) return;
-      const cards = mobileGrid.querySelectorAll(".process-mobile-card");
-
-      gsap.fromTo(
-        cards,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.12,
-          duration: 0.7,
-          ease: "power3.out",
-          immediateRender: false,
+        const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: mobileGrid,
-            start: "top 90%",
+            trigger: section.querySelector(".process-pin-wrap"),
+            start: "top top",
+            end: `+=${totalSteps * 600}`,
+            pin: true,
+            scrub: 0.5,
+            onUpdate: (self) => {
+              triggerRef.current = self;
+            },
           },
-        },
-      );
-    });
+        });
 
-    return () => mm.revert();
+        for (let i = 0; i < totalSteps - 1; i++) {
+          const lbl = `step${i}`;
+
+          tl.addLabel(lbl)
+            .to(
+              cardEls[i],
+              { rotateY: -90, opacity: 0, duration: 0.4, ease: "power2.in" },
+              lbl,
+            )
+            .fromTo(
+              cardEls[i + 1],
+              { rotateY: 90, opacity: 0 },
+              { rotateY: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
+              `${lbl}+=0.35`,
+            )
+
+            .to(iconEls[i], { scale: 0, opacity: 0, duration: 0.3 }, lbl)
+            .fromTo(
+              iconEls[i + 1],
+              { scale: 0, opacity: 0 },
+              { scale: 1, opacity: 1, duration: 0.3 },
+              `${lbl}+=0.35`,
+            )
+
+            .to(numEls[i], { yPercent: -100, opacity: 0, duration: 0.3 }, lbl)
+            .fromTo(
+              numEls[i + 1],
+              { yPercent: 100, opacity: 0 },
+              { yPercent: 0, opacity: 1, duration: 0.3 },
+              `${lbl}+=0.35`,
+            )
+
+            .to(
+              titleEls[i],
+              { yPercent: -100, opacity: 0, duration: 0.35 },
+              lbl,
+            )
+            .fromTo(
+              titleEls[i + 1],
+              { yPercent: 60, opacity: 0 },
+              { yPercent: 0, opacity: 1, duration: 0.35 },
+              `${lbl}+=0.3`,
+            )
+
+            .to(descEls[i], { y: -20, opacity: 0, duration: 0.3 }, lbl)
+            .fromTo(
+              descEls[i + 1],
+              { y: 20, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.3 },
+              `${lbl}+=0.3`,
+            )
+
+            .to(
+              borderEl,
+              {
+                borderColor: steps[i + 1].color,
+                boxShadow: `0 0 60px ${steps[i + 1].color}25, 0 0 120px ${steps[i + 1].color}10, inset 0 0 40px ${steps[i + 1].color}08`,
+                duration: 0.6,
+              },
+              lbl,
+            )
+
+            .to(
+              [labelTop, labelBottom],
+              { color: steps[i + 1].color, duration: 0.5 },
+              lbl,
+            )
+
+            .to(
+              progressFill,
+              {
+                scaleX: (i + 2) / totalSteps,
+                background: `linear-gradient(90deg, ${steps[0].color}, ${steps[i + 1].color})`,
+                duration: 0.6,
+              },
+              lbl,
+            )
+
+            // Dot indicators
+            .to(dotEls[i], { scale: 1, opacity: 0.3, duration: 0.3 }, lbl)
+            .to(
+              dotEls[i + 1],
+              {
+                scale: 1.4,
+                opacity: 1,
+                duration: 0.3,
+                backgroundColor: steps[i + 1].color,
+              },
+              `${lbl}+=0.3`,
+            )
+
+            .to({}, { duration: 0.3 });
+        }
+
+        // Initial states
+        cardEls.forEach((el, i) => {
+          if (i > 0) gsap.set(el, { rotateY: 90, opacity: 0 });
+        });
+        iconEls.forEach((el, i) => {
+          if (i > 0) gsap.set(el, { scale: 0, opacity: 0 });
+        });
+        numEls.forEach((el, i) => {
+          if (i > 0) gsap.set(el, { yPercent: 100, opacity: 0 });
+        });
+        titleEls.forEach((el, i) => {
+          if (i > 0) gsap.set(el, { yPercent: 60, opacity: 0 });
+        });
+        descEls.forEach((el, i) => {
+          if (i > 0) gsap.set(el, { y: 20, opacity: 0 });
+        });
+        dotEls.forEach((el, i) => {
+          gsap.set(el, {
+            scale: i === 0 ? 1.4 : 1,
+            opacity: i === 0 ? 1 : 0.3,
+            backgroundColor: steps[i].color,
+          });
+        });
+        gsap.set(progressFill, {
+          scaleX: 1 / totalSteps,
+          transformOrigin: "left center",
+        });
+
+        // Nav buttons
+        const prevBtn = section.querySelector(".process-prev");
+        const nextBtn = section.querySelector(".process-next");
+
+        const goToStep = (stepIndex) => {
+          if (!triggerRef.current) return;
+          const st = triggerRef.current;
+          const progress = stepIndex / (totalSteps - 1);
+          gsap.to(window, {
+            scrollTo: { y: st.start + progress * (st.end - st.start) },
+            duration: 0.8,
+            ease: "power2.inOut",
+          });
+        };
+
+        const getCurrentStep = () =>
+          triggerRef.current
+            ? Math.round(triggerRef.current.progress * (totalSteps - 1))
+            : 0;
+
+        const onPrev = () => {
+          const c = getCurrentStep();
+          if (c > 0) goToStep(c - 1);
+        };
+        const onNext = () => {
+          const c = getCurrentStep();
+          if (c < totalSteps - 1) goToStep(c + 1);
+        };
+
+        prevBtn?.addEventListener("click", onPrev);
+        nextBtn?.addEventListener("click", onNext);
+        return () => {
+          prevBtn?.removeEventListener("click", onPrev);
+          nextBtn?.removeEventListener("click", onNext);
+        };
+      });
+
+      /* ── MOBILE: stagger reveal ── */
+      mm.add("(max-width: 1023px)", () => {
+        const section = sectionRef.current;
+        if (!section) return;
+        const mobileGrid = section.querySelector(".process-mobile-grid");
+        if (!mobileGrid) return;
+        const cards = mobileGrid.querySelectorAll(".process-mobile-card");
+
+        gsap.fromTo(
+          cards,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            duration: 0.7,
+            ease: "power3.out",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: mobileGrid,
+              start: "top 90%",
+            },
+          },
+        );
+      });
+    } catch (err) {
+      console.error("[Process GSAP]", err);
+      /* Fallback: make all process cards visible */
+      sectionRef.current
+        ?.querySelectorAll(".process-mobile-card, .process-card")
+        .forEach((el) => {
+          el.style.visibility = "visible";
+          el.style.opacity = "1";
+        });
+    }
+
+    return () => {
+      try {
+        mm?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   return (

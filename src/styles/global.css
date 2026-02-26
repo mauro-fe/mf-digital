@@ -273,6 +273,19 @@
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
+/* ── Safety-net: if GSAP has not animated elements within 7 s, force them visible ── */
+@keyframes gsap-safety {
+  to {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Applied only to elements that GSAP set to visibility:hidden inline */
+.gsap-safe {
+  animation: gsap-safety 0.4s 7s both;
+}
+
 /* ============================= */
 /* 🧼 BASE */
 /* ============================= */

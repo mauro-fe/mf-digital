@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Check, ArrowRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,91 +11,104 @@ const plans = PLANS.items;
 export default function Plans({ className = "" }) {
   const sectionRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      /* ── Initial states ── */
-      gsap.set(".plans-badge", { opacity: 0, y: -20, visibility: "hidden" });
-      gsap.set(".plans-title", { opacity: 0, y: 30, visibility: "hidden" });
-      gsap.set(".plans-subtitle", { opacity: 0, y: 20, visibility: "hidden" });
-      gsap.set(".plans-card", {
-        opacity: 0,
-        y: 60,
-        scale: 0.94,
-        visibility: "hidden",
-      });
-      gsap.set(".plans-feature-item", { opacity: 0, x: -12 });
+  useEffect(() => {
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        /* ── Initial states ── */
+        gsap.set(".plans-badge", { opacity: 0, y: -20, visibility: "hidden" });
+        gsap.set(".plans-title", { opacity: 0, y: 30, visibility: "hidden" });
+        gsap.set(".plans-subtitle", {
+          opacity: 0,
+          y: 20,
+          visibility: "hidden",
+        });
+        gsap.set(".plans-card", {
+          opacity: 0,
+          y: 60,
+          scale: 0.94,
+          visibility: "hidden",
+        });
+        gsap.set(".plans-feature-item", { opacity: 0, x: -12 });
 
-      /* ── Header entrance ── */
-      const headerTl = gsap.timeline({
-        scrollTrigger: { trigger: ".plans-header", start: "top 85%" },
-      });
+        /* ── Header entrance ── */
+        const headerTl = gsap.timeline({
+          scrollTrigger: { trigger: ".plans-header", start: "top 85%" },
+        });
 
-      headerTl
-        .to(".plans-badge", {
+        headerTl
+          .to(".plans-badge", {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "back.out(1.5)",
+            visibility: "visible",
+          })
+          .to(
+            ".plans-title",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.4",
+          )
+          .to(
+            ".plans-subtitle",
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.7,
+              ease: "power3.out",
+              visibility: "visible",
+            },
+            "-=0.5",
+          );
+
+        /* ── Cards stagger entrance ── */
+        gsap.to(".plans-card", {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          ease: "back.out(1.5)",
+          scale: 1,
           visibility: "visible",
-        })
-        .to(
-          ".plans-title",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            visibility: "visible",
+          stagger: { amount: 0.4, from: "center" }, // center-out stagger = popular card last
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { trigger: ".plans-grid", start: "top 85%" },
+          onComplete: () => {
+            // After cards are visible, stagger in features
+            gsap.to(".plans-feature-item", {
+              opacity: 1,
+              x: 0,
+              stagger: 0.025,
+              duration: 0.4,
+              ease: "power2.out",
+            });
           },
-          "-=0.4",
-        )
-        .to(
-          ".plans-subtitle",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            visibility: "visible",
-          },
-          "-=0.5",
-        );
+        });
 
-      /* ── Cards stagger entrance ── */
-      gsap.to(".plans-card", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        visibility: "visible",
-        stagger: { amount: 0.4, from: "center" }, // center-out stagger = popular card last
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".plans-grid", start: "top 85%" },
-        onComplete: () => {
-          // After cards are visible, stagger in features
-          gsap.to(".plans-feature-item", {
-            opacity: 1,
-            x: 0,
-            stagger: 0.025,
-            duration: 0.4,
-            ease: "power2.out",
-          });
-        },
-      });
+        /* ── Popular card: continuous subtle glow pulse ── */
+        gsap.to(".plans-card-popular .plans-glow", {
+          opacity: 0.7,
+          scale: 1.08,
+          duration: 2.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 1.2,
+        });
+      }, sectionRef);
+    } catch (err) {
+      console.error("[Plans GSAP]", err);
+    }
 
-      /* ── Popular card: continuous subtle glow pulse ── */
-      gsap.to(".plans-card-popular .plans-glow", {
-        opacity: 0.7,
-        scale: 1.08,
-        duration: 2.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 1.2,
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx?.revert();
+      } catch (e) {}
+    };
   }, []);
 
   const openWhatsapp = (e) => {
